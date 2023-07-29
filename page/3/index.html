@@ -150,6 +150,74 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/%E8%A3%85%E9%A5%B0%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/01/%E8%A3%85%E9%A5%B0%E5%99%A8/" class="post-title-link" itemprop="url">装饰器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="什么是装饰器"><a href="#什么是装饰器" class="headerlink" title="什么是装饰器"></a>什么是装饰器</h3><p>装饰器是一个对类进行处理的函数。装饰器函数的第一个参数，就是所要装饰的目标类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@decorator</span><br><span class="line">class A &#123;&#125;</span><br><span class="line"></span><br><span class="line">//等同于</span><br><span class="line">class A &#123;&#125;</span><br><span class="line">A = decorator(A) || A;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用案例"><a href="#使用案例" class="headerlink" title="使用案例"></a>使用案例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//src/decorators/CursorPointer.js</span><br><span class="line">import React from &#x27;react&#x27;</span><br><span class="line"></span><br><span class="line">export default Component =&gt; class extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div style=&#123;&#123;cursor:&#x27;pointer&#x27;,display:&#x27;inline-block&#x27;&#125;&#125;&gt;</span><br><span class="line">            &lt;Component&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个装饰器（高阶组件）接受一个React组件作为参数，然后返回一个新的React组件。实现比较简单，包裹一个div,添加了一个style,就这么简单。以后所有被它装饰的组件都会具有这个特征</p>
+<p>使用这个装饰器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &#x27;react&#x27;</span><br><span class="line">import Clickable from &#x27;../decorators/CursorPointer&#x27;</span><br><span class="line"></span><br><span class="line">@Clickable</span><br><span class="line">class ClickablePanel extends React.Component &#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;div className=&quot;panel&quot;&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//定义一个函数，也就是定义一个Decorator，target参数就是传进来的Class。</span><br><span class="line">//这里是为类添加了一个静态属性</span><br><span class="line">function testable(target) &#123;</span><br><span class="line">  target.isTestable = true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//在Decorator后面跟着Class，Decorator是函数的话，怎么不是testable(MyTestableClass)这样写呢？</span><br><span class="line">//我只能这样理解：因为语法就这样，只要Decorator后面是Class，默认就已经把Class当成参数隐形传进Decorator了。</span><br><span class="line">@testable</span><br><span class="line">class MyTestableClass &#123;&#125;</span><br><span class="line"></span><br><span class="line">console.log(MyTestableClass.isTestable) // true</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/Immutable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -923,82 +991,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/20/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/20/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/" class="post-title-link" itemprop="url">事件监听</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/API/" itemprop="url" rel="index"><span itemprop="name">API</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unable to preventDefault inside passive event listener due to target being treated as passive</span><br></pre></td></tr></table></figure>
-
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>当我们给<code>document</code>添加了<code>touch</code>事件的监听器的时候，如果同时在handle内部调用了<code>event.preventDefault()</code>就会报这个警告，提示我们，不能给passive（被动的） 事件监听器<code>preventDefault</code>,因为它被认为是passive</p>
-<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><h4 id="target-addEventListener-type-listener-useCapture"><a href="#target-addEventListener-type-listener-useCapture" class="headerlink" title="target.addEventListener(type,listener, useCapture)"></a>target.addEventListener(type,listener, useCapture)</br></h4><p>useCature默认为false,表示在冒泡阶段出发listener</p>
-<h4 id="target-addEventListener-type-listener-options"><a href="#target-addEventListener-type-listener-options" class="headerlink" title="target.addEventListener(type,listener, options)"></a>target.addEventListener(type,listener, options)</h4><ul>
-<li><code>options</code><ul>
-<li><code>capture</code> (默认false)</li>
-<li><code>once</code></br><br>  表示listener在添加之后最多只调用一次，如果是true，listener会在其被调用后自动移除</li>
-<li><code>pasive</code></br><br>  设置为true时，表示<code>listener</code>永远不会调用<code>preventDefault()</code> (默认为true)</li>
-</ul>
-</li>
-</ul>
-<h3 id="passive-event-listener"><a href="#passive-event-listener" class="headerlink" title="passive event listener"></a><code>passive event listener</code></h3><p>当我们滚动页面的时候（通常是我们监听touch事件的时候），页面其实会有一个短暂的停顿，浏览器不知道我们是否需要<code>preventDefault</code>,所以它需要一个延迟来检测，导致我们滑动显得比较卡顿。</p>
-<p>我们可以对<code>addEventListener</code>设置<code>&#123;passive: true&#125;</code>来避免浏览器检测这个我们是否有在touch事件的handler里调用<code>preventDefault</code>。此时的事件监听器就被称为<strong>passive event listener</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1068,14 +1060,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
