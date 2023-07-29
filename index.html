@@ -259,8 +259,6 @@
 
 <h3 id="2-16、SELinux-简介"><a href="#2-16、SELinux-简介" class="headerlink" title="2.16、SELinux 简介"></a>2.16、SELinux 简介</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 SELinux 状态</span></span><br><span class="line">getenforce</span><br><span class="line"></span><br><span class="line"><span class="comment"># SELinux 配置文件</span></span><br><span class="line"><span class="comment"># 修改配置文件后，需要重启才能生效</span></span><br><span class="line">vim /etc/selinux/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时从 enforcing 变为 permissive</span></span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 具体标签查看</span></span><br><span class="line">ps -Z</span><br><span class="line"><span class="built_in">id</span> -Z</span><br><span class="line"><span class="built_in">ls</span> -Z</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
       
     </div>
 
@@ -1147,7 +1145,7 @@
 <tr>
 <td>From</td>
 <td>发出请求的用户的Email</td>
-<td>From:<a href="mailto:&#x75;&#115;&#x65;&#114;&#64;&#x65;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;">&#x75;&#115;&#x65;&#114;&#64;&#x65;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;</a></td>
+<td>From:<a href="mailto:&#117;&#115;&#x65;&#x72;&#x40;&#x65;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#117;&#115;&#x65;&#x72;&#x40;&#x65;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a></td>
 </tr>
 <tr>
 <td>Host</td>
