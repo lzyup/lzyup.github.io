@@ -150,6 +150,69 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/Context/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/01/Context/" class="post-title-link" itemprop="url">Context</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="context是什么"><a href="#context是什么" class="headerlink" title="context是什么"></a><code>context</code>是什么</h3><p><code>context</code>提供了一种通过组件树传递数据的方法，无需每个级别手动传递 props 属性即全局共享数据</p>
+<h3 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h3><p>以主题色<code>theme</code>为例</p>
+<h4 id="不使用context时"><a href="#不使用context时" class="headerlink" title="不使用context时"></a>不使用<code>context</code>时</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;Toolbar theme=&quot;dark&quot; /&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Toolbar(props)&#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;ThemeButton theme=&#123;props.theme&#125; /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ThemeButton extends React.Component &#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;Button theme=&#123;this.props.theme&#125;/&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用context时"><a href="#使用context时" class="headerlink" title="使用context时"></a>使用<code>context</code>时</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">//为当前theme创建一个context（&#x27;light&#x27;为默认值）</span><br><span class="line">const ThemeContext = React.createContext(&#x27;light&#x27;);</span><br><span class="line">class App extends React.component &#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        //使用一个Provider来将当前的theme传递给以下组件树</span><br><span class="line">        //无论多深，任何组件都能读取这个值</span><br><span class="line">        return (</span><br><span class="line">            &lt;ThemeContext.Provider value=&quot;dark&quot;&gt;</span><br><span class="line">                &lt;Toolbar /&gt;</span><br><span class="line">            &lt;/ThemeContext.Provider&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function ToolBar()&#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;ThemeButton /&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ThemeButton extends React.Component&#123;</span><br><span class="line">    //挂载在class上的`contextType`属性会被重赋值为一个由React.createContext()创建的Context对象。</span><br><span class="line">    //这样就能使用this.context来消费最近Context上的那个值</span><br><span class="line">    static contextType = ThemeContext;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;Button theme=&#123;this.context&#125; /&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/%E8%A3%85%E9%A5%B0%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -902,95 +965,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/20/history/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/20/history/" class="post-title-link" itemprop="url">history</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/%E5%AF%BC%E8%88%AA/" itemprop="url" rel="index"><span itemprop="name">导航</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><code>window.history</code>是一个只读属性，用来获取<code>History</code>对象的引用，<code>History</code>对象提供了操作浏览器会话历史（浏览器地址栏中访问的页面，以及当前页面中通过框架加载的页面）的接口。<strong>同时，从<code>HTML5</code>开始，提供了对history栈中内容的操作</strong></p>
-<p>在<code>HTML5</code>之前，前端开发者只能通过<code>history</code>对象进行前进后退的动作，但却不能在不刷新当前页面的情况下进行<code>url</code>的修改，在<code>HTML5</code>之前，单页应用仅能通过<code>hash</code>模式进行路由管理，但通过<code>HTML5</code>新提出的<code>history API</code>,单页应用就能像正常应用那样管理页面的<code>url</code>。</p>
-<p><a href="https://juejin.im/post/5d394c656fb9a07eca69bf98">HTML5新特性介绍</a></p>
-<h3 id="pushState"><a href="#pushState" class="headerlink" title="pushState"></a>pushState</h3><p><strong>pushState</strong>:用来新增历史记录</p>
-<p><code>pushState()</code>需要三个参数：一个状态对象，一个标题（目前被忽略），和（可选的）一个URL.</p>
-<ul>
-<li><p><strong>状态对象</strong></br><br>状态对象state是一个JavaScript对象，通过pushState()创建新的历史记录条目。无论什么时候用户导航到新的状态，popState事件就会被触发，且该事件的state属性包含该历史记录条目状态对象的副本。</p>
-</li>
-<li><p>标题</br><br>Firefox目前忽略这个参数，但未来可能会用到。在此处传一个空字符串应该可以安全的防范未来这个方法的更改。或者，你可以为跳转的state传递一个短标题。</p>
-</li>
-<li><p>URL</br><br>改参数定义了新的历史URL记录。注意，调用<code>pushState()</code>后浏览器并不会立即加载这个URL,但可能会在稍后某些情况下加载这些这个URL,比如在用户重新打开浏览器时。新URL不必须为绝对路径。如果新URL是相对路径，那么它将被作为相对于当前URL处理。新URL必须与当前URL同源，否则<code>pushState()</code>会抛出一个异常。改参数是可选的，缺省为当前URL。</p>
-</li>
-</ul>
-<h3 id="replaceState"><a href="#replaceState" class="headerlink" title="replaceState"></a>replaceState</h3><p><code>history.replaceState()</code>的使用与<code>history.pushState()</code>非常相似，区别在于<code>replaceState()</code>是修改了当前的历史记录项而不是新建一个。注意这并不会阻止其在全局浏览器历史记录中创建一个新的历史记录项。</p>
-<h3 id="popstate事件"><a href="#popstate事件" class="headerlink" title="popstate事件"></a>popstate事件</h3><p>触发历史记录改变的事件，比如用户前进、后退等操作会触发popstate事件。进而获取到通过pushState和replaceState传递的值</p>
-<ul>
-<li><strong>重点</strong></br><br>页面加载时，或许会有个非null的状态对象。这是有可能发生的。举个例子，假如页面（通过<code>pushState()</code>或者<code>raplaceState()</code>方法）设置了状态对象而后用户重启了浏览器。那么当页面重新加载时，页面会接收一个<code>onload</code>事件，但是没有触发<code>popstate</code>事件。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//监听state事件</span><br><span class="line">window.addEventListener(&#x27;popstate&#x27;,function(event)&#123;</span><br><span class="line">    console.log(event.state);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="hashchange事件"><a href="#hashchange事件" class="headerlink" title="hashchange事件"></a>hashchange事件</h3><p><code>hashchange</code>事件在URL的hash部分（即<code>#</code>号后面的部分，包括<code>#</code>号）发生变化时触发。该事件一般在<code>window</code>对象上监听。</p>
-<p><code>hashchange</code>的事件实例具有两个特有属性：<code>oldURL</code>属性和<code>newURL</code>属性，分别表示变化前后</p>
-<h3 id="history-back回退"><a href="#history-back回退" class="headerlink" title="history.back回退"></a>history.back回退</h3><p>回退到上一个history记录</p>
-<h3 id="history-forward前进"><a href="#history-forward前进" class="headerlink" title="history.forward前进"></a>history.forward前进</h3><p>前进一个history记录</p>
-<h3 id="history-go去往第n条记录"><a href="#history-go去往第n条记录" class="headerlink" title="history.go去往第n条记录"></a>history.go去往第n条记录</h3><p>去往第几个history记录</p>
-<h3 id="history-length长度"><a href="#history-length长度" class="headerlink" title="history.length长度"></a>history.length长度</h3><p>获取浏览history记录的长度</p>
-<h3 id="history-state当前地址"><a href="#history-state当前地址" class="headerlink" title="history.state当前地址"></a>history.state当前地址</h3><p>获取当前的记录</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1060,7 +1034,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -150,6 +150,138 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/08/01/ESLint-%E4%B8%8E-Prettie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/01/ESLint-%E4%B8%8E-Prettie/" class="post-title-link" itemprop="url">ESLint 与 Prettie</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="eslint-prettier-editorconfig-lint-staged"><a href="#eslint-prettier-editorconfig-lint-staged" class="headerlink" title="eslint+prettier+editorconfig+lint-staged"></a><code>eslint</code>+<code>prettier</code>+<code>editorconfig</code>+<code>lint-staged</code></h2><h2 id="ESlint"><a href="#ESlint" class="headerlink" title="ESlint"></a><code>ESlint</code></h2><p>开发过程中，如果写出不合符规范的代码，能够及时提醒开发者，及时修复</p>
+<p>通常，需要较大变动才能修复的规范问题，eslint 无法自动修复。如：单行不超过 80 个字符</p>
+<p>针对代码质量问题，例如：未使用变量、三等号、全局变量生命问题</p>
+<h2 id="Prettier"><a href="#Prettier" class="headerlink" title="Prettier"></a><code>Prettier</code></h2><p>保存代码，使用格式化快捷键，能够自动按照我们制定的规范、格式化代码</p>
+<p>针对代码格式问题，例如：单行代码长度、tab 长度、空格、逗号表达式</p>
+<h2 id="editorconfig"><a href="#editorconfig" class="headerlink" title="editorconfig"></a><code>editorconfig</code></h2><p>用于覆盖编辑器（针对不同编辑器，vscode,webstorm）默认的配置</p>
+<h2 id="为什么要两者结合"><a href="#为什么要两者结合" class="headerlink" title="为什么要两者结合"></a>为什么要两者结合</h2><p><code>ESLint</code>擅长校验，<code>prettier</code>擅长格式；但是两者有些规则是冲突的</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>禁掉 ESLint 中与 Prettier 冲突的规则，然后使用 Prettier 做格式化， ESLint 做代码校验</p>
+<ul>
+<li><p>首先禁掉 ESLint&#x2F;插件中与 Prettier 冲突的规则，创建一个包<code>eslint-confit-prettier</code>,里面定义了被禁掉的 ESLint&#x2F;插件规则</p>
+</li>
+<li><p>创建一个插件<code>eslint-plugin-prettier</code>,定义一条规则 prettier&#x2F;prettier，调用 Prettier,配合 ESLint 实现运行<code>eslint --fix</code>按 Prettier 规则自动化格式代码</p>
+</li>
+<li><p>在.eslintrc.js 中如下配置</p>
+<p>{<br>extends: [<br>…, &#x2F;&#x2F; 其他<br>“prettier”, &#x2F;&#x2F; eslint-config-prettier<br>]<br>plugins: [“prettier”], &#x2F;&#x2F; eslint-plugin-prettier<br>rules: {<br>“prettier&#x2F;prettier”: “error” &#x2F;&#x2F; 开启规则<br>}<br>}</p>
+</li>
+</ul>
+<h3 id="eslint-config-prettier"><a href="#eslint-config-prettier" class="headerlink" title="eslint-config-prettier"></a><code>eslint-config-prettier</code></h3><p>让所有可能会与 prettier 规则存在冲突的 eslint rule 失效即关闭 ESLint 与 Prettier 冲突的规则。</p>
+<pre><code>&quot;extends&quot;:[
+    &quot;eslint:recommend&quot;,
+    &quot;prettier&quot;
+]
+</code></pre>
+<h3 id="eslint-plugin-prettier"><a href="#eslint-plugin-prettier" class="headerlink" title="eslint-plugin-prettier"></a><code>eslint-plugin-prettier</code></h3><p>将 prettier 的能力集成到 eslint 中。以 ESlint 规则的方式运行 Prettier 检查代码规范性，并进行修复</p>
+<pre><code>&#123;
+    &quot;rules&quot;:&#123;
+        &quot;prettier/prettier&quot;: &quot;error&quot;
+    &#125;,
+    &quot;plugins&quot;:[&quot;prettier&quot;]
+&#125;
+</code></pre>
+<h3 id="Prettier和ESLint"><a href="#Prettier和ESLint" class="headerlink" title="Prettier和ESLint"></a><code>Prettier</code>和<code>ESLint</code></h3><p>npm 安装这两个，要它们生效都需要使用命令行，例如<code>prettier --write</code>和<code>eslint --fix</code><br>如果需要 vscode 保存就生效，vscode 需要安装对应插件</p>
+<p><code>Prettier</code>对应的<code>settins.json</code>配置</p>
+<pre><code>&#123;
+    ...
+    // 新增如下配置
+    &quot;editor.formatOnType&quot;: true,
+    &quot;editor.formatOnSave&quot;: true,
+    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,
+    &quot;[javascript]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[typescript]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[typescriptreact]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[html]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[json]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[scss]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[jsonc]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+&#125;
+</code></pre>
+<p><code>ESLint</code>对应<code>setting.json</code>配置</p>
+<pre><code> &quot;editor.codeActionsOnSave&quot;: &#123;
+        &quot;source.fixAll.eslint&quot;: true
+    &#125;,
+</code></pre>
+<h2 id="VSCode-安装的-eslint-和-prettier-插件和-npm-安装的有什么区别"><a href="#VSCode-安装的-eslint-和-prettier-插件和-npm-安装的有什么区别" class="headerlink" title="VSCode 安装的 eslint 和 prettier 插件和 npm 安装的有什么区别"></a>VSCode 安装的 eslint 和 prettier 插件和 npm 安装的有什么区别</h2><p>VSCode 中安装的是在编辑器里面用的，如果项目根目录下有 eslintrc 和 prettierrc 配置文件，VSCode 插件会自动读取配置文件中的配置检查你的代码和格式化文件，npm 安装的是在命令行中运行的。如果你只安装 npm 包，VSCode 是不会有 lint 提示的，只能通过命令行，在小黑窗查看不符合 lint 规则的检测信息。安装 npm 包最主要的原因是可以通过 git hook 强制提交代码前 lint 和格式化代码保证代码仓库的代码风格统一。</p>
+<p><a href="https://blog.theodo.com/2019/08/empower-your-dev-environment-with-eslint-prettier-and-editorconfig-with-no-conflicts/">参考链接</a></p>
+<p><a href="https://juejin.cn/post/6924568874700505102">参考链接</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/07/29/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1145,7 +1277,7 @@
 <tr>
 <td>From</td>
 <td>发出请求的用户的Email</td>
-<td>From:<a href="mailto:&#x75;&#115;&#101;&#x72;&#x40;&#101;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#x75;&#115;&#101;&#x72;&#x40;&#101;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a></td>
+<td>From:<a href="mailto:&#x75;&#x73;&#x65;&#x72;&#x40;&#x65;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#x75;&#x73;&#x65;&#x72;&#x40;&#x65;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a></td>
 </tr>
 <tr>
 <td>Host</td>
@@ -1278,77 +1410,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/thunk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/27/thunk/" class="post-title-link" itemprop="url">thunk</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是Thunk"><a href="#什么是Thunk" class="headerlink" title="什么是Thunk"></a>什么是Thunk</h3><p>是一个函数式编程的黑科技为了去延迟执行</p>
-<h3 id="形如"><a href="#形如" class="headerlink" title="形如"></a>形如</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function thunkedYell(text)&#123;</span><br><span class="line">    return function thunk () &#123;</span><br><span class="line">        console.log(text + &#x27;!&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const thunkedYell = text=&gt; ()=&gt; console.log(text + &#x27;!&#x27;)</span><br></pre></td></tr></table></figure>
-<p>其中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">()=&gt; console.log(text + &#x27;!&#x27;)就是thunk</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="redux-thunk"><a href="#redux-thunk" class="headerlink" title="redux-thunk"></a><code>redux-thunk</code></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function createThunkMiddleware(extraArgument)&#123;</span><br><span class="line">    return(&#123;dispatch,getState&#125;) =&gt; (next)=&gt;(action)=&gt;&#123;</span><br><span class="line">        if(typeof action === &#x27;function&#x27;)&#123;</span><br><span class="line">            return action(dispatch,getState,extraArgument);</span><br><span class="line">        &#125;</span><br><span class="line">        return next(action)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://medium.com/fullstack-academy/thunks-in-redux-the-basics-85e538a3fe60">参考链接</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1418,7 +1479,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
