@@ -200,7 +200,7 @@
 </ul>
 <h2 id="2、CSRF-攻击过程"><a href="#2、CSRF-攻击过程" class="headerlink" title="2、CSRF 攻击过程"></a>2、CSRF 攻击过程</h2><p>登录态 Cookie 的 Key 是浏览器默认自动携带的，Key 通常是会话 Cookie，只要浏览器不关闭，Key 一直存在。所以只要用户 A 登录过网站（<a href="http://www.test.com),浏览器没有关闭,用户在没有关闭的浏览器打开一个黑客网页(www.hacker.com),黑客页面发送一个http请求到www.test.com的后台会默认带上www.test.com的登录态cookie,也就能模拟一些增删改查等敏感操作.get和post都一样,这就是csrf攻击原理./">www.test.com），浏览器没有关闭，用户在没有关闭的浏览器打开一个黑客网页（www.hacker.com）,黑客页面发送一个HTTP请求到www.test.com的后台会默认带上www.test.com的登录态cookie，也就能模拟一些增删改查等敏感操作。Get和Post都一样，这就是CSRF攻击原理。</a></p>
 <h2 id="3、防护方案-Token"><a href="#3、防护方案-Token" class="headerlink" title="3、防护方案 Token"></a>3、防护方案 Token</h2><p>由于 Cookie 有跨域限制，所以我们可以用这个特性来区分自己页面还是黑客页面。只要页面能读（或者写）<a href="http://www.test.com域名cookie,就证明是自己的页面.方案很简单,比如服务器通过cookie下发一个token,token值是随机数,页面发请求的时候从cookie取出token通过http请求参数传给后台,后台对比参数里的token和cookie里的token是否一致./">www.test.com域名Cookie,就证明是自己的页面。方案很简单，比如服务器通过cookie下发一个token，token值是随机数，页面发请求的时候从cookie取出token通过HTTP请求参数传给后台，后台对比参数里的token和cookie里的token是否一致。</a></p>
-<h3 id="3-1-Token-是谁生成的"><a href="#3-1-Token-是谁生成的" class="headerlink" title="3.1 Token 是谁生成的"></a>3.1 Token 是谁生成的</h3><p>原理上，token 前端后端生成都可以，只要保证随机性。如果是前端生成 token 然后写到 Cookie 里，然后 HTTP 请求参数也带上 token,后端逻辑一样对比参数里面的 token 和 cookie 里面的 token 是否一致，如果一致就证明是自己页面发出的请求，如果不一致就返回失败。这就是 Cookie 读和写的区别，只要能读写自己域名的 Cookie 就是自己的页面</p>
+<h3 id="3-1-Token-是谁生成的"><a href="#3-1-Token-是谁生成的" class="headerlink" title="3.1 Token 是谁生成的"></a>3.1 Token 是谁生成的</h3><p>原理上，token 前端后端生成都可以，只要保证随机性。如果是前端生成 token 然后写到 Cookie 里，然后 HTTP 请求参数也带上 token,后端逻辑一样对比参数里面的 token 和 cookie 里面的 token 是否一致，如果一致就证明是自己页面发出的请求，如果不一致就返回失败。这就是 Cookie 读和写的区别，只要能读写自己域名的 Cookie 就是自己的页面。</p>
 
       
     </div>
