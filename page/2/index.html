@@ -150,6 +150,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/http%E7%BC%93%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/27/http%E7%BC%93%E5%AD%98/" class="post-title-link" itemprop="url">http缓存</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是http缓存？"><a href="#什么是http缓存？" class="headerlink" title="什么是http缓存？"></a>什么是http缓存？</h2><p> 指的是浏览器在本地磁盘对用户最近请求过的文档进行存储，当访问者再次访问同一页面时，浏览器就可以直接从本地磁盘加载文档。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>减少了冗余的数据传输</li>
+<li>减少了服务器的负担，大大提升了网站的性能</li>
+<li>加快了客户端加载网页的速度</li>
+</ul>
+<h2 id="缓存相关的header"><a href="#缓存相关的header" class="headerlink" title="缓存相关的header"></a>缓存相关的header</h2><ul>
+<li><p>Expires  <code>响应头，代表该资源的过期时间</code></p>
+</li>
+<li><p>Cache-Control <code>请求/响应头，缓存控制字段，精确控制缓存策略</code></p>
+<p>  主要是利用该字段的<code>max-age</code>值来判断，譬如Cache-Control:max-age&#x3D;3600,代表资源的有效期是3600秒，还有几个常用字段是</p>
+<p>  （1）no-cache:不使用本地缓存。需要使用缓存协商，先与服务器确认返回的响应头是否被更改，如果之前的响应头中存在ETag,那么请求的时候会与服务器端验证，如果资源为被更改，则可以避免重新下载。<br>  （2）no-store:直接禁止浏览器缓存数据，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。<br>  （3）public:可以被所有的用户缓存，包括终端用户和CDN等中间代理服务器<br>  （4）private:只能被终端用户的浏览器缓存，不允许CDN等中间代理服务器对其缓存</p>
+<p>  <strong>另外，<code>Cache-Control</code>与<code>Expires</code>可以在服务器端配置同时启用，同时启用的时候<code>Cache-Control优先级高</code></strong></p>
+</li>
+<li><p>If-Modified-Since <code>请求头，资源最近修改时间，由浏览器告诉服务器</code> </p>
+</li>
+<li><p>Last-Modified <code>响应头，资源最近修改时间，由服务器告诉浏览器，如果命中缓存，则返回304，并且不会返回资源内容，也不会返回Last_Modified</code></p>
+</li>
+<li><p>ETag <code>响应头，资源标识，由服务器告诉浏览器,如果命中缓存，由于ETag重新生成，响应头中还是会把这个ETag返回，即使这个ETag跟之前没有变化</code></p>
+</li>
+<li><p>If-None-Match <code>请求头，缓存资源标识，由浏览器告诉服务器</code></p>
+</li>
+</ul>
+<h2 id="为什么要用ETag"><a href="#为什么要用ETag" class="headerlink" title="为什么要用ETag"></a>为什么要用<code>ETag</code></h2><ul>
+<li><code>If-Modified-Since</code>是秒级别的</li>
+<li>如果服务器上文件被修改了，但是实际上内容根本没发生改变（仅仅改变修改的时间），也会因为<code>Last-Modified</code>时间匹配不上而重新返回数据</li>
+<li>某些服务器不能精确的得到文件的最后修改时间</li>
+</ul>
+<h2 id="缓存分类"><a href="#缓存分类" class="headerlink" title="缓存分类"></a>缓存分类</h2><p> http缓存分为两类：<code>协商缓存</code>和<code>强缓存</code>。</p>
+<p> 浏览器在第一次请求发生后，再次请求时：</p>
+<p> 1、浏览器会先获取该资源缓存的header信息，根据其中的<code>expires</code>和<code>cache-control</code>判断是否命中<code>强缓存</code>，若命中则直接从缓存中获取资源，包括缓存的header信息，本次请求不会与服务器进行通信。</p>
+<p> 2、如果没有命中强缓存，浏览器会发送请求到服务器，该请求会携带第一次请求返回的有关缓存的header字段信息（Last-Modified&#x2F;IF-Modified-Since、Etag&#x2F;IF-None-Match）,由服务器根据请求中的相关header信息来对比结果是否命中协商缓存，若命中，则服务器返回新的响应header信息更新缓存中的对应header信息，但是并不返回资源内容，它会告知浏览器可以直接从缓存中获取；否则返回最新的资源内容。</p>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p> 强缓存是利用http的返回头中的<code>Expires</code>或者<code>Cache-Control</code>两个字段来控制的，用来表示资源的缓存时间（对应状态码200）</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存就是由服务器来确定缓存资源是否可用，所以客户端与服务器端要通过某种标识来进行通信，从而让服务器判断请求资源是否可以缓存访问，这主要涉及到下面两组header字段，这两组搭档都是成对出现的，即第一次请求的响应头带上某个字段（<code>Last-Modified</code>或者<code>Etag</code>）,则后续请求则会带上对应的请求字段（<code>If-Modified-Since</code>或者<code>If-None-Match</code>），若响应头没有Last-Modified或者Etag字段，则请求头也不会有对应的字段（对应状态码304）</p>
+<h3 id="情景分析"><a href="#情景分析" class="headerlink" title="情景分析"></a>情景分析</h3><ul>
+<li>浏览器请求a.js</li>
+<li>服务器返回a.js,同时告诉浏览器的过期绝对时间（Expires）和相对时间（Cache-Control:max-age&#x3D;10）,以及a.js上次修改时间Last-Modified,以及a.js的Etag.</li>
+<li>10s内浏览器再次请求a.js,不在请求服务器，直接使用本地缓存</li>
+<li>11s时，浏览器再次请求a.js，请求服务器，带上上次修改时间If-Modified-Since和上次的Etag值If-None-Match.</li>
+<li>服务器收到浏览器的If-Modified-Since和If-None-Match,发现了  If-None-Match,则比较If-None-Match和a.js的Etag值，忽略If-Modified和If-Modified-Since的比较。</li>
+<li>a.js文件内容没有变化，则Etag和If-None-Match一致，服务器告诉浏览器继续使用本地缓存（304）</li>
+</ul>
+<p><a href="http://caibaojian.com/browser-cache.html">参考链接1</a></p>
+<p> <a href="https://juejin.im/post/5b3c87386fb9a04f9a5cb037">参考链接2</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/http%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,7 +459,7 @@
 <tr>
 <td>From</td>
 <td>发出请求的用户的Email</td>
-<td>From:<a href="mailto:&#117;&#x73;&#101;&#114;&#x40;&#101;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#109;">&#117;&#x73;&#101;&#114;&#x40;&#101;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#109;</a></td>
+<td>From:<a href="mailto:&#117;&#x73;&#x65;&#114;&#x40;&#x65;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#117;&#x73;&#x65;&#114;&#x40;&#x65;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a></td>
 </tr>
 <tr>
 <td>Host</td>
@@ -1264,77 +1366,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">发布订阅模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">响应式原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>发布-订阅模式又叫做观察者模式，它定义了一种一对多的依赖关系，即当一个对象的状态发生改变的时候，所有依赖他的对象都会得到通知。</p>
-<h3 id="观察者模式下的角色划分"><a href="#观察者模式下的角色划分" class="headerlink" title="观察者模式下的角色划分"></a>观察者模式下的角色划分</h3><ul>
-<li><code>Subject</code>:抽象主题（抽象被观察者），抽象主题角色把所有观察者对象保存在一个集合里，每个主题都可以有任意数量的观察者，抽象主题提供一个接口，可以增加和删除观察者对象</li>
-<li><code>ConcreteSubject</code>:具体主题（具体被观察者），该角色将有关状态存入具体观察者对象，在具体主题的内部状态发生改变时，给所有注册过的观察者发送通知。</li>
-<li><code>Observer</code>：抽象观察者，是观察者的抽象类，它定义一个更新接口，使得在得到主题更改通知时更新自己。</li>
-<li><code>ConcreteObserver</code>：具体观察者，实现抽象观察者定义的更新接口，以便在得到主题更改通知时更新自身的状态。</li>
-</ul>
-<p><a href="https://blog.csdn.net/itachi85/article/details/50773358">参考链接</a></p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function Dep()&#123;</span><br><span class="line">    this.subs = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dep.prototype.addSub = function(sub)&#123;</span><br><span class="line">    this.subs.push(sub);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dep.prototype.notify = function()&#123;</span><br><span class="line">    this.subs.forEach(sub=&gt;sub.update());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Watcher(fn)&#123;</span><br><span class="line">    this.fn = fn;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Wathcher.prototype.update = function()&#123;</span><br><span class="line">    this.fn();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var dep = new Dep();</span><br><span class="line">dep.addSub(new Watcher(function()&#123;</span><br><span class="line">    console.log(&#x27;okokok&#x27;);</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">dep.notify();</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1404,14 +1435,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
