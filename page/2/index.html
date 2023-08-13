@@ -150,6 +150,67 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/http%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/27/http%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82/" class="post-title-link" itemprop="url">http版本差异</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Http1-0和HTTP1-1一些区别"><a href="#Http1-0和HTTP1-1一些区别" class="headerlink" title="Http1.0和HTTP1.1一些区别"></a>Http1.0和HTTP1.1一些区别</h3><h4 id="缓存处理"><a href="#缓存处理" class="headerlink" title="缓存处理"></a>缓存处理</h4><p>在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略</p>
+<h4 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h4><p>HTTP1.1支持长连接和请求的流水线处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，在HTTP1.1中默认开启Connection:keep-alive,一定程度上弥补了HTTP1.0每次请求都要创建连接的缺点。</p>
+<h3 id="Http2-0和Http1-X相比的特性"><a href="#Http2-0和Http1-X相比的特性" class="headerlink" title="Http2.0和Http1.X相比的特性"></a>Http2.0和Http1.X相比的特性</h3><h4 id="新的二进制格式"><a href="#新的二进制格式" class="headerlink" title="新的二进制格式"></a>新的二进制格式</h4><p>HTTP1.x的解析是基于文本，HTTP2.0解析采用二进制格式，实现方便且健壮。<br>####多路复用<br>即连接共享，每一个request都是用作练级诶共享机制的。一个request对应一个id,这样一个连接上可以有多个request，每个连接的request可以随机在一起，接收方可以根据request的id将request再归属到各自不同的服务器请求里面。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/http%E7%BC%93%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -459,7 +520,7 @@
 <tr>
 <td>From</td>
 <td>发出请求的用户的Email</td>
-<td>From:<a href="mailto:&#117;&#x73;&#x65;&#114;&#x40;&#x65;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#117;&#x73;&#x65;&#114;&#x40;&#x65;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a></td>
+<td>From:<a href="mailto:&#117;&#x73;&#x65;&#114;&#64;&#101;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#117;&#x73;&#x65;&#114;&#64;&#101;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a></td>
 </tr>
 <tr>
 <td>Host</td>
@@ -1236,136 +1297,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/Hooks%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/16/Hooks%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">Hooks基本用法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/Hooks/" itemprop="url" rel="index"><span itemprop="name">Hooks</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="什么是Hooks"><a href="#什么是Hooks" class="headerlink" title="什么是Hooks"></a>什么是Hooks</h3><p>Hooks是一种函数，该函数允许您从函数式组件“勾住(hook into)”React状态和生命周期功能</p>
-<h3 id="有哪些钩子"><a href="#有哪些钩子" class="headerlink" title="有哪些钩子"></a>有哪些钩子</h3><p>基本钩子：<code>useState</code>、<code>useEffect</code>、<code>useContext</code></br><br>额外的钩子：<code>useCallback</code>、<code>useReducer</code>、<code>userMemo</code>、<code>useRef</code>、<code>useLayoutEffect</code>、<code>useImperativeHandle</code>、<code>useDebugValue</code></p>
-<h3 id="不同钩子的用法"><a href="#不同钩子的用法" class="headerlink" title="不同钩子的用法"></a>不同钩子的用法</h3><h4 id="useState"><a href="#useState" class="headerlink" title="useState"></a><code>useState</code></h4><p>创建于一个新的状态，参数为一个固定的值或者一个有返回值的方法。钩子执行后的结果为一个<strong>数组</strong>，分别为生成的状态以及改变状态的方法，通过解构赋值的方法拿到对应的值和方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const [count, changeCount] = useState(0);</span><br></pre></td></tr></table></figure>
-
-<p><strong>需要注意的是</strong>：<code>useState</code>相较于类组件的<code>setState</code>的非覆盖式更新改变，<code>useState</code> 覆盖式更新状态，需要开发者自己处理逻辑比如<code>setobject(&#123;...obj,count:1&#125;)</code></p>
-<h4 id="useEffect（每次render都会执行）"><a href="#useEffect（每次render都会执行）" class="headerlink" title="useEffect（每次render都会执行）"></a><code>useEffect</code>（每次render都会执行）</h4><p>执行副作用钩子，所有的副作用在组件挂在完成后会执行一次，如果副作用存在返回的函数，那么返回的函数将在卸载时运行。主要应用于以下两种情况</br><br>1、函数式组件中不存在类组件的生命周期，如果我们需要在一些特定的生命周期或者变化后做一些操作的话，必须借助<code>useEffect</code>的一些特性去实现。</p>
-<p>2、useState产生的changeState方法并没有提供类似于setState的第二个参数一样的功能，因此如果需要在State改变后执行一些方法，必须通过useEffect实现</p>
-<p>该钩子接受两个参数：第一个参数为副作用需要执行回调，生成的回调方法可以返回一个函数（<strong>将在组件卸载时运行</strong>）；第二个为该副作用监听的状态数组。当对应状态发生变动时会执行副作用，<strong>如果第二个参数为空，那么在每一个State变化时都会执行该副作用</strong></br></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const [count, changeCount] = useState(0);</span><br><span class="line"></span><br><span class="line">// 将在count变化时打印最新的count数据</span><br><span class="line">useEffect(() =&gt; &#123;</span><br><span class="line">  message.info(`count发生变动，最新值为$&#123;count&#125;`);</span><br><span class="line">&#125;, [count])</span><br></pre></td></tr></table></figure>
-
-<p>如何应用第一种情况呢，分析我们需要的是让目标副作用在初始化执行一次后再也不会被调用，于是只要让与该副作用相关联的状态为空(空数组)，不管其他状态如何变化，该副作用都不会再次执行，就实现了<code>componentDidMount</code>和<code>componentWillUnmount</code>的功能</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">useEffect(() =&gt; &#123;</span><br><span class="line">    message.info(&#x27;我只在页面挂载时打印&#x27;);</span><br><span class="line">    return () =&gt; &#123;</span><br><span class="line">      message.info(&#x27;我只在页面卸载时打印&#x27;);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, []);</span><br></pre></td></tr></table></figure>
-
-<h4 id="useCallback-缓存函数"><a href="#useCallback-缓存函数" class="headerlink" title="useCallback(缓存函数)"></a><code>useCallback</code>(缓存函数)</h4><p>生成Callback的钩子。用于不同的<code>useEffect</code>中存在的相同逻辑的封装，减少代码冗余，配合<code>useEffect</code>使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const [count1, changeCount1] = useState(0);</span><br><span class="line">const [count2, changeCount2] = useState(10);</span><br><span class="line"></span><br><span class="line">const calculateCount = useCallback(() =&gt; &#123;</span><br><span class="line">  if (count1 &amp;&amp; count2) &#123;</span><br><span class="line">    return count1 * count2;</span><br><span class="line">  &#125;</span><br><span class="line">  return count1 + count2;</span><br><span class="line">&#125;, [count1, count2])</span><br><span class="line"></span><br><span class="line">useEffect(() =&gt; &#123;</span><br><span class="line">    const result = calculateCount(count, count2);</span><br><span class="line">    message.info(`执行副作用，最新值为$&#123;result&#125;`);</span><br><span class="line">&#125;, [calculateCount])</span><br></pre></td></tr></table></figure>
-
-<p>在使用<code>useCallback</code>生成计算的回调后，在使用该回调的副作用中，<strong>第二个参数应该是生成的回调</strong><br>此时<code>useCallback</code>和<code>useEffect</code>是按顺序执行的，实现了副作用逻辑的抽离</p>
-<h4 id="useRef-可以绕过Hooks的Capture-Value特性"><a href="#useRef-可以绕过Hooks的Capture-Value特性" class="headerlink" title="useRef(可以绕过Hooks的Capture Value特性)"></a><code>useRef</code>(可以绕过Hooks的Capture Value特性)</h4><ul>
-<li>获取DOM元素的节点</li>
-<li>获取子组件的实例</li>
-<li>渲染周期之间共享数据的存储（state不能存储跨渲染周期的数据，因为state的保存会触发组件重渲染）</br><br><code>useRef</code>接受一个参数，为ref的初始值。类似类组件的<code>createRef</code>方法，该钩子会返回一个对象，对象中的current字段为我们<strong>指向实例&#x2F;保存的变量</strong>,可以实现获得目标节点实例或保存状态的功能。</li>
-</ul>
-<p><strong>useRef保存的变量不会随着每次数据的变化重新生成，而是保持在我们最后一次赋值时的状态，依靠这种特性，在配合useCallback和useEffect我们可以实现preProps&#x2F;preState的功能。</strong></p>
-<h4 id="useMemo（React-memo）（缓存值）"><a href="#useMemo（React-memo）（缓存值）" class="headerlink" title="useMemo（React.memo）（缓存值）"></a><code>useMemo</code>（React.memo）（缓存值）</h4><p>Memo为Memory简写，<code>useMemo</code>即使用记忆的内容。该钩子主要用于性能的优化。</p>
-<p>在业务中，我们可以用<code>useMemo</code>来处理计算结果的缓存或引入组件来防止重复挂载优化。其接受两个参数，第一个参数为<code>Getter</code>方法，<strong>返回值为要缓存的数据或组件</strong>，第二个参数为该返回值相关联的状态，当其中任何一个状态发生变化时就会重新调用Getter方法生成新的返回值。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const calculateCount = useMemo(() =&gt; &#123;</span><br><span class="line">   message.info(&#x27;重新生成计算结果&#x27;);</span><br><span class="line">   return count1 * 10;</span><br><span class="line"> &#125;, [count1]);</span><br><span class="line"> </span><br><span class="line"> //返回组件</span><br><span class="line">   const child = useMemo(() =&gt; &#123;</span><br><span class="line">   message.info(&#x27;重新生成Child组件&#x27;);</span><br><span class="line">   return &lt;Child count=&#123;count1&#125; /&gt;;</span><br><span class="line"> &#125;, [count1]);</span><br><span class="line"> return (</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="useCallback和useMemo"><a href="#useCallback和useMemo" class="headerlink" title="useCallback和useMemo"></a><code>useCallback</code>和<code>useMemo</code></h3><p><code>useCallback</code>是根据以来缓存第一个入参的(callback)。<code>useMemo</code>是根据依赖(deps)缓存第一个入参(allback)执行后的值</p>
-<h3 id="编写自己的钩子"><a href="#编写自己的钩子" class="headerlink" title="编写自己的钩子"></a>编写自己的钩子</h3><p>钩子并不是什么高深莫测的东西，它只是对我们常用逻辑的一些封装。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import React,&#123; useState &#125; from &#x27;react&#x27;</span><br><span class="line"></span><br><span class="line">//编写我们自己的hook,名字以use开头</span><br><span class="line">funtion useCounter(initialValue)&#123;</span><br><span class="line">    //接受初始化值生成state</span><br><span class="line">    const [count,changeCount] = useState(initialValue)</span><br><span class="line">    //声明减少的方法</span><br><span class="line">    const decrease = () =&gt;&#123;</span><br><span class="line">        changeCount(count - 1);</span><br><span class="line">    &#125;</span><br><span class="line">    //声明增加的方法</span><br><span class="line">    const increase = () =&gt;&#123;</span><br><span class="line">        changeCount(count + 1)</span><br><span class="line">    &#125;</span><br><span class="line">    //声明重置计数器方法</span><br><span class="line">    const resetCounter = () =&gt;&#123;</span><br><span class="line">        changeCount(0)</span><br><span class="line">    &#125;</span><br><span class="line">    //将count数字与方法返回回去</span><br><span class="line">    return [count,&#123;decrease,increase,resetCounter&#125;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default function myHooksView() &#123;</span><br><span class="line">  // 在函数组件中使用我们自己编写的hook生成一个计数器，并拿到所有操作方法的对象</span><br><span class="line">  const [count, controlCount] = useCounter(10);</span><br><span class="line">  return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        当前数量：&#123;count&#125;</span><br><span class="line">            &lt;button onClick=&#123;controlCount.decrease&#125;&gt;减少&lt;/button&gt;</span><br><span class="line">            &lt;button onClick=&#123;controlCount.increase&#125;&gt;增加&lt;/button&gt;</span><br><span class="line">            &lt;button onClick=&#123;controlCount.resetCounter&#125;&gt;重置&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
-<thead>
-<tr>
-<th>钩子</th>
-<th>用法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>useState</td>
-<td>const [state,changeState] &#x3D; useState(initialValue)</td>
-<td>用于生成状态以及改变状态</td>
-</tr>
-<tr>
-<td>useEffect</td>
-<td>useEffect(fn,[…relativeState])</td>
-<td>用于生成与状态绑定的副作用</td>
-</tr>
-<tr>
-<td>useCallback</td>
-<td>useCallback(fn,[…relativeState])</td>
-<td>用于生成与状态绑定的回调函数</td>
-</tr>
-<tr>
-<td>useMemo</td>
-<td>useMemo(fn,[…relativeState])</td>
-<td>用于生成与状态绑定的组件&#x2F;计算结果</td>
-</tr>
-<tr>
-<td>useRef</td>
-<td>const newRef &#x3D; useRef(initialValue)</td>
-<td>用于获取节点实例&#x2F;数据保存</td>
-</tr>
-</tbody></table>
-<p><a href="https://github.com/happylindz/blog/issues/19">示例</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1435,14 +1366,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
