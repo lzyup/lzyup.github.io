@@ -150,6 +150,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/08/24/%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/24/%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="字符集（Character-Set）"><a href="#字符集（Character-Set）" class="headerlink" title="字符集（Character Set）"></a>字符集（Character Set）</h3><p>字符的集合，定义系统能处理哪些字符；</p>
+<h3 id="编码（Encoding）"><a href="#编码（Encoding）" class="headerlink" title="编码（Encoding）"></a>编码（Encoding）</h3><p>规定这些字符在计算机内部的表示（字符集中的表示）</p>
+<h3 id="码点"><a href="#码点" class="headerlink" title="码点"></a>码点</h3><p>每一个字符的编码就是一个码点</p>
+<h2 id="列几种常见的字符集和编码方式"><a href="#列几种常见的字符集和编码方式" class="headerlink" title="列几种常见的字符集和编码方式"></a>列几种常见的字符集和编码方式</h2><h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><ul>
+<li>ASCII(American Standard Code for Information Interchange，美国信息交换标准代码)</li>
+</ul>
+<p>是比较早的一种编码字符集，里面包含了 128 种字符，囊括了英文中常用的字母、数字、标点符号。另外还考虑了一些计算机的特定行为，比如响铃等等。</p>
+<ul>
+<li>GBK</li>
+</ul>
+<p>GBK 是对 GB2312 的一个扩展，兼容 GB2312，因此也兼容 ASCII，也是一个变长编码方案。下面是一个简介：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GBK 总体编码范围为 8140-FEFE，首字节在 81-FE 之间，尾字节在 40-FE 之间，总计 23940 个码位，共收入 21886 个汉字和图形符号，其中汉字（包括部首和构件）21003 个，图形符号 883 个。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Unicode</li>
+</ul>
+<p>Unicode 字符集的容量其实是在不断扩充中的。它规定，一个 16 位即 2Byte 的空间为一个平面（plane），一个平面的容量就是 2^16 &#x3D; 65536。目前 Unicode 已经定义了 17 个平面，即 17 * 65536 大约 100 万这么多容量。如果不够还可以继续扩充至 18 平面、19 平面 ……</p>
+<p>Unicode 的编码一般使用十六进制表示，前面加一个 U+，比如「汉」的 Unicode 编码是 U+6C49, a 的 Unicode 编码是 U+0061. 补充前面两个 0 是一种通常的记法。</p>
+<h4 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h4><ul>
+<li><p>ASCII</p>
+</li>
+<li><p>GBK</p>
+</li>
+<li><p>utf-16、utf-8</p>
+</li>
+<li><p>emoji</p>
+</li>
+<li><p>base64</p>
+<p>base64 编码是用来解决把不可打印的内容塞进可打印内容的需求的。比如把图片存到数据库，图片数据归根到底还是一堆二进制串，用 base64 编码后的显示成的字符串就大大缩小的长度，可以存到数据库。</p>
+<p>所谓 Base64，就是:小写字母 a-z、大写字母 A-Z、数字 0-9、符号”+”、”&#x2F;“（再加上作为垫字的”&#x3D;”，实际上是 65 个字符）—-作为一个基本字符集。然后，其他所有符号都转换成这个字符集中的字符。</p>
+</li>
+</ul>
+<h3 id="理解字符集和编码方式"><a href="#理解字符集和编码方式" class="headerlink" title="理解字符集和编码方式"></a>理解字符集和编码方式</h3><p>ASCII、GBK 等类编码模式的字符集和编码方式都是一一对应的，Unicode 是字符集，UTF-32&#x2F; UTF-16&#x2F; UTF-8 是三种字符编码方案。</p>
+<p>在早期的编码字符集中，如 ASCII，都是存储器里面直接放入编码字符集的对应编码，字符的编号是什么，就直接用这个编号作为存储中的编码。这在 ASCII 这样字符集中是没问题的。</p>
+<p>但是 Unicode 就会有上面的问题。因为 Unicode 有 17 个编码空间，17 超过了 2^4 &#x3D; 16，实际上用到了 2^5 的容量，再加上每个平面都是 2^16，其实一共是 5 + 16 &#x3D; 21 位。在 1Byte &#x3D; 8 bit 的硬件设备中，要使用定长的方式表示 Unicode，就会用到 3Byte。这样英文字符所占的空间就会 ASCII 情况下多三倍。而 Unicode 作为一种现代字符编码规则，用了一种截然的不同的策略。 那就是把每一个字符的编码，用一种特殊的规则映射到编码之上。这样的策略过程就是「编码方式」（charset encoding），Unicode 有很多编码方式，我们常见的有<code>utf-8</code>、<code>utf-16</code></p>
+<h3 id="URI-编码"><a href="#URI-编码" class="headerlink" title="URI 编码"></a>URI 编码</h3><p>考虑到 URI 在各种平台间传输时的兼容性，<code>URI 规范中规定只有 US-ASCII 字符集中的字符</code>可以直接出现在 URI 中。事实上，甚至 ASCII 本身的许多字符也不允许直接出现在 URI 中，有的也要转义。URL 路径中的中文需要转义，具体编码用的是 utf-8。</p>
+<p><strong>encodeURI:</strong> 会将需要编码的字符转换为 UTF-8 的格式。对于非转义字符以及保留字符（;,&#x2F;?:@&amp;&#x3D;+$#）不会进行转义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL中包含中文</span></span><br><span class="line"><span class="built_in">encodeURI</span>(<span class="string">&#x27;http://www.帅.com&#x27;</span>); <span class="comment">// http://www.%E5%B8%85.com</span></span><br><span class="line">​</span><br><span class="line"><span class="comment">// 值的内容为特殊符号。值为?&amp;</span></span><br><span class="line"><span class="built_in">encodeURI</span>(<span class="string">&#x27;http://a.com?key=?&amp;&#x27;</span>); <span class="comment">// &quot;http://a.com?key=?&amp;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>encodeURIComponent:</strong> 会编码所有的 URL 保留字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">&#x27;https://aotu.io/&#x27;</span>)</span><br><span class="line"><span class="comment">// &quot;https%3A%2F%2Faotu.io%2F&quot;</span></span><br><span class="line">​</span><br><span class="line"><span class="built_in">encodeURI</span>(<span class="string">&#x27;https://aotu.io/&#x27;</span>)</span><br><span class="line"><span class="comment">// &quot;https://aotu.io/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在处理页面跳转、跟服务器端进行交互时, 凡涉及到对 URI 进行解析的、最好用<strong>encodeURIComponent</strong>进行编码避免部分数据的丢失</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/08/13/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1066,69 +1158,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/promiseMiiddleware/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/27/promiseMiiddleware/" class="post-title-link" itemprop="url">promiseMiddleware</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">export default function promiseMiddleware() &#123;</span><br><span class="line">  return next =&gt; action =&gt; &#123;</span><br><span class="line">    const &#123; promise, type, success, error, complete, isFetching, ...rest &#125; = action;</span><br><span class="line"></span><br><span class="line">    if(!promise) return next(action);</span><br><span class="line"></span><br><span class="line">    const SUCCESS = type + &#x27;_SUCCESS&#x27;;</span><br><span class="line">    const REQUEST = type + &#x27;_REQUEST&#x27;;</span><br><span class="line">    const FAILURE = type + &#x27;_FAILURE&#x27;;</span><br><span class="line"></span><br><span class="line">    next(&#123; ...rest, isFetching: true, type: REQUEST &#125;); </span><br><span class="line">    // promise完成回调，无论success or error都会执行</span><br><span class="line">    const completeCallback = (...args) =&gt; &#123;</span><br><span class="line">      typeof complete === &#x27;function&#x27; &amp;&amp; complete(...args);</span><br><span class="line">    &#125;;</span><br><span class="line">    return promise</span><br><span class="line">      .then(response =&gt; (&#123; json: response.data.data, status: response.statusText &#125;))</span><br><span class="line">      .then((&#123; json, status &#125;) =&gt; &#123;</span><br><span class="line">        next(&#123; ...rest, json, isFetching: false, type: SUCCESS &#125;);</span><br><span class="line">        completeCallback(true, json, next);</span><br><span class="line">        if(typeof success === &#x27;function&#x27;) &#123;</span><br><span class="line">          success(json, next);</span><br><span class="line">        &#125;</span><br><span class="line">        return json;</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(err =&gt; &#123;</span><br><span class="line">        completeCallback(false, err, next);</span><br><span class="line">        if(typeof error === &#x27;function&#x27;) &#123;</span><br><span class="line">          error(err, next);</span><br><span class="line">        &#125;</span><br><span class="line">        next(&#123; ...rest, error: err, isFetching: false, type: FAILURE &#125;);</span><br><span class="line">        return err;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1198,7 +1227,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
