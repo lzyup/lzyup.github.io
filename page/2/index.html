@@ -150,6 +150,77 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/30/h5%E8%BD%AF%E9%94%AE%E7%9B%98%E8%B8%A9%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/30/h5%E8%BD%AF%E9%94%AE%E7%9B%98%E8%B8%A9%E5%9D%91/" class="post-title-link" itemprop="url">h5软键盘踩坑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bug%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">bug日记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p><strong>h5中input输入，弹出的软键盘会占据window的位置。</strong></p>
+<p>在Android系统中，当页面中有<code>position:absolute</code>或者<code>position:fixed</code>的元素，软键盘弹起后，window的高度是窗体的顶部到软键盘之上，底部的固定定位元素会覆盖到输入框上。</p>
+<p>如图：<br><img src="https://file.5rs.me/oss/uploadfe/jpg/06d1d3089b64049cdc32f17e17978c42.jpg" alt="image"></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>监听<code>resize</code>事件,话不多说，抄起键盘</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//提前拿到键盘未弹起的高度</span><br><span class="line">this.originHeight = document.documentElement.clientHeight || document.body.clientHeight;</span><br><span class="line"></span><br><span class="line">....</span><br><span class="line">//控制底部按钮的展示</span><br><span class="line"> let isShowButton = true;</span><br><span class="line">  if(Utils.browser().android) &#123;</span><br><span class="line">      const resizeHeight = document.documentElement.clientHeight || document.body.clientHeight;</span><br><span class="line">      let isShowButton = true;</span><br><span class="line">      if(resizeHeight &lt; this.originHeight) &#123;</span><br><span class="line">        // 键盘弹起的页面逻辑</span><br><span class="line">       isShowButton = false;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        // 键盘弹收起的页面逻辑</span><br><span class="line">        isShowButton = true;</span><br><span class="line">      &#125;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">        isShowButton</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>实际效果：</p>
+<p><img src="https://file.5rs.me/oss/uploadfe/jpg/2329d27f68554f706dbf9607a2bd3c78.jpg" alt="image"></p>
+<p>会发现稍微有点瑕疵，输入框盖在了背景图上面，sad！！！</p>
+<p><img src="https://file.5rs.me/oss/uploadfe/jpg/3f5534bbd8bbac4896697018c641132f.jpg" alt="image"></p>
+<p>导致这个的原因是因为键盘弹起的时候，body高度塌陷了，背景图也塌陷了，我们之前提前拿了原始body高度<strong>this.originHeight</strong>，直接给style设置上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">style=&#123;&#123; backgroundImage: `url($&#123;skinConfig.backgroundPic&#125;)`, height: `$&#123;this.originHeight&#125;px` &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果<br><img src="https://download.5rs.me/oss/uploadfe/jpg/aaf9226a1a1a35814d6e586bb34f0072.jpg?auth_key=1611988702-0-0-811da0bbe67b0c660a2317657b4b0548" alt="image"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/promiseMiiddleware/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -583,7 +654,7 @@
 <tr>
 <td>From</td>
 <td>发出请求的用户的Email</td>
-<td>From:<a href="mailto:&#x75;&#x73;&#101;&#x72;&#x40;&#101;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x75;&#x73;&#101;&#x72;&#x40;&#101;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;</a></td>
+<td>From:<a href="mailto:&#117;&#x73;&#101;&#114;&#x40;&#x65;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#117;&#x73;&#101;&#114;&#x40;&#x65;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;</a></td>
 </tr>
 <tr>
 <td>Host</td>
@@ -1181,84 +1252,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/withRouter%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/05/withRouter%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">withRouter使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/Router/" itemprop="url" rel="index"><span itemprop="name">Router</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>withRouter是react-route的一个高阶组件，可获取history</p>
-<p>render时会把match,location和history传入props</p>
-<h3 id="history"><a href="#history" class="headerlink" title="history"></a><code>history</code></h3><ul>
-<li><code>action</code></br><br>可得知路由栈的操作是<code>POP</code>、<code>PUSH</code>、<code>REPLACE</code></li>
-</ul>
-<h3 id="location"><a href="#location" class="headerlink" title="location"></a><code>location</code></br></h3><pre><code>- `pathname`当前路由的绝对路径
-- `search`查询参数，访问`/user?userId=123`=&gt;可以拿到`?userId=123`
-- `hash`:`#the-hash`
-- `state`:类似vue的路由元信息`meta`,在这里的存储的信息不会明文显示在浏览器上
-</code></pre>
-<h3 id="match"><a href="#match" class="headerlink" title="match"></a><code>match</code></br></h3><pre><code>- `params`当`&lt;Route to=&#39;/user/:id&#39; component=&#123;user&#125;&gt;`,访问`/user/123`在`user`组件中。`this.props.match.params.id`可以获取id
-- `isExact`,当前路由是不是完全匹配
-</code></pre>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>路由组件是可以直接获取这些属性（<code>history</code>、<code>location</code>,<code>match</code>）,而非路由组件就必须通过<code>withRouter</code>修饰后才能获取这些属性。<br>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&#x27;/&#x27; component=&#123;App&#125; /&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>App组件就可以直接获取路由中这些属性，但是，如果App组件汇总有一个子组件<code>Foo</code>，那么<code>Foo</code>就不能直接获取路由中的属性了，必须通过<code>withRouter</code>修饰后才能获取到</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1328,14 +1321,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
