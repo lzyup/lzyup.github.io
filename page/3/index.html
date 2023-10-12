@@ -150,6 +150,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/26/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/26/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">React Router相关概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/Router/" itemprop="url" rel="index"><span itemprop="name">Router</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//写法一</span><br><span class="line">import &#123;Switch,Route,Router,HashHistory,Link&#125; from &#x27;react-router-dom&#x27;</span><br><span class="line"></span><br><span class="line">//写法二</span><br><span class="line">import &#123;Switch,Route,Router&#125; from &#x27;react-router&#x27;</span><br><span class="line">import &#123;HashHistory,Link&#125; from &#x27;react-router-dom&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="react-router-react-router-dom和react-router-native"><a href="#react-router-react-router-dom和react-router-native" class="headerlink" title="react-router,react-router-dom和react-router-native"></a><code>react-router</code>,<code>react-router-dom</code>和<code>react-router-native</code></h2><h3 id="react-router"><a href="#react-router" class="headerlink" title="react-router"></a><code>react-router</code></h3><p>提供了一些router的核心api,包括<code>Router</code>,<code>Route</code>,<code>Switch</code>等，但是它没有提供dom操作进行跳转的api,<strong>服务器端渲染</strong>正好可以。</p>
+<h3 id="react-router-dom"><a href="#react-router-dom" class="headerlink" title="react-router-dom"></a><code>react-router-dom</code></h3><p>基于<code>react-router</code>，加入了在浏览器运行环境下的一些功能，我们可以通过dom的事件控制路由。例如<code>Link</code>组件，会渲染一个<code>a</code>标签；<code>BrowserRouter</code>和<code>HahsRouter</code>组件，前者使用<code>pushState</code>和<code>popState</code>事件构建路由，后者使用<code>window.location.hash</code>和<code>hashchange</code>事件构建路由。</p>
+<h3 id="react-router-native"><a href="#react-router-native" class="headerlink" title="react-router-native"></a><code>react-router-native</code></h3><p>基于<code>react-router</code>,类似<code>react-router-dom</code>,加入了<code>react-native</code>运行环境下的一些功能。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><code>react-router-dom</code>依赖<code>react-router</code>，所以我们使用npm安装以来的时候，只需要安装相应环境下的库即可，不用再显式安装<code>react-router</code>。基于浏览器环境下的开发，只需要安装<code>raect-router-dom</code>;基于<code>react-native</code>环境的开发，只需要安装<code>react-router-native</code>。<code>npm</code>会自动解析<code>react-router-dom</code>包中<code>package.json</code>的依赖并安装。</p>
+<h2 id="V4与之前版本路由跳转的区别"><a href="#V4与之前版本路由跳转的区别" class="headerlink" title="V4与之前版本路由跳转的区别"></a>V4与之前版本路由跳转的区别</h2><h3 id="react-router-v4使用history控制路由跳转"><a href="#react-router-v4使用history控制路由跳转" class="headerlink" title="react-router v4使用history控制路由跳转"></a><code>react-router v4使用history控制路由跳转</code></h3><p>在使用<code>react-router v3</code>时候，跳转路由如下：</p>
+<ul>
+<li>从<code>react-router</code>导出<code>browserHistory</code>。</li>
+<li>使用<code>browserHistory.push()</code>等操作路由跳转</li>
+</ul>
+<p>但是在<code>react-router v4</code>中，不提供<code>browserHistory</code>等导出</p>
+<h4 id="推荐使用withRouter"><a href="#推荐使用withRouter" class="headerlink" title="推荐使用withRouter"></a>推荐使用<code>withRouter</code></h4><p><code>withRouter</code>高阶组件，提供了<code>history</code>使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import &#123;withRouter&#125; from &quot;react-router-dom&quot;;</span><br><span class="line"></span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    ...</span><br><span class="line">    myFunction()&#123;</span><br><span class="line">        this.props.history.push(&quot;/some/path&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">export default withRouter(MyComponent)</span><br></pre></td></tr></table></figure>
+
+<h2 id="改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。"><a href="#改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。" class="headerlink" title="改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。"></a>改版后的<code>react-router-dom</code>路由，需要理解三个概念<code>Router</code>、<code>Route</code>和<code>Link</code>。</h2><h3 id=""><a href="#" class="headerlink" title="&lt;Router&gt;"></a><code>&lt;Router&gt;</code></h3><p><code>&lt;Router&gt;</code>是所有路由组件共用的底层接口，一般我们的应用不会使用这个接口，而是使用高级的路由：</p>
+<ul>
+<li><code>&lt;BrowserRouter&gt;</code>:使用HTML5提供的historyAPI来保持UI和URL的同步；</li>
+<li><code>&lt;HashRouter&gt;</code>:使用URL的hash(例如：<code>window.location.hash</code>)来保持UI和URL同步</li>
+<li><code>&lt;MemoryRouter&gt;</code>：能在内存保存你“URL”的历史记录（并没有对地址栏读写）;</li>
+<li><code>&lt;NativeRouter&gt;</code>：为使用<code>React Native</code>提供路由支持</li>
+<li><code>&lt;StaticRouter&gt;</code>: 从不会改变地址</li>
+</ul>
+<h3 id="-1"><a href="#-1" class="headerlink" title="&lt;Link&gt;"></a><code>&lt;Link&gt;</code></h3><p>Link是react路由中的点击切换到哪一个组件的链接，（这里只素衣不说是页面，而是说组件，因为切换到另一个界面只是展示效果，react的本质还是一个单页面应用-single page application）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">e.g.:</span><br><span class="line">import &#123; BrowserRouter as Router, Link&#125; from &quot;react-router-dom&quot;;</span><br><span class="line">class Main extends Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return(</span><br><span class="line">        &lt;Router&gt;</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li&gt;&lt;link to=&#x27;/&#x27;&gt;首页&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;&lt;link to=&#x27;/other&#x27;&gt;其他页&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/Router&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要说明的是：</br><br><code>&lt;Router&gt;</code>下面只能包含一个盒子标签，类似这里的div</br><br><code>&lt;Link&gt;</code>代表一个链接，在html界面中会解析成a标签。作为一个链接，必须有一个to属性，代表链接地址。这个链接地址是一个相对路径。</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title="&lt;Route&gt;"></a><code>&lt;Route&gt;</code></h3><ul>
+<li><code>Route</code>代表你的路由界面，<code>path</code>代表路径，<code>component</code>代表路径对应的界面。</li>
+<li>在其<code>path</code>属性与某个<code>location</code>匹配时呈现一些UI</li>
+<li>e.g.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&#x27;/roster&#x27;&gt;</span><br><span class="line">//when the pathname is &#x27;/&#x27;,the path dose not match</span><br><span class="line">//when the pathname is &#x27;/roster&#x27; or &#x27;/roster/2&#x27;,the path matches</span><br><span class="line">//If you only want to match &#x27;/roster&#x27;,then you need to use</span><br><span class="line">//the &quot;exact&quot; prop.The following will match &#x27;/roster&#x27;,but not</span><br><span class="line">//&#x27;/roster/2&#x27;</span><br><span class="line"></span><br><span class="line">&lt;Route exact path=&quot;/roster&quot;&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="将会渲染什么"><a href="#将会渲染什么" class="headerlink" title="&lt;Route&gt;将会渲染什么"></a><code>&lt;Route&gt;</code>将会渲染什么</h4><p><a href="https://juejin.im/post/5a7e9ee7f265da4e7832949c#heading-12">链接</a></br><br>Routes可以接受三种props来决定路径匹配时渲染的元素，只能给<code>&lt;Route&gt;</code>元素提供一种来定义要渲染的内容。</p>
+<ul>
+<li><code>&lt;component&gt;</code></br><br>一个React组件，当一个带有<code>component</code>prop的路由匹配的时候，路由将会返回prop提供的component类型的组件</li>
+<li><code>render</code></br><br>一个返回React元素的方法，与<code>Component</code>类似，也是当路径匹配的时候会被调用。写成内联形式渲染和传递参数的时候非常方便。</li>
+<li><code>children</code></br><br>一个返回React元素的方法。与前两种不同的是，这种方法总是会被渲染，无论路由与当前的路径是否匹配。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&quot;/page&quot; component=&#123;Page&#125;/&gt;</span><br><span class="line"></span><br><span class="line">const extraProps = &#123;color:&#x27;red&#x27;&#125;</span><br><span class="line">&lt;Route path=&quot;/page&quot; render=&#123;(props)=&gt;&#123;</span><br><span class="line">    &lt;Page &#123;...props&#125; data=&#123;extraProps&#125;/&gt;</span><br><span class="line">&#125;&#125;</span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line">&lt;Route path=&quot;/page&quot; children=&#123;(props)=&gt;&#123;</span><br><span class="line">    props.match</span><br><span class="line">    ?&lt;Page &#123;...props&#125;/&gt;</span><br><span class="line">    :&lt;EmptyPage &#123;...props&#125;/&gt;</span><br><span class="line">&#125;&#125;/&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/a/1 ---this.props.match.params.id</span><br><span class="line">/a?id=1---this.props.location.query.id`</span><br></pre></td></tr></table></figure>
+
+<h3 id="React-Router-V4设计思路"><a href="#React-Router-V4设计思路" class="headerlink" title="React Router V4设计思路"></a>React Router V4设计思路</h3><p><a href="https://juejin.im/post/5986d1456fb9a03c3f405bd2">链接</a></br><br>在V4中，路由是动态，需要忘记之前使用静态路由的思维方式，把路由当做普通组件，动态路由的优点，可以任意时间、任意地点自由添加新的Route。</p>
+<p>e.g.</br></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;BrowserRoute&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;Route path=&#x27;/&#x27; component=&#123;App&#125;/&gt;</span><br><span class="line">        &lt;Route path=&#123;&#x27;/about&#x27;&#125; component=&#123;About&#125;/&gt;</span><br><span class="line">        &lt;Route path=&#123;&#x27;/contact&#x27;&#125; component=&#123;Contact&#125;/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/BrowserRoute&gt;</span><br><span class="line"></span><br><span class="line">const About = (props) =&gt;&#123;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;Route path=&#123;`$&#123;props.match.url/a&#125;` component=&#123;AboutA&#125;&#125;/&gt;</span><br><span class="line">        &lt;Route </span><br><span class="line">            path=&#123;`$&#123;props.match.url&#125;/b` component=&#123;AboutB&#125;&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&#125;</span><br><span class="line">//动态在About组件内定义两个新的路由</span><br><span class="line">//当访问/about/a时，组件AboutA会被作为About的子组件渲染，</span><br><span class="line">//当访问/about/b时，组件AboutB会作为About的子组件渲染。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="-3"><a href="#-3" class="headerlink" title=""></a></h3><p><a href="https://github.com/mrdulin/blog/issues/42">参考链接（1）</a></br><br><a href="https://www.kancloud.cn/chandler/react_handbook/1271261">参考链接（2）</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/withRouter%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -929,91 +1036,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/23/typeof-instanceof-%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/23/typeof-instanceof-%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">typeof && instanceof 详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">JS相关</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS%E7%9B%B8%E5%85%B3/typeof-instanceof/" itemprop="url" rel="index"><span itemprop="name">typeof && instanceof</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="typeof和instanceof的区别"><a href="#typeof和instanceof的区别" class="headerlink" title="typeof和instanceof的区别"></a>typeof和instanceof的区别</h3><h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a><code>typeof</code></br></h4><p>在JavaScript中，判断一个变量的类型常常会用<code>typeof</code>运算符，在使用<code>typeof</code>运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回”object”</p>
-<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a><code>instanceof</code></br></h4><ul>
-<li>语法</br><br>  <code>object instanceof constructor</code></br></li>
-</ul>
-<p><code>instanceof</code>运算符用来检测一个<strong>对象</strong>在其原型链中是否存在一个构造函数的prototyep属性</p>
-<h3 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h3><p>默认情况下（不覆盖<code>toString</code>方法前提下），任何一个对象调用<code>Object</code>原生的<code>toString</code>方法都会返回<code>[Object type]</code>,其中<code>type</code>是对象的类型。</p>
-<h4 id="1、-Class"><a href="#1、-Class" class="headerlink" title="1、[[Class]]"></a>1、[[Class]]</h4><p>每个实例都有一个<code>[[Class]]</code>属性，这个属性中就指定了上述字符串中的<code>type</code>(构造函数名)。<code>[[Class]]</code>不能直接地被访问，但通常可以间接地通过在这个值上借用默认的<code>Object.prototype.toString.call(..)</code>方法调用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call(&quot;abc&quot;); // &quot;[object String]&quot;</span><br><span class="line">Object.prototype.toString.call(100); // &quot;[object Number]&quot;</span><br><span class="line">Object.prototype.toString.call(true); // &quot;[object Boolean]&quot;</span><br><span class="line">Object.prototype.toString.call(null); // &quot;[object Null]&quot;</span><br><span class="line">Object.prototype.toString.call(undefined); // &quot;[object Undefined]&quot;</span><br><span class="line">Object.prototype.toString.call([1,2,3]); // &quot;[object Array]&quot;</span><br><span class="line">Object.prototype.toString.call(/\w/); // &quot;[object RegExp]&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="JS中数据类型"><a href="#JS中数据类型" class="headerlink" title="JS中数据类型"></a>JS中数据类型</h3><p>数字、字符串、布尔三者，在JS中称为原始的(primitives)类型，再加上<code>null</code>与<code>undefined</code>也是。除了这些数据类型外，其他的都是对象。</p>
-<h3 id="包装对象"><a href="#包装对象" class="headerlink" title="包装对象"></a>包装对象</h3><p>对象中有一类是Number、String、Boolean这三个对象，分别对应数字、字符串、布尔类型，我们称它们为包装对象或包装对象类型(Wrappers)</p>
-<ul>
-<li>原始-&gt;包装： new Number(123)</li>
-<li>包装-&gt;原始：(new Number(123)).valueOf()</li>
-</ul>
-<p>包装对象是个对象，所以它与原始资料类型并不同，用<code>typeof</code>与<code>instanceof</code>可以检测出来</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typeof 123 // &#x27;number&#x27;</span><br><span class="line">typeof new Number(123) //&quot;object&quot;</span><br><span class="line">123 instanceof Number //false</span><br></pre></td></tr></table></figure>
-
-<h3 id="调用Number、String、Boolean函数，是转换其他类型到这个类型的语法"><a href="#调用Number、String、Boolean函数，是转换其他类型到这个类型的语法" class="headerlink" title="调用Number、String、Boolean函数，是转换其他类型到这个类型的语法"></a>调用Number、String、Boolean函数，是转换其他类型到这个类型的语法</h3><p>在不使用<code>new</code>关键字构建对象实例时，使用像<code>Number(123)</code>这样的语法，这是一种从其他资料类型要转到数字类型的函数调用方法。调用后仍然是原始资料类型，并不会产生包装对象类型。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = Number(123);</span><br><span class="line">typeof a; //&quot;number&quot;</span><br><span class="line"></span><br><span class="line">var b = Number(&#x27;1.99&#x27;);</span><br><span class="line">typeof b;//&quot;number&quot;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://segmentfault.com/q/1010000007552319">参考链接</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1083,14 +1105,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>

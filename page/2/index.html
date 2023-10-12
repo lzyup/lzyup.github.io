@@ -150,6 +150,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/11/webpack%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/11/webpack%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">webpack基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index"><span itemprop="name">webpack</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>本质上，<strong>webpack</strong>是一个现代JavaScript应用程序的静态模块打包工具。当webpack处理应用程序时，它会在内部构建一个依赖图，此依赖图会映射项目所需的每个模块，并生成一个或多个bundle。简而言之，就是处理模块依赖，并将它们合并成可用的静态资源。</p>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><h4 id="（1）-项目中使用的每个文件都是个模块-module"><a href="#（1）-项目中使用的每个文件都是个模块-module" class="headerlink" title="（1） 项目中使用的每个文件都是个模块(module)"></a>（1） 项目中使用的每个文件都是个模块(module)</h4><h4 id="（2）-通过互相引用-这些模块形成一个图的数据结构"><a href="#（2）-通过互相引用-这些模块形成一个图的数据结构" class="headerlink" title="（2） 通过互相引用,这些模块形成一个图的数据结构"></a>（2） 通过互相引用,这些模块形成一个图的数据结构</h4><h4 id="（3）-在打包过程中，模块被合并成chunk-chunk合并成chunk组，并形成一个通过模块互相连接的图-ModuleGraph-。"><a href="#（3）-在打包过程中，模块被合并成chunk-chunk合并成chunk组，并形成一个通过模块互相连接的图-ModuleGraph-。" class="headerlink" title="（3） 在打包过程中，模块被合并成chunk.chunk合并成chunk组，并形成一个通过模块互相连接的图(ModuleGraph)。"></a>（3） 在打包过程中，模块被合并成chunk.chunk合并成chunk组，并形成一个通过模块互相连接的图(ModuleGraph)。</h4><h4 id="（4）-一个chunk组中可能有多个chunk-例如，SplitChunksPlugin会将一个chunk拆分为一个或多个chunk"><a href="#（4）-一个chunk组中可能有多个chunk-例如，SplitChunksPlugin会将一个chunk拆分为一个或多个chunk" class="headerlink" title="（4） 一个chunk组中可能有多个chunk,例如，SplitChunksPlugin会将一个chunk拆分为一个或多个chunk"></a>（4） 一个chunk组中可能有多个chunk,例如，<code>SplitChunksPlugin</code>会将一个chunk拆分为一个或多个chunk</h4><h4 id="（5）-chunk的两种形式"><a href="#（5）-chunk的两种形式" class="headerlink" title="（5） chunk的两种形式"></a>（5） chunk的两种形式</h4><ul>
+<li><code>initial(初始化)</code>是入口起点的main chunk。此chunk包含为入口起点指定的所有模块及其依赖项。</li>
+<li><code>non-initial</code>是可以延迟加载的块。可能会出现在使用<code>动态导入（dynamic imports）</code>或者<code>SplitChunksPlugin</code>时。</li>
+</ul>
+<p>需要说明的是，<code>non-initial</code>chunk没有名称，因此会使用唯一ID来替代名称。在使用动态导入时，我们可以通过<code>magic comment</code>来显式指定chunk名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import(</span><br><span class="line">  /* webpackChunkName: &quot;app&quot; */</span><br><span class="line">  &#x27;./app.jsx&#x27;</span><br><span class="line">).then((App) =&gt; &#123;</span><br><span class="line">  ReactDOM.render(&lt;App /&gt;, root);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h4><ul>
+<li>入口（entry）</li>
+<li>输出（output）</li>
+<li>loader</li>
+<li>插件（plugin）</li>
+<li>模式（mode）</li>
+</ul>
+<h3 id="入口起点（entry-points）"><a href="#入口起点（entry-points）" class="headerlink" title="入口起点（entry points）"></a>入口起点（entry points）</h3><p>指示webpack应该使用哪个模块，将其作为构建其内部依赖图的开始。进入入口起点后，webpack会找到有哪些模块和库是入口七点（直接和间接）依赖的。</p>
+<h4 id="单个入口"><a href="#单个入口" class="headerlink" title="单个入口"></a>单个入口</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    main: &#x27;./path/to/my/entry/file.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多入口"><a href="#多入口" class="headerlink" title="多入口"></a>多入口</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#x27;./src/app.js&#x27;,</span><br><span class="line">    adminApp: &#x27;./src/adminApp.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出（output）"><a href="#输出（output）" class="headerlink" title="输出（output）"></a>输出（output）</h3><p>告诉webpack在哪里输出它所创建的bundle,以及如何命名这些文件。主要输出文件的默认值是<code>./dist/main.js</code>，其他生成文件默认放置在<code>./dist</code>文件夹中。</p>
+<h4 id="单入口"><a href="#单入口" class="headerlink" title="单入口"></a>单入口</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &#x27;bundle.js&#x27;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多个起点"><a href="#多个起点" class="headerlink" title="多个起点"></a>多个起点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#x27;./src/app.js&#x27;,</span><br><span class="line">    search: &#x27;./src/search.js&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &#x27;[name].js&#x27;,</span><br><span class="line">    path: __dirname + &#x27;/dist&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 写入到硬盘：./dist/app.js, ./dist/search.js</span><br></pre></td></tr></table></figure>
+
+<h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>webpack只能理解JavaScript和JSON文件。<code>loader</code>让webpack能够去处理其他类型的文件，并将它们转化为有效模块，以供应用程序使用，以及被添加到依赖图中。</br></p>
+<p>在webpack的配置中loader有两个属性：</p>
+<ul>
+<li><code>test</code>属性，用于标识出应该被对应的<code>loader</code>进行转换的某个或某些文件</li>
+<li><code>use</code>属性，表示进行转换用哪个loader。</li>
+</ul>
+<h4 id="常见Loaders"><a href="#常见Loaders" class="headerlink" title="常见Loaders"></a>常见<code>Loaders</code></h4><ul>
+<li><p><code>babel-loader</code></br><br>转换ES6、ES7等JS新特性语法</p>
+</li>
+<li><p><code>css-loader</code></br><br>支持.css文件的加载和解析</p>
+</li>
+<li><p><code>less-loader</code></br><br>将less文件转换成css</p>
+</li>
+<li><p><code>ts-loader</code></br><br>将TS转换成JS</p>
+</li>
+<li><p><code>file-loader</code></br><br>进行图片、字体等的打包</p>
+</li>
+<li><p><code>raw-loader</code></br><br>将文件以字符串的形式导入</p>
+</li>
+<li><p><code>thread-loader</code></br><br>多进程打包JS和CSS</p>
+</li>
+</ul>
+<h3 id="插件（plugin）"><a href="#插件（plugin）" class="headerlink" title="插件（plugin）"></a>插件（plugin）</h3><p>loader用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。包括：打包优化，资源管理，注入环境变量。</p>
+<p>webpack.config.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);//通过 npm 安装</span><br><span class="line"></span><br><span class="line">const webpack = require(&#x27;webpack&#x27;);//用于访问内置插件</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    module:&#123;</span><br><span class="line">        rules:[</span><br><span class="line">            &#123; test: /\.txt$/, use: &#x27;raw-loader&#x27; &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins:[</span><br><span class="line">        new HtmlWebpackPlugin(&#123;template: &#x27;./src/index.html&#x27;&#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的示例中，<code>html-webpack-plugin</code>为应用程序生成一个HTML文件，并自动注入所有生成的bundle。</p>
+<h4 id="常见的Plugins"><a href="#常见的Plugins" class="headerlink" title="常见的Plugins"></a>常见的Plugins</h4><ul>
+<li><code>CommonsChunkPlugin</code></br><br>将chunks相同的模块代码提取成公共JS</li>
+<li><code>CleanWebpackPlugin</code></br><br>清空构建目录</li>
+<li><code>ExtractTextWebpackPlugin</code></br><br>将CSS从bundle文件中提取成一个独立的CSS文件</li>
+<li><code>CopyWebpackPlugin</code></br><br>将文件或者文件夹拷贝到构建的输出目录</li>
+<li><code>HtmlWebpackPlugin</code></br><br>创建html文件去承载输出的bundle</li>
+<li><code>UglifyjsWebpackPlugin</code></br><br>压缩JS</li>
+<li><code>ZipWebpackPlugin</code></br><br>将打包出的资源生成一个zip包</li>
+</ul>
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><h4 id="webpack-watch-mode-webpack观察模式"><a href="#webpack-watch-mode-webpack观察模式" class="headerlink" title="webpack watch mode(webpack观察模式)"></a><code>webpack watch mode(webpack观察模式)</code></h4><p>使用<code>webpack --watch</code>命令依赖图中所有文件的更改。如果其中一个文件被更新，代码将重新编译，所以你不必再去手动运行整个构建。</p>
+<h4 id="使用-webpack-dev-server"><a href="#使用-webpack-dev-server" class="headerlink" title="使用 webpack-dev-server"></a>使用 webpack-dev-server</h4><p><code>webpack-dev-server</code>为你提供了一个简单的web server,并且具有live reloading(实时重新加载)功能。</p>
+<blockquote>
+<p><code>webpack-dev-server</code>在编译之后不会写入到任何输出文件，而是将bundle文件保留在内存中，然后将它们serve到server中，就好像它们是挂载在server根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到bundle文件，则可以通过dev server配置中的<code>publicPath</code>选项中进行修改</p>
+</blockquote>
+<h3 id="使用webpack-dev-middleware"><a href="#使用webpack-dev-middleware" class="headerlink" title="使用webpack-dev-middleware"></a>使用webpack-dev-middleware</h3><p><code>webpack-dev-middle</code>是一个封装器(wrapper)，它可以把webpack处理过的文件发送到一个server。<code>webpack-dev-server</code>在内部使用了它，然而它也可以作为一个单独的package来使用，以便根据需求进行跟多自定义设置。</p>
+<h3 id="运用"><a href="#运用" class="headerlink" title="运用"></a>运用</h3><h4 id="配置html模板"><a href="#配置html模板" class="headerlink" title="配置html模板"></a>配置html模板</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line">const HtmlwebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);</span><br><span class="line">const &#123;CleanWebpackPlugin&#125; = require(&#x27;clean-webpack-plugin&#x27;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  mode:&#x27;development&#x27;,//开发模式</span><br><span class="line">  entry: &#123;</span><br><span class="line">      main: &#x27;./main.js&#x27;, //入口文件</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &#x27;[name].[hash:8].js&#x27;,//打包后的文件名称</span><br><span class="line">    path: path.resolve(__dirname,&#x27;dist&#x27;) //打包后的目录</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve:&#123;</span><br><span class="line">    alias:&#123;</span><br><span class="line">        &#x27;vue$&#x27;:&#x27;vue/dist/vue.runtime.esm.js&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">    extensions:[&#x27;*&#x27;,&#x27;.js&#x27;,&#x27;.json&#x27;,&#x27;.vue&#x27;]</span><br><span class="line">  &#125;,</span><br><span class="line">   plugins:[</span><br><span class="line">      new HtmlwebpackPlugin(&#123;</span><br><span class="line">          template:&#x27;index.html&#x27;,</span><br><span class="line">          filename:&#x27;index.html&#x27;,</span><br><span class="line">      &#125;),</span><br><span class="line">    new CleanWebpackPlugin(),</span><br><span class="line">  ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><a href="https://webpack.docschina.org/configuration/output/#output-publicpath">官方文档</a></p>
+<p><a href="https://juejin.im/post/5de87444518825124c50cd36#heading-33">参考文章</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/30/h5%E8%BD%AF%E9%94%AE%E7%9B%98%E8%B8%A9%E5%9D%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -654,7 +783,7 @@
 <tr>
 <td>From</td>
 <td>发出请求的用户的Email</td>
-<td>From:<a href="mailto:&#117;&#x73;&#101;&#114;&#x40;&#x65;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;">&#117;&#x73;&#101;&#114;&#x40;&#x65;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#109;</a></td>
+<td>From:<a href="mailto:&#117;&#x73;&#x65;&#114;&#x40;&#101;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#117;&#x73;&#x65;&#114;&#x40;&#101;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a></td>
 </tr>
 <tr>
 <td>Host</td>
@@ -1145,113 +1274,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/26/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/26/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">React Router相关概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/Router/" itemprop="url" rel="index"><span itemprop="name">Router</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//写法一</span><br><span class="line">import &#123;Switch,Route,Router,HashHistory,Link&#125; from &#x27;react-router-dom&#x27;</span><br><span class="line"></span><br><span class="line">//写法二</span><br><span class="line">import &#123;Switch,Route,Router&#125; from &#x27;react-router&#x27;</span><br><span class="line">import &#123;HashHistory,Link&#125; from &#x27;react-router-dom&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="react-router-react-router-dom和react-router-native"><a href="#react-router-react-router-dom和react-router-native" class="headerlink" title="react-router,react-router-dom和react-router-native"></a><code>react-router</code>,<code>react-router-dom</code>和<code>react-router-native</code></h2><h3 id="react-router"><a href="#react-router" class="headerlink" title="react-router"></a><code>react-router</code></h3><p>提供了一些router的核心api,包括<code>Router</code>,<code>Route</code>,<code>Switch</code>等，但是它没有提供dom操作进行跳转的api,<strong>服务器端渲染</strong>正好可以。</p>
-<h3 id="react-router-dom"><a href="#react-router-dom" class="headerlink" title="react-router-dom"></a><code>react-router-dom</code></h3><p>基于<code>react-router</code>，加入了在浏览器运行环境下的一些功能，我们可以通过dom的事件控制路由。例如<code>Link</code>组件，会渲染一个<code>a</code>标签；<code>BrowserRouter</code>和<code>HahsRouter</code>组件，前者使用<code>pushState</code>和<code>popState</code>事件构建路由，后者使用<code>window.location.hash</code>和<code>hashchange</code>事件构建路由。</p>
-<h3 id="react-router-native"><a href="#react-router-native" class="headerlink" title="react-router-native"></a><code>react-router-native</code></h3><p>基于<code>react-router</code>,类似<code>react-router-dom</code>,加入了<code>react-native</code>运行环境下的一些功能。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><code>react-router-dom</code>依赖<code>react-router</code>，所以我们使用npm安装以来的时候，只需要安装相应环境下的库即可，不用再显式安装<code>react-router</code>。基于浏览器环境下的开发，只需要安装<code>raect-router-dom</code>;基于<code>react-native</code>环境的开发，只需要安装<code>react-router-native</code>。<code>npm</code>会自动解析<code>react-router-dom</code>包中<code>package.json</code>的依赖并安装。</p>
-<h2 id="V4与之前版本路由跳转的区别"><a href="#V4与之前版本路由跳转的区别" class="headerlink" title="V4与之前版本路由跳转的区别"></a>V4与之前版本路由跳转的区别</h2><h3 id="react-router-v4使用history控制路由跳转"><a href="#react-router-v4使用history控制路由跳转" class="headerlink" title="react-router v4使用history控制路由跳转"></a><code>react-router v4使用history控制路由跳转</code></h3><p>在使用<code>react-router v3</code>时候，跳转路由如下：</p>
-<ul>
-<li>从<code>react-router</code>导出<code>browserHistory</code>。</li>
-<li>使用<code>browserHistory.push()</code>等操作路由跳转</li>
-</ul>
-<p>但是在<code>react-router v4</code>中，不提供<code>browserHistory</code>等导出</p>
-<h4 id="推荐使用withRouter"><a href="#推荐使用withRouter" class="headerlink" title="推荐使用withRouter"></a>推荐使用<code>withRouter</code></h4><p><code>withRouter</code>高阶组件，提供了<code>history</code>使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import &#123;withRouter&#125; from &quot;react-router-dom&quot;;</span><br><span class="line"></span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    ...</span><br><span class="line">    myFunction()&#123;</span><br><span class="line">        this.props.history.push(&quot;/some/path&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">export default withRouter(MyComponent)</span><br></pre></td></tr></table></figure>
-
-<h2 id="改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。"><a href="#改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。" class="headerlink" title="改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。"></a>改版后的<code>react-router-dom</code>路由，需要理解三个概念<code>Router</code>、<code>Route</code>和<code>Link</code>。</h2><h3 id=""><a href="#" class="headerlink" title="&lt;Router&gt;"></a><code>&lt;Router&gt;</code></h3><p><code>&lt;Router&gt;</code>是所有路由组件共用的底层接口，一般我们的应用不会使用这个接口，而是使用高级的路由：</p>
-<ul>
-<li><code>&lt;BrowserRouter&gt;</code>:使用HTML5提供的historyAPI来保持UI和URL的同步；</li>
-<li><code>&lt;HashRouter&gt;</code>:使用URL的hash(例如：<code>window.location.hash</code>)来保持UI和URL同步</li>
-<li><code>&lt;MemoryRouter&gt;</code>：能在内存保存你“URL”的历史记录（并没有对地址栏读写）;</li>
-<li><code>&lt;NativeRouter&gt;</code>：为使用<code>React Native</code>提供路由支持</li>
-<li><code>&lt;StaticRouter&gt;</code>: 从不会改变地址</li>
-</ul>
-<h3 id="-1"><a href="#-1" class="headerlink" title="&lt;Link&gt;"></a><code>&lt;Link&gt;</code></h3><p>Link是react路由中的点击切换到哪一个组件的链接，（这里只素衣不说是页面，而是说组件，因为切换到另一个界面只是展示效果，react的本质还是一个单页面应用-single page application）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">e.g.:</span><br><span class="line">import &#123; BrowserRouter as Router, Link&#125; from &quot;react-router-dom&quot;;</span><br><span class="line">class Main extends Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return(</span><br><span class="line">        &lt;Router&gt;</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li&gt;&lt;link to=&#x27;/&#x27;&gt;首页&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;&lt;link to=&#x27;/other&#x27;&gt;其他页&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/Router&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>需要说明的是：</br><br><code>&lt;Router&gt;</code>下面只能包含一个盒子标签，类似这里的div</br><br><code>&lt;Link&gt;</code>代表一个链接，在html界面中会解析成a标签。作为一个链接，必须有一个to属性，代表链接地址。这个链接地址是一个相对路径。</p>
-<h3 id="-2"><a href="#-2" class="headerlink" title="&lt;Route&gt;"></a><code>&lt;Route&gt;</code></h3><ul>
-<li><code>Route</code>代表你的路由界面，<code>path</code>代表路径，<code>component</code>代表路径对应的界面。</li>
-<li>在其<code>path</code>属性与某个<code>location</code>匹配时呈现一些UI</li>
-<li>e.g.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&#x27;/roster&#x27;&gt;</span><br><span class="line">//when the pathname is &#x27;/&#x27;,the path dose not match</span><br><span class="line">//when the pathname is &#x27;/roster&#x27; or &#x27;/roster/2&#x27;,the path matches</span><br><span class="line">//If you only want to match &#x27;/roster&#x27;,then you need to use</span><br><span class="line">//the &quot;exact&quot; prop.The following will match &#x27;/roster&#x27;,but not</span><br><span class="line">//&#x27;/roster/2&#x27;</span><br><span class="line"></span><br><span class="line">&lt;Route exact path=&quot;/roster&quot;&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="将会渲染什么"><a href="#将会渲染什么" class="headerlink" title="&lt;Route&gt;将会渲染什么"></a><code>&lt;Route&gt;</code>将会渲染什么</h4><p><a href="https://juejin.im/post/5a7e9ee7f265da4e7832949c#heading-12">链接</a></br><br>Routes可以接受三种props来决定路径匹配时渲染的元素，只能给<code>&lt;Route&gt;</code>元素提供一种来定义要渲染的内容。</p>
-<ul>
-<li><code>&lt;component&gt;</code></br><br>一个React组件，当一个带有<code>component</code>prop的路由匹配的时候，路由将会返回prop提供的component类型的组件</li>
-<li><code>render</code></br><br>一个返回React元素的方法，与<code>Component</code>类似，也是当路径匹配的时候会被调用。写成内联形式渲染和传递参数的时候非常方便。</li>
-<li><code>children</code></br><br>一个返回React元素的方法。与前两种不同的是，这种方法总是会被渲染，无论路由与当前的路径是否匹配。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&quot;/page&quot; component=&#123;Page&#125;/&gt;</span><br><span class="line"></span><br><span class="line">const extraProps = &#123;color:&#x27;red&#x27;&#125;</span><br><span class="line">&lt;Route path=&quot;/page&quot; render=&#123;(props)=&gt;&#123;</span><br><span class="line">    &lt;Page &#123;...props&#125; data=&#123;extraProps&#125;/&gt;</span><br><span class="line">&#125;&#125;</span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line">&lt;Route path=&quot;/page&quot; children=&#123;(props)=&gt;&#123;</span><br><span class="line">    props.match</span><br><span class="line">    ?&lt;Page &#123;...props&#125;/&gt;</span><br><span class="line">    :&lt;EmptyPage &#123;...props&#125;/&gt;</span><br><span class="line">&#125;&#125;/&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/a/1 ---this.props.match.params.id</span><br><span class="line">/a?id=1---this.props.location.query.id`</span><br></pre></td></tr></table></figure>
-
-<h3 id="React-Router-V4设计思路"><a href="#React-Router-V4设计思路" class="headerlink" title="React Router V4设计思路"></a>React Router V4设计思路</h3><p><a href="https://juejin.im/post/5986d1456fb9a03c3f405bd2">链接</a></br><br>在V4中，路由是动态，需要忘记之前使用静态路由的思维方式，把路由当做普通组件，动态路由的优点，可以任意时间、任意地点自由添加新的Route。</p>
-<p>e.g.</br></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;BrowserRoute&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;Route path=&#x27;/&#x27; component=&#123;App&#125;/&gt;</span><br><span class="line">        &lt;Route path=&#123;&#x27;/about&#x27;&#125; component=&#123;About&#125;/&gt;</span><br><span class="line">        &lt;Route path=&#123;&#x27;/contact&#x27;&#125; component=&#123;Contact&#125;/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/BrowserRoute&gt;</span><br><span class="line"></span><br><span class="line">const About = (props) =&gt;&#123;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;Route path=&#123;`$&#123;props.match.url/a&#125;` component=&#123;AboutA&#125;&#125;/&gt;</span><br><span class="line">        &lt;Route </span><br><span class="line">            path=&#123;`$&#123;props.match.url&#125;/b` component=&#123;AboutB&#125;&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&#125;</span><br><span class="line">//动态在About组件内定义两个新的路由</span><br><span class="line">//当访问/about/a时，组件AboutA会被作为About的子组件渲染，</span><br><span class="line">//当访问/about/b时，组件AboutB会作为About的子组件渲染。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="-3"><a href="#-3" class="headerlink" title=""></a></h3><p><a href="https://github.com/mrdulin/blog/issues/42">参考链接（1）</a></br><br><a href="https://www.kancloud.cn/chandler/react_handbook/1271261">参考链接（2）</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1321,14 +1343,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
