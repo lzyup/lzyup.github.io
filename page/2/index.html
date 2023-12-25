@@ -150,6 +150,241 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/07/28/DOCKER%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/28/DOCKER%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">DOCKER介绍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器相关技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="DOCKER"><a href="#DOCKER" class="headerlink" title="DOCKER"></a>DOCKER</h1><h1 id="1、Docker-详细介绍"><a href="#1、Docker-详细介绍" class="headerlink" title="1、Docker 详细介绍"></a>1、Docker 详细介绍</h1><p>Docker 是一种开源的容器化技术，可以让开发者更加方便地创建、部署和运行应用程序。本文将详细介绍 Docker 的基本概念、安装使用方法以及常用命令。</p>
+<h2 id="2、Docker-的基本概念"><a href="#2、Docker-的基本概念" class="headerlink" title="2、Docker 的基本概念"></a>2、Docker 的基本概念</h2><p>Docker 是一个容器化平台，可以将应用程序及其依赖库、配置文件等封装到一个容器中。容器是一个轻量级的、可移植的软件包，可以在任何地方运行，而不需要依赖特定的操作系统或硬件平台。Docker 容器可以在秒级别内启动和停止，非常适合应用程序的测试、开发和部署。</p>
+<p>Docker 的核心概念包括镜像（Image）、容器（Container）和仓库（Registry）：</p>
+<ul>
+<li>镜像是一个只读的模板，用于创建 Docker 容器，可以理解为类比于面向对象编程中的类。</li>
+<li>容器是由镜像创建的运行实例，可以理解为类比于面向对象编程中的对象。</li>
+<li>仓库是存放 Docker 镜像的地方，可以理解为类比于代码仓库或者图书馆。</li>
+</ul>
+<p>安装完成后，可以使用以下命令检查 Docker 是否正确安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、Docker-常用命令"><a href="#3、Docker-常用命令" class="headerlink" title="3、Docker 常用命令"></a>3、Docker 常用命令</h2><p>以下是 Docker 常用命令，供参考：</p>
+<ul>
+<li><code>docker run</code>：启动一个容器。</li>
+<li><code>docker stop</code>：停止一个容器。</li>
+<li><code>docker ps</code>：查看正在运行的容器。</li>
+<li><code>docker images</code>：查看本地的镜像。</li>
+<li><code>docker pull</code>：拉取一个远程镜像到本地。</li>
+<li><code>docker push</code>：将一个本地镜像推送到远程仓库。</li>
+<li><code>docker build</code>：根据 Dockerfile 构建一个镜像。</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="4、DockerFile"><a href="#4、DockerFile" class="headerlink" title="4、DockerFile"></a>4、DockerFile</h2><p>可以认为是一个脚本，包含如何构建 Docker 镜像的说明。实际上这些指令是一组在<code>Docker</code>环境中自动执行的命令，以构建特定的<code>Docker</code>镜像。</p>
+<h3 id="4-1、FROM"><a href="#4-1、FROM" class="headerlink" title="4.1、FROM"></a>4.1、FROM</h3><p><code>Docker</code>镜像有着分层的概念，因此制作任何一个<code>Docker</code>镜像都需要有一个基础镜像，<code>FROM</code>用于指定基础镜像，语法为：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">FROM</span> &lt;image&gt;:&lt;tag&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中基础镜像的<code>tag</code>可以不指定，即默认使用<code>latest</code> ，在制作时尽量使用官方的镜像作为基础镜像，如果想指定一个小型轻量的镜像，基础镜像可以选择<code>Alpine</code></p>
+<p>另外需要提到的是，这里说了任何镜像都需要一个基础镜像，那么问题来了，就好比是先有鸡还是先有蛋的问题，基础镜像的“祖宗”是什么呢？能不能在构建时不以任何镜像为基础呢？答案是肯定的，可以选用<code>scratch</code>。</p>
+<h3 id="4-2、LABEL"><a href="#4-2、LABEL" class="headerlink" title="4.2、LABEL"></a>4.2、LABEL</h3><p><code>LABEL</code> 一般用来添加镜像的原数据，没有实际作用。常用于声明镜像作者，<code>licensce</code> 等信息，写法为<code>&lt;key&gt;=&lt;value&gt;</code> ，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">LABEL</span> <span class="string">&quot;com.example.vendor&quot;</span>=<span class="string">&quot;ACME Incorporated&quot;</span></span><br><span class="line"><span class="variable constant_">LABEL</span> com.<span class="property">example</span>.<span class="property">label</span>-<span class="keyword">with</span>-value=<span class="string">&quot;foo&quot;</span></span><br><span class="line"><span class="variable constant_">LABEL</span> version=<span class="string">&quot;1.0&quot;</span></span><br><span class="line"><span class="variable constant_">LABEL</span> description=<span class="string">&quot;This text illustrates \</span></span><br><span class="line"><span class="string">that label-values can span multiple lines.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3、COPY-和-ADD"><a href="#4-3、COPY-和-ADD" class="headerlink" title="4.3、COPY 和 ADD"></a>4.3、COPY 和 ADD</h3><p><code>COPY</code> 和<code>ADD</code> 都是用于在构建时往镜像中复制文件或目录的，并且两者都支持在复制时修改文件或目录的属主和属组，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">ADD</span> [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</span><br><span class="line"><span class="variable constant_">ADD</span> [--chown=&lt;user&gt;:&lt;group&gt;] [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span><br><span class="line"><span class="variable constant_">COPY</span> [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</span><br><span class="line"><span class="variable constant_">COPY</span> [--chown=&lt;user&gt;:&lt;group&gt;] [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>两者的使用差不多，但是<code>ADD</code> 功能更加丰富</p>
+<ul>
+<li>支持 URL<br>例如源路径是文件的<code>URL</code> 链接，构建时自动进行下载，下载后放到目标路径下，文件权限为 600</li>
+<li>压缩包自动解压</li>
+</ul>
+<h3 id="4-4、ARG"><a href="#4-4、ARG" class="headerlink" title="4.4、ARG"></a>4.4、ARG</h3><p><code>ARG</code> 设置的构建时的参数，也可以理解为构建时的环境变量，与<code>ENV</code>的不同是只在构建时生效，生成的镜像中是不存在的</p>
+<p>可以在<code>ARG</code> 中同时生命参数名和参数值</p>
+<p>也可以只生命参数名，在构建时通过<code>-build-arg</code> &lt;参数名&gt; &#x3D;&lt;值&gt;的形式来复制，复制的前提是在<code>Dockerfile</code> 中进行了声明，否则会出现警告，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">ARG</span> &lt;name&gt;[=<span class="language-xml"><span class="tag">&lt;<span class="name">default</span> <span class="attr">value</span>&gt;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-5、RUN"><a href="#4-5、RUN" class="headerlink" title="4.5、RUN"></a>4.5、RUN</h3><p><code>RUN</code> 指令表示在当前的镜像层之上的新层中执行命令并将结果提交，用户<code>Dockerfile</code> 的下一步操作，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">RUN</span> /bin/bash -c <span class="string">&#x27;source $HOME/.bashrc; \</span></span><br><span class="line"><span class="string">RUN mkdir /test</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>RUN</code> 命令中也可以使用<code>exec</code> 格式来避免<code>shell</code> 字符串损坏，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">RUN</span>[(<span class="string">&#x27;/bin/bash&#x27;</span>, <span class="string">&#x27;-c&#x27;</span>, <span class="string">&#x27;echo hello&#x27;</span>)];</span><br></pre></td></tr></table></figure>
+
+<p><code>RUN</code> 作为<code>Dockerfile</code> 中最为常用的指令，在使用时有以下建议：</p>
+<ul>
+<li>在<code>RUN</code> 指令执行过程中，产生的中间镜像会被当做缓存在下一次构建时使用，如果不想使用缓存，使其失效，可以在<code>build</code> 时添加<code>--no-cache</code></li>
+<li>尽量把所有的<code>RUN</code> 指令写到一起，如果多条<code>shell</code> 命令，可以不用每条命令都添加<code>RUN</code> ，更好的做法是通过<code>\</code> 换行，通过<code>&amp;&amp;</code> 连接多个指令，这样对构建生成的镜像的大小优化是很有帮助的，语法为</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">RUN</span> set -x &amp;&amp; \</span><br><span class="line">    yum install -y epel-release \</span><br><span class="line">    make \</span><br><span class="line">    gcc \</span><br><span class="line">    gcc-c++</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-6、WORKDIR"><a href="#4-6、WORKDIR" class="headerlink" title="4.6、WORKDIR"></a>4.6、WORKDIR</h3><p><code>WORKDIR</code> 指令为<code>Dockerfile</code> 中的任何<code>RUN</code> 、<code>CMD</code> 、<code>ENTRYPOINT</code>、<code>COPY</code> 和<code>ADD</code> 指令设置工作目录。如果工作目录不存在，及时它没有在后续的<code>Dockerfile</code> 指令中使用，它也会被创建</p>
+<p><code>WORKDIR</code> 指令可以在<code>Dockerfile</code> 中使用多次。如果提供了一个相对路径，它将相对于前一个<code>WORKDIR</code> 指令的路径，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">WORKDIR</span> /a</span><br><span class="line"><span class="variable constant_">WORKDIR</span> b</span><br><span class="line"><span class="variable constant_">WORKDIR</span> c</span><br><span class="line"><span class="variable constant_">RUN</span> pwd</span><br></pre></td></tr></table></figure>
+
+<p>这个<code>Dockerfile</code> 中的最后一个<code>pwd</code> 命令输出的是<code>/a/b/c</code></p>
+<p><code>WORKDIR</code> 指令也可以解析之前使用<code>ENV</code> 设置的环境变量，只能使用在<code>Dockerfile</code> 中显示设置的环境变量，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">ENV</span> <span class="variable constant_">DIRPATH</span>=/path</span><br><span class="line"><span class="variable constant_">WORKDIR</span> $DIRPATH/$DIRNAME</span><br><span class="line"><span class="variable constant_">RUN</span> pwd</span><br></pre></td></tr></table></figure>
+
+<p>这里的最终路径为<code>/path/#DIRNAME</code></p>
+<h3 id="4-7、EXPOSE"><a href="#4-7、EXPOSE" class="headerlink" title="4.7、EXPOSE"></a>4.7、EXPOSE</h3><p><code>EXPOSE</code> 指令声明了容器在运行时监听指定的网络端口，可以指定端口是监听<code>TCP</code> 还是<code>UDP</code> ，默认为<code>TCP</code></p>
+<p><code>EXPOSE</code> 指令实际上并不发布端口，即端口限制，它的作用仅仅是作为构建镜像的人和运行容器的人之间的一种文档，关于要发布哪些端口。当运行容器时，要实际发布端口，使用<code>docker</code> 运行中的<code>-p</code> 参数来发布和映射一个或多个端口，或者直接使用<code>-p</code> 来自动随机映射<code>Expose</code> 声明的端口，语法为：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">EXPOSE</span> &lt;port&gt; [&lt;port&gt;/&lt;protocol&gt;...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-8、CMD-和-ENTRYPOINT"><a href="#4-8、CMD-和-ENTRYPOINT" class="headerlink" title="4.8、CMD 和 ENTRYPOINT"></a>4.8、CMD 和 ENTRYPOINT</h3><p><code>CMD</code> 和 <code>ENTRYPOINT</code> 都是指定容器将如何运行</p>
+<p><code>CMD</code> 指令有三种形式</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">CMD</span> [<span class="string">&quot;executable&quot;</span>,<span class="string">&quot;param1&quot;</span>,<span class="string">&quot;param2&quot;</span>] # 首选的exec格式</span><br><span class="line"><span class="variable constant_">CMD</span> [<span class="string">&quot;param1&quot;</span>,<span class="string">&quot;param2&quot;</span>] # 只传递参数，作为<span class="variable constant_">ENTRYPOINT</span>的默认参数</span><br><span class="line"><span class="variable constant_">CMD</span> command param1 param2 (shell form)  # shell的形式</span><br></pre></td></tr></table></figure>
+
+<p>在<code>Dockerfile</code> 中只能有一条<code>CMD</code> 指令，如果指定了多条，只有最后一条会生效</p>
+<p><code>ENTRYPOINT</code> 有两种形式</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">ENTRYPOINT</span> [<span class="string">&quot;executable&quot;</span>, <span class="string">&quot;param1&quot;</span>, <span class="string">&quot;param2&quot;</span>]  # exec格式</span><br><span class="line"><span class="variable constant_">ENTRYPOINT</span> command param1 param2  # shell形式</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-9、HEALTHCHECK"><a href="#4-9、HEALTHCHECK" class="headerlink" title="4.9、HEALTHCHECK"></a>4.9、HEALTHCHECK</h3><p><code>HEALTHCHECK</code> 用于检查容器的健康状态，<code>Docker</code> 可通过健康状态来决定是否对容器进行重新调度，语法为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">HEALTHCHECK</span> [选项] <span class="variable constant_">CMD</span> &lt;命令&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可选项为</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">–interval=&lt;间隔&gt; ：两次健康检查的间隔，默认为<span class="number">30</span>秒</span><br><span class="line">–timeout=&lt;时长&gt; ：执行健康检查命令的超时时间，如果超时，则本次健康检查就被视为失败，默认<span class="number">30</span>秒</span><br><span class="line">–retries=&lt;次数&gt; ：当连续失败指定的次数后，将容器状态置为unhealthy ，默认<span class="number">3</span>次</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、镜像构建"><a href="#5、镜像构建" class="headerlink" title="5、镜像构建"></a>5、镜像构建</h2><h3 id="5-1-构建上下文"><a href="#5-1-构建上下文" class="headerlink" title="5.1 构建上下文"></a>5.1 构建上下文</h3><p>构建上下文<code>build context</code> ,”上下文”意为和现在这个工作相关的周围环境。在<code>docker</code> 镜像的构建过程中有构建上下文<code>build context</code> 这一概念，通俗的来说就是指执行<code>docker build</code> 时当前的工作目录，不管构建时有没有用到当前目录下的某些文件及目录，默认情况下这个上下文中的文件及目录都会作为构建上下文内容发送给<code>Docker Damon</code></p>
+<p>当<code>docker build</code> 开始执行时，控制台会输出 <code>Sendding build context to Docker daemon xxxMB</code> ，这就表示将当前工作目录下的文件及目录作为了构建上下文</p>
+<p>前面提到可以在<code>RUN</code> 指令中添加 <code>--no-cache</code> 不适用缓存，同样也可以在执行<code>docker build</code> 命令时添加该指令以在镜像构建时不使用缓存</p>
+<h3 id="5-2-忽略构建"><a href="#5-2-忽略构建" class="headerlink" title="5.2 忽略构建"></a>5.2 忽略构建</h3><p>和<code>git</code> 忽略文件<code>.gitignore</code> 一样的道理，在<code>docker</code> 构建镜像时也有<code>.dockerignore</code> ，可以用来排除当前工作目录下不需要加入到构建上下文<code>build context</code> 中的文件</p>
+<p>例如，在构建<code>npm</code> 前端的镜像项目时，在<code>Dockerfile</code> 的同一个文件夹中创建一个<code>.dockerignore</code> 文件，带有以下内容，这样在构建时就可以避免将本地模拟以及调试日志被拷贝进入到<code>Docker</code> 镜像中</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node_modules;</span><br><span class="line">npm - debug.<span class="property">log</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-多阶段构建"><a href="#5-3-多阶段构建" class="headerlink" title="5.3 多阶段构建"></a>5.3 多阶段构建</h3><p>多阶段构建的应用场景及优势就是为了降低复杂性并减少依赖，避免镜像包含不必要的软件包</p>
+<p>例如，应用程序的镜像中一般不需要安装开发调试软件包。如果需要从源码编译构建应用，最好的方式就是使用多阶段构建</p>
+<p>简单来说，多阶段构建就是允许一个<code>Dockerfile</code> 中出现多条<code>FROM</code> 指令，只有最后一条<code>FROM</code> 指令中指定的基础镜像作为本次构建镜像的基础镜像，其他的阶段都可以认为是中间步骤</p>
+<p>每一条<code>FROM</code> 指令都表示着多阶段构建过程中的一个构建阶段，后面的构建阶段可以拷贝利用前面构建阶段的产物</p>
+<p>列举一个编译构建<code>npm</code> 项目，利用多阶段构建最终把静态资源制作成<code>nginx</code> 镜像的<code>Dockerfile</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#### <span class="title class_">Stage</span> <span class="number">1</span>: npm build</span><br><span class="line"><span class="variable constant_">FROM</span> <span class="attr">node</span>:<span class="number">12.4</span><span class="number">.0</span>-alpine <span class="keyword">as</span> build</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">WORKDIR</span> /app</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">COPY</span> package.<span class="property">json</span> package-lock.<span class="property">json</span> ./</span><br><span class="line"><span class="variable constant_">RUN</span> npm install</span><br><span class="line"></span><br><span class="line"># <span class="title class_">Copy</span> the main application</span><br><span class="line"><span class="variable constant_">COPY</span> . ./</span><br><span class="line"></span><br><span class="line"># <span class="title class_">Arguments</span></span><br><span class="line"></span><br><span class="line"># <span class="title class_">Build</span> the application</span><br><span class="line"><span class="variable constant_">RUN</span> npm run build</span><br><span class="line"></span><br><span class="line">#### <span class="title class_">Stage</span> <span class="number">2</span>: <span class="title class_">Serve</span> the application <span class="keyword">from</span> <span class="title class_">Nginx</span></span><br><span class="line"><span class="variable constant_">FROM</span> <span class="attr">nginx</span>:latest</span><br><span class="line"></span><br><span class="line"><span class="variable constant_">COPY</span> --<span class="keyword">from</span>=build /app/build /<span class="keyword">var</span>/www</span><br><span class="line"></span><br><span class="line"># <span class="title class_">Copy</span> our custom nginx config</span><br><span class="line"><span class="variable constant_">COPY</span> nginx.<span class="property">conf</span> /etc/nginx/nginx.<span class="property">conf</span></span><br><span class="line"></span><br><span class="line"># <span class="title class_">Expose</span> port <span class="number">3000</span> to the <span class="title class_">Docker</span> host, so we can access it</span><br><span class="line"># <span class="keyword">from</span> the outside.</span><br><span class="line"><span class="variable constant_">EXPOSE</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="variable constant_">ENTRYPOINT</span> [<span class="string">&quot;nginx&quot;</span>,<span class="string">&quot;-g&quot;</span>,<span class="string">&quot;daemon off;&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://mp.weixin.qq.com/s/6x-6nWkXjEKYmeIsSmm-pA">Dockerfile 语法概要</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/11/https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/11/https/" class="post-title-link" itemprop="url">https</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="RSA-非对称加密"><a href="#RSA-非对称加密" class="headerlink" title="RSA(非对称加密)"></a>RSA(非对称加密)</h3><p>用私钥加密的数据，只有对应的公钥才能解密，用公钥加密的数据，只有对应的私钥才能解密</p>
+<h3 id="非对称加密-对称加密"><a href="#非对称加密-对称加密" class="headerlink" title="非对称加密 + 对称加密"></a>非对称加密 + 对称加密</h3><ul>
+<li>生成一个对称加密算法的秘钥，用RSA方式传递</li>
+<li>再用对称加密算法来通信</li>
+</ul>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><p>(服务器的公钥+服务器信息)通过hash算法生成(消息摘要)通过CA的私钥加密从而生成数字签名</p>
+<h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><p>公钥 + 签名，由第三方认证机构颁发</p>
+<h3 id="校验过程"><a href="#校验过程" class="headerlink" title="校验过程"></a>校验过程</h3><p>当接收到服务器的证书，客户端用同样的Hash算法，再次生成消息摘要，然后用CA的公钥对数字签名解密，得到CA创建的消息摘要，两者一比，就知道有没有人篡改了，<br>如果没有篡改就取服务的公钥。</p>
+<p><img src="https://ss.csdn.net/p?http://mmbiz.qpic.cn/mmbiz_png/KyXfCrME6UJFk4ma5Y5g5wIeggZaCZ3x1n4IwPsiaF62PuK3aASF76C3ortagdYyFs8gUic6aJr9ibwyj2quFCMjQ/0?wx_fmt=png" alt="image"></p>
+<h3 id="https流程"><a href="#https流程" class="headerlink" title="https流程"></a>https流程</h3><ul>
+<li>浏览器发出安全请求(<a href="http://xxx.com/">http://xxx.com</a>)</li>
+<li>服务器发送数字证书（包含服务器的public key）</li>
+<li>浏览器用预置的CA列表验证证书，如果有问题，则提示风险</li>
+<li>浏览器生产随机的对称密钥，用服务器的public key加密</li>
+<li>服务器用自己的private key进行解密，得到对称密钥</li>
+<li>双方都知道对称密钥，用它来加密通信</li>
+</ul>
+<p><img src="http://mmbiz.qpic.cn/mmbiz_png/KyXfCrME6UJFk4ma5Y5g5wIeggZaCZ3xKYfzxv54kPQ9q9SKRPHpnVib9MF6MfPcLJgej3wicCVZSicUMNzoVasiaA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="https流程图"></p>
+<p><a href="https://blog.csdn.net/coderising/article/details/100021384">参考链接</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/11/webpack%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -783,7 +1018,7 @@
 <tr>
 <td>From</td>
 <td>发出请求的用户的Email</td>
-<td>From:<a href="mailto:&#117;&#x73;&#x65;&#114;&#x40;&#101;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#117;&#x73;&#x65;&#114;&#x40;&#101;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a></td>
+<td>From:<a href="mailto:&#x75;&#115;&#x65;&#x72;&#64;&#x65;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;">&#x75;&#115;&#x65;&#x72;&#64;&#x65;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a></td>
 </tr>
 <tr>
 <td>Host</td>
@@ -1098,186 +1333,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/Redux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/27/Redux/" class="post-title-link" itemprop="url">Redux</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/Redux/" itemprop="url" rel="index"><span itemprop="name">Redux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h4><p>Store是保存数据的地方，整个应用只能有一个Store</p>
-<ul>
-<li>getState()</li>
-<li>dispatch(action)</li>
-<li>subscribe(listener)</li>
-<li>replaceReducer(nextReducer)</li>
-</ul>
-<h4 id="State"><a href="#State" class="headerlink" title="State"></a>State</h4><p><code>Store</code>对象包含所有数据。如果想得到某个时点的数据，就要对<code>Store</code>生成快照。这种时点的数据集合，就叫做State</p>
-<p>当前时刻的State,可以通过<code>store.getState()</code>拿到</p>
-<p><strong>Redux规定，一个State对应一个View。只要State相同，View就相同。</strong></p>
-<h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><p>Action是View发出的通知，表示State应该要发生变化了。</br><br>Action就是一个普通JavaScript对象</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const action = &#123;</span><br><span class="line">    type:&#x27;ADD_TODO&#x27;,</span><br><span class="line">    payload:&#x27;Learn Redux&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Action的名称是<code>ADD_TODO</code>,它携带的信息是字符串<code>Learn Redux</code></p>
-<p>Action描述当前发生的事情。改变State的唯一方法，就是使用Action。它会运送数据到Store。</p>
-<h4 id="Action创建函数"><a href="#Action创建函数" class="headerlink" title="Action创建函数"></a>Action创建函数</h4><p><strong>Action创建函数</strong>就是生成action的方法。</p>
-<h5 id="同步Action创建函数"><a href="#同步Action创建函数" class="headerlink" title="同步Action创建函数"></a>同步Action创建函数</h5><p>简单的返回一个action</p>
-<h5 id="异步Action创建函数"><a href="#异步Action创建函数" class="headerlink" title="异步Action创建函数"></a>异步Action创建函数</h5><p>返回的是一个函数</p>
-<p>被dispatch的function会接收<code>dispatch</code>作为参数，并且可以异步调用它。这类function称为thunk</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const fetchPosts = subreddit =&gt; dispatch =&gt;&#123;</span><br><span class="line">    // Thunk middleware 知道如何处理函数</span><br><span class="line">    //这里把dispatch方法通过参数的形式传给函数</span><br><span class="line">    //以此来让它自己也能dispatch action</span><br><span class="line">    dispatch(requestPosts(subreddit))</span><br><span class="line">    return fetch(`https://www.reddit.com/r/$&#123;subreddit&#125;.json`)</span><br><span class="line">    .then(response=&gt;response.json())</span><br><span class="line">    .then(json=&gt;dispatch(receivePosts(subreddit,json)))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用方法一</span><br><span class="line">store.dispatch(fetchPosts(&#x27;reactjs&#x27;))</span><br><span class="line">//使用方法二</span><br><span class="line">store.dispatch(fetchPosts(&#x27;reactjs&#x27;)).then(()=&gt; console.log(store.getState()))</span><br></pre></td></tr></table></figure>
-<p><code>fetchPosts</code>是一个Action Creator(动作生成器)，返回一个函数。这个函数先执行，先发出一个Action（requestPosts(postTitle)）,然后异步操作。难道结果，先将结果转成JSON格式，然后再发出一个Action(receivePosts(postTitle,json))</p>
-<ul>
-<li>fetchPosts返回了一个函数，而普通的Action Creator默认返回一个对象。</li>
-<li>返回的函数参数是<code>dispatch</code>和<code>getState</code>这两个Redux方法，普通的Action Creator的参数是Action的内容</li>
-<li>在返回的函数之中，先发出一个Action(requestPosts(PostTitle)),表示操作开始</li>
-<li>异步操作结束之后，再发出一个Action(receivePosts(postTitle,json)),表示操作结束</li>
-</ul>
-<p>这样处理，解决了自动发送第二个Action的问题，但是，又带来一个新的问题，Action是由<code>store.dispatch</code>方法发送的，正常情况下，参数只能是对象，不能是函数</p>
-<p>这是，就使用中间件<code>redux-thunk</code></p>
-<h4 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h4><p>Store收到Action以后，必须给出一个新的State,这样View才会发生变化。这种State的计算过程叫做Reducer</p>
-<p>Reducer是一个函数，它接受Action和当前State作为参数，返回一个新的State</p>
-<p><strong>注意两点</strong></p>
-<ul>
-<li>不要修改 <code>state</code>。使用<code>Object.assign()</code>新建一个副本</li>
-<li>在default情况下返回旧的state。遇到未知的action时，一定要返回旧的state<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function todoApp(state = initialState, action) &#123;</span><br><span class="line">  switch (action.type) &#123;</span><br><span class="line">    case SET_VISIBILITY_FILTER:</span><br><span class="line">      return Object.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        visibilityFilter: action.filter</span><br><span class="line">      &#125;)</span><br><span class="line">    default:</span><br><span class="line">      return state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>Reducer函数并不是手动调用，store.dispatch方法会触发Reducer的自动执行</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const reducer = function(state,action)&#123;</span><br><span class="line">    return new_state</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="React-Redux用法"><a href="#React-Redux用法" class="headerlink" title="React-Redux用法"></a>React-Redux用法</h4><p>将组件与store中的<code>state</code>和<code>dispatch</code>直接联系起来</p>
-<h5 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a>mapStateToProps</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const mapStateToProps = (state) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        todos:state.todos</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/18/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/18/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">React事件系统</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">React组件绑定事件本质上是代理到document上。</span><br></pre></td></tr></table></figure>
-
-<h3 id="React合成事件"><a href="#React合成事件" class="headerlink" title="React合成事件"></a>React合成事件</h3><p>在React中，通过React绑定的事件，其回调函数中的event对象，是经过React合成的SyntheticEvent,与原生的DOM事件的event不是一回事。</p>
-<p>因此，React合成事件对象的<code>e.stopPropagation</code>，只能阻止React模拟的事件冒泡，并不能阻止真实的DOM事件冒泡，更加不能阻止已经触发元素的多个事件的依次执行。在这种情况下，只有原生事件对象的<code>stopImmediatePropagation</code>能做到。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>对于React的合成事件对象e来说：</p>
-<ul>
-<li><p><code>e.stopPropagation</code></br><br>用来阻止React模拟的事件冒泡</p>
-</li>
-<li><p><code>e.stopImmediatePropagation</code></br><br> 没有这个函数</p>
-</li>
-<li><p><code>e.nativeEvent.stopPropagation</code></br><br>原生事件对象的用于阻止DOM事件的进一步捕获或者冒泡</p>
-</li>
-<li><p><code>e.nativeEnvent.stopImmediatePropagation</code></br><br>原生事件对象的用于阻止DOM事件的进一步捕获或者冒泡，且该元素的后续绑定的相同事件类型的事件也被一并阻止。</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1343,14 +1402,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
