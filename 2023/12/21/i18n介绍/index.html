@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="名字的由来国际化(internationalization)又称为 i18n(读法为 i 18 n，据说是因为 internationalization(国际化)这个单词从 i 到 n 之间有 18 个英文字母，i18n 的名字由此而来)">
+  <meta name="description" content="名字的由来国际化(internationalization)又称为 i18n(读法为 i 18 n，据说是因为 internationalization(国际化)这个单词从 i 到 n 之间有 18 个英文字母，i18n 的名字由此而来) 基本使用12345678910111213141516171819202122232425262728import i18n from &amp;#x27;i18nex">
 <meta property="og:type" content="article">
 <meta property="og:title" content="i8n介绍">
 <meta property="og:url" content="http://yoursite.com/2023/12/21/i18n%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="Luzy&#39;s Blog">
-<meta property="og:description" content="名字的由来国际化(internationalization)又称为 i18n(读法为 i 18 n，据说是因为 internationalization(国际化)这个单词从 i 到 n 之间有 18 个英文字母，i18n 的名字由此而来)">
+<meta property="og:description" content="名字的由来国际化(internationalization)又称为 i18n(读法为 i 18 n，据说是因为 internationalization(国际化)这个单词从 i 到 n 之间有 18 个英文字母，i18n 的名字由此而来) 基本使用12345678910111213141516171819202122232425262728import i18n from &amp;#x27;i18nex">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-21T11:46:44.107Z">
-<meta property="article:modified_time" content="2023-12-21T11:49:16.652Z">
+<meta property="article:modified_time" content="2023-12-29T08:54:03.565Z">
 <meta property="article:author" content="Luzy">
 <meta name="twitter:card" content="summary">
 
@@ -194,6 +194,15 @@
 
       
         <h3 id="名字的由来"><a href="#名字的由来" class="headerlink" title="名字的由来"></a>名字的由来</h3><p>国际化(internationalization)又称为 i18n(读法为 i 18 n，据说是因为 internationalization(国际化)这个单词从 i 到 n 之间有 18 个英文字母，i18n 的名字由此而来)</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import i18n from &#x27;i18next&#x27;;</span><br><span class="line"></span><br><span class="line">// 初始化 i18n 实例，命名空间默认是translation</span><br><span class="line">i18n.init(&#123;</span><br><span class="line">  lng: &#x27;en&#x27;,</span><br><span class="line">  ns: [&#x27;translation&#x27;],</span><br><span class="line">  defaultNS: &#x27;translation&#x27;,</span><br><span class="line">  resources: &#123;</span><br><span class="line">    en: &#123;</span><br><span class="line">      translation: &#123;</span><br><span class="line">        welcome: &#x27;Welcome&#x27;,</span><br><span class="line">        goodbye: &#x27;Goodbye&#x27;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 使用 addResourceBundle 添加资源</span><br><span class="line">i18n.addResourceBundle(&#x27;en&#x27;, &#x27;translation&#x27;, &#123;</span><br><span class="line">  welcome: &#x27;Hello&#x27;, // 更新现有资源</span><br><span class="line">  newKey: &#x27;New Key&#x27;, // 添加新资源</span><br><span class="line">&#125;, true);</span><br><span class="line"></span><br><span class="line">// 输出结果</span><br><span class="line">console.log(i18n.t(&#x27;welcome&#x27;)); // 输出 &quot;Hello&quot;（已更新）</span><br><span class="line">console.log(i18n.t(&#x27;goodbye&#x27;)); // 输出 &quot;Goodbye&quot;</span><br><span class="line">console.log(i18n.t(&#x27;newKey&#x27;)); // 输出 &quot;New Key&quot;</span><br><span class="line">console.log(i18n.t(&#x27;newKey&#x27;,&#123;ns:&#x27;translation&#x27;&#125;)) //输出 &quot;New Key&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="API-解释"><a href="#API-解释" class="headerlink" title="API 解释"></a>API 解释</h3><h4 id="addResourceBundle-和-addResources"><a href="#addResourceBundle-和-addResources" class="headerlink" title="addResourceBundle 和 addResources"></a>addResourceBundle 和 addResources</h4><p><code>addResourceBundle</code>这个方法主要用于向特定的语言和命名空间添加或更新资源。如果你需要在运行时动态地添加或更新翻译资源，或者你有一个复杂的资源对象需要合并到现有的资源中;</p>
+<p><code>addResources</code>这个方法主要用于一次性向特定的语言和命名空间批量添加资源。如果你有一组翻译资源需要添加，而不需要合并到现有的资源中.</p>
+<h4 id="getResource-和-getResourceBundle"><a href="#getResource-和-getResourceBundle" class="headerlink" title="getResource 和 getResourceBundle"></a>getResource 和 getResourceBundle</h4><p><code>getResource</code>这个方法用于获取特定语言、命名空间和键的翻译资源。如果你需要在应用程序中访问某个特定翻译资源，譬如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const welcomeResource = i18n.getResource(&#x27;en&#x27;, &#x27;translation&#x27;, &#x27;welcome&#x27;);</span><br><span class="line">console.log(welcomeResource); // 输出 &quot;Welcome&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>getResourceBundle</code>这个方法用于获取特定语言和命名空间的整个资源对象。如果你需要访问一个命名空间中的所有翻译资源，譬如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const resourceBundle = i18n.getResourceBundle(&#x27;en&#x27;, &#x27;translation&#x27;);</span><br><span class="line">console.log(resourceBundle); // 输出 &#123; welcome: &#x27;Welcome&#x27;, goodbye: &#x27;Goodbye&#x27;, ... &#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -274,7 +283,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8D%E5%AD%97%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="nav-number">1.</span> <span class="nav-text">名字的由来</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8D%E5%AD%97%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="nav-number">1.</span> <span class="nav-text">名字的由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API-%E8%A7%A3%E9%87%8A"><span class="nav-number">3.</span> <span class="nav-text">API 解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#addResourceBundle-%E5%92%8C-addResources"><span class="nav-number">3.1.</span> <span class="nav-text">addResourceBundle 和 addResources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getResource-%E5%92%8C-getResourceBundle"><span class="nav-number">3.2.</span> <span class="nav-text">getResource 和 getResourceBundle</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
