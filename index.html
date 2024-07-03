@@ -150,6 +150,191 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/07/03/%E5%8F%91%E5%B8%83npm%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/07/03/%E5%8F%91%E5%B8%83npm%E5%8C%85/" class="post-title-link" itemprop="url">发布npm包</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/npm/" itemprop="url" rel="index"><span itemprop="name">npm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1、npm相关命令"><a href="#1、npm相关命令" class="headerlink" title="1、npm相关命令"></a>1、<code>npm</code>相关命令</h3><ul>
+<li><p>查看 npm 镜像源地址</p>
+<p><code>npm config get registry</code></p>
+</li>
+<li><p>设置 npm 默认源</p>
+<p><code>npm config set registry https://registry.npmmirror.com</code></p>
+</li>
+<li><p>注册用户(按照提示输入 Username、Password、Email 完成注册)</p>
+<p><code>npm adduser</code></p>
+</li>
+<li><p>登录</p>
+<p><code>npm login</code></p>
+</li>
+<li><p>发布包</p>
+<p><code>npm publish</code></p>
+</li>
+<li><p>升级版本</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm version patch   (补丁号，修复bug ， v1.0.0----&gt;v1.0.1)</span><br><span class="line"></span><br><span class="line">npm version minor   (次版本号，增加新功能，v1.0.0----&gt;v1.1.0)</span><br><span class="line"></span><br><span class="line">npm version major    (主版本号，不兼容的修改，v1.0.0----&gt;v2.0.0)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>撤销发布的包</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm unpublish z-tool@1.0.0 删除某个版本</span><br><span class="line">npm unpublish z-tool --force 删除整个npm市场的包</span><br><span class="line"></span><br><span class="line">npm unpublish的推荐替代命令：npm deprecate &lt;pkg&gt;[@&lt;version&gt;] &lt;message&gt;</span><br><span class="line">使用这个命令，并不会在社区里撤销你已有的包，但会在任何人尝试安装这个包的时候得到警告</span><br><span class="line">例如：npm deprecate z-tool &#x27;这个包我已经不再维护了哟～&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、文件说明"><a href="#2、文件说明" class="headerlink" title="2、文件说明"></a>2、文件说明</h3><h4 id="2-1vite-config-ts配置如下"><a href="#2-1vite-config-ts配置如下" class="headerlink" title="2.1vite.config.ts配置如下"></a>2.1<code>vite.config.ts</code>配置如下</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">/* eslint-disable @typescript-eslint/ban-ts-comment */</span><br><span class="line">import &#123; defineConfig &#125; from &#x27;vite&#x27;;</span><br><span class="line">import react from &#x27;@vitejs/plugin-react&#x27;;</span><br><span class="line">import dts from &#x27;vite-plugin-dts&#x27;;</span><br><span class="line">// @ts-ignore</span><br><span class="line">import &#123; resolve &#125; from &#x27;path&#x27;;</span><br><span class="line"></span><br><span class="line">// https://vitejs.dev/config/</span><br><span class="line">export default defineConfig(&#123;</span><br><span class="line">  build: &#123;</span><br><span class="line">    outDir: &#x27;lib&#x27;, // 自定义构建输出目录</span><br><span class="line">    lib: &#123;</span><br><span class="line">      // @ts-expect-error</span><br><span class="line">      entry: resolve(__dirname, &#x27;src/index.ts&#x27;),</span><br><span class="line">      name: &#x27;index&#x27;,</span><br><span class="line">      fileName: &#x27;index&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">    cssCodeSplit: false, // 避免打包时出现</span><br><span class="line">    rollupOptions: &#123;</span><br><span class="line">      // 确保外部化处理那些你不想打包进库的依赖</span><br><span class="line">      external: [&#x27;react&#x27;, &#x27;react-dom&#x27;],</span><br><span class="line">      output: &#123;</span><br><span class="line">        // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量</span><br><span class="line">        globals: &#123;</span><br><span class="line">          vue: &#x27;React&#x27;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [react(), dts()],</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>vite-plugin-dts</code>插件，用于自动生成 TypeScript 类型定义文件（.d.ts）</p>
+<h3 id="2-2-包的导出"><a href="#2-2-包的导出" class="headerlink" title="2.2 包的导出"></a>2.2 包的导出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export &#123; SequenceDiagrams &#125; from &#x27;./components/index&#x27;;</span><br><span class="line"></span><br><span class="line">export &#123; TaskType, TaskStatus &#125; from &#x27;./components/type&#x27;;</span><br><span class="line">export type &#123; ITaskItem, IRoleItem &#125; from &#x27;./components/type&#x27;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在<code>index.ts</code>导出组件和对应的类型</p>
+<h3 id="2-3-package-json-关键字段说明"><a href="#2-3-package-json-关键字段说明" class="headerlink" title="2.3 package.json 关键字段说明"></a>2.3 package.json 关键字段说明</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;@luzyup/sequence-diagram&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.0.4&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;module&quot;,</span><br><span class="line">  &quot;types&quot;: &quot;./lib/index.d.ts&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;./lib/index.umd.cjs&quot;,</span><br><span class="line">  &quot;module&quot;: &quot;./lib/index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;vite&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;tsc &amp;&amp; vite build&quot;,</span><br><span class="line">    &quot;lint&quot;: &quot;eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0&quot;,</span><br><span class="line">    &quot;preview&quot;: &quot;vite preview&quot;,</span><br><span class="line">    &quot;docs:dev&quot;: &quot;vitepress dev docs&quot;,</span><br><span class="line">    &quot;docs:build&quot;: &quot;vitepress build docs&quot;,</span><br><span class="line">    &quot;docs:preview&quot;: &quot;vitepress preview docs&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;@ant-design/icons&quot;: &quot;^5.3.7&quot;,</span><br><span class="line">    &quot;ahooks&quot;: &quot;^3.8.0&quot;,</span><br><span class="line">    &quot;antd&quot;: &quot;^5.18.1&quot;,</span><br><span class="line">    &quot;react&quot;: &quot;^18.2.0&quot;,</span><br><span class="line">    &quot;react-dom&quot;: &quot;^18.2.0&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;@types/react&quot;: &quot;^18.2.66&quot;,</span><br><span class="line">    &quot;@types/react-dom&quot;: &quot;^18.2.22&quot;,</span><br><span class="line">    &quot;@typescript-eslint/eslint-plugin&quot;: &quot;^7.2.0&quot;,</span><br><span class="line">    &quot;@typescript-eslint/parser&quot;: &quot;^7.2.0&quot;,</span><br><span class="line">    &quot;@vitejs/plugin-react&quot;: &quot;^4.2.1&quot;,</span><br><span class="line">    &quot;eslint&quot;: &quot;^8.57.0&quot;,</span><br><span class="line">    &quot;eslint-plugin-react-hooks&quot;: &quot;^4.6.0&quot;,</span><br><span class="line">    &quot;eslint-plugin-react-refresh&quot;: &quot;^0.4.6&quot;,</span><br><span class="line">    &quot;less&quot;: &quot;^4.2.0&quot;,</span><br><span class="line">    &quot;typescript&quot;: &quot;^5.2.2&quot;,</span><br><span class="line">    &quot;vite&quot;: &quot;^5.2.0&quot;,</span><br><span class="line">    &quot;vite-plugin-dts&quot;: &quot;^3.9.1&quot;,</span><br><span class="line">    &quot;vitepress&quot;: &quot;^1.2.3&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>type</code></li>
+</ul>
+<p>指定项目的类型，可以是<code>module</code>或<code>commonjs</code>，用于告诉 Node.js 如何解析模块。如果不指定 type 字段，默认为”commonjs”。如果使用 ES 模块语法，应该将 type 设置为”module”</p>
+<ul>
+<li><code>types</code></li>
+</ul>
+<p>指定项目的类型定义文件(.d.ts)的路径，用于 TypeScript 中引用项目的类型定义。如果项目没有类型定义文件，可以通过<code>vite-plugin-dts</code>等工具自动生成</p>
+<ul>
+<li><code>main</code></li>
+</ul>
+<p>指定项目的入口文件路径，用于 require()或者 import 项目时默认加载的文件。如果不指定 main 字段，默认为”index.js”。</p>
+<ul>
+<li><code>module</code><br>指定 ES 模块规范下的入口文件路径，用于 import 项目时默认加载的文件。如果不指定 module 字段，默认为”index.js”。如果项目使用 ES 模块语法，应该同时指定 main 和 module 字段</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/02/06/babel%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/02/06/babel%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">babel插件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">JS相关</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS%E7%9B%B8%E5%85%B3/babel/" itemprop="url" rel="index"><span itemprop="name">babel</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1、什么是-babel"><a href="#1、什么是-babel" class="headerlink" title="1、什么是 babel"></a>1、什么是 babel</h2><p>Babel 是 <code>JavaScript</code> 编译器，更确切地说是源码到源码的编译器，通常也叫做“转换编译器（<code>transpiler</code>）”。 意思是说你为 Babel 提供一些 <code>JavaScript</code> 代码，Babel 更改这些代码，然后返回给你新生成的代码。</p>
+<h2 id="2、babel-工作流程"><a href="#2、babel-工作流程" class="headerlink" title="2、babel 工作流程"></a>2、babel 工作流程</h2><h3 id="2-1-parse-解析"><a href="#2-1-parse-解析" class="headerlink" title="2.1 parse(解析)"></a>2.1 <code>parse</code>(解析)</h3><p><code>parse</code>解析源代码，生成抽象语法树；将源代码解析生成 AST 抽象语法树，其中包括词法分析(<code>Lexical Analysis</code>)和语法分析(<code>Syntactic Analysisi</code>)两个阶段。</p>
+<h3 id="2-2-transform-转换"><a href="#2-2-transform-转换" class="headerlink" title="2.2 transform(转换)"></a>2.2 <code>transform</code>(转换)</h3><p><code>transform</code>对<code>AST</code>树进行遍历，对其节点做各种操作（删除、更新、新增等，这是 Babel 编译器中最复杂的过程，同时也是插件介入工作的部分。将源代码版本的<code>AST</code>转换成目标版本的<code>AST</code>）。</p>
+<h3 id="2-3-generate-生成"><a href="#2-3-generate-生成" class="headerlink" title="2.3 generate(生成)"></a>2.3 <code>generate</code>(生成)</h3><p>最后由<code>generate</code>将目标版本的<code>AST</code>生成目标代码（将 AST 对象转换成字符串形式的代码，同时还会创建源码映射<code>sourcemap</code>）</p>
+<h2 id="3、babel-工具"><a href="#3、babel-工具" class="headerlink" title="3、babel 工具"></a>3、babel 工具</h2><ul>
+<li><code>@babel/parser</code>用来解析源代码；</li>
+<li><code>@babel/traverse</code>用于遍历<code>AST</code>，并调用 visitor 函数修改<code>AST</code>节点；</li>
+<li><code>@babel/types</code>是一个用于<code>AST</code>节点的<code>Loadash</code>式工具库，包含构造、验证以及变换<code>AST</code>节点的方法</li>
+<li><code>@babel/template</code>是另一个虽然很小但很有用的模块，能让你编写字符串形式且代用占位符的代码来代替手动编码，尤其是快速生成的大规模<code>AST</code>的时候，用它比一个一个用<code>@babel/types</code>生成拼接的<code>AST</code>好用太多了</li>
+<li><code>@babel/generator</code>将<code>AST</code>转换成目标代码</li>
+<li><code>@babel/cores</code>涵盖了上述所有包的功能，可以完成从编译、转换到生成代码和<code>sourcemap</code>中所有的流程。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/12/22/git%E4%BD%BF%E7%94%A8ssh%E8%BF%9E%E6%8E%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -195,7 +380,7 @@
       
           <h2 id="不存在-SSH-秘钥"><a href="#不存在-SSH-秘钥" class="headerlink" title="不存在 SSH 秘钥"></a>不存在 SSH 秘钥</h2><ul>
 <li>打开 github-&gt;setting-&gt;sshkeys and GPGkeys</li>
-<li>输入 ssh-keygen -t rsa -C “<a href="mailto:&#x78;&#x78;&#120;&#x78;&#x40;&#120;&#120;&#120;&#46;&#99;&#x6f;&#109;">&#x78;&#x78;&#120;&#x78;&#x40;&#120;&#120;&#120;&#46;&#99;&#x6f;&#109;</a>“(你的邮箱)</li>
+<li>输入 ssh-keygen -t rsa -C “<a href="mailto:&#x78;&#120;&#120;&#120;&#x40;&#x78;&#120;&#x78;&#x2e;&#99;&#x6f;&#109;">&#x78;&#120;&#120;&#120;&#x40;&#x78;&#120;&#x78;&#x2e;&#99;&#x6f;&#109;</a>“(你的邮箱)</li>
 <li>cat ~&#x2F;.ssh&#x2F;id_rsa.pub</li>
 <li>复制产生的 ssh keys，并粘贴到 github 对应页面位置中</li>
 </ul>
@@ -889,265 +1074,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/08/01/ESLint-%E4%B8%8E-Prettie/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/01/ESLint-%E4%B8%8E-Prettie/" class="post-title-link" itemprop="url">ESLint 与 Prettie</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/ESlint/" itemprop="url" rel="index"><span itemprop="name">ESlint</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="eslint-prettier-editorconfig-lint-staged"><a href="#eslint-prettier-editorconfig-lint-staged" class="headerlink" title="eslint+prettier+editorconfig+lint-staged"></a><code>eslint</code>+<code>prettier</code>+<code>editorconfig</code>+<code>lint-staged</code></h2><h2 id="ESlint"><a href="#ESlint" class="headerlink" title="ESlint"></a><code>ESlint</code></h2><p>开发过程中，如果写出不合符规范的代码，能够及时提醒开发者，及时修复</p>
-<p>通常，需要较大变动才能修复的规范问题，eslint 无法自动修复。如：单行不超过 80 个字符</p>
-<p>针对代码质量问题，例如：未使用变量、三等号、全局变量生命问题</p>
-<h2 id="Prettier"><a href="#Prettier" class="headerlink" title="Prettier"></a><code>Prettier</code></h2><p>保存代码，使用格式化快捷键，能够自动按照我们制定的规范、格式化代码</p>
-<p>针对代码格式问题，例如：单行代码长度、tab 长度、空格、逗号表达式</p>
-<h2 id="editorconfig"><a href="#editorconfig" class="headerlink" title="editorconfig"></a><code>editorconfig</code></h2><p>用于覆盖编辑器（针对不同编辑器，vscode,webstorm）默认的配置</p>
-<h2 id="为什么要两者结合"><a href="#为什么要两者结合" class="headerlink" title="为什么要两者结合"></a>为什么要两者结合</h2><p><code>ESLint</code>擅长校验，<code>prettier</code>擅长格式；但是两者有些规则是冲突的</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>禁掉 ESLint 中与 Prettier 冲突的规则，然后使用 Prettier 做格式化， ESLint 做代码校验</p>
-<ul>
-<li><p>首先禁掉 ESLint&#x2F;插件中与 Prettier 冲突的规则，创建一个包<code>eslint-confit-prettier</code>,里面定义了被禁掉的 ESLint&#x2F;插件规则</p>
-</li>
-<li><p>创建一个插件<code>eslint-plugin-prettier</code>,定义一条规则 prettier&#x2F;prettier，调用 Prettier,配合 ESLint 实现运行<code>eslint --fix</code>按 Prettier 规则自动化格式代码</p>
-</li>
-<li><p>在.eslintrc.js 中如下配置</p>
-<p>{<br>extends: [<br>…, &#x2F;&#x2F; 其他<br>“prettier”, &#x2F;&#x2F; eslint-config-prettier<br>]<br>plugins: [“prettier”], &#x2F;&#x2F; eslint-plugin-prettier<br>rules: {<br>“prettier&#x2F;prettier”: “error” &#x2F;&#x2F; 开启规则<br>}<br>}</p>
-</li>
-</ul>
-<h3 id="eslint-config-prettier"><a href="#eslint-config-prettier" class="headerlink" title="eslint-config-prettier"></a><code>eslint-config-prettier</code></h3><p>让所有可能会与 prettier 规则存在冲突的 eslint rule 失效即关闭 ESLint 与 Prettier 冲突的规则。</p>
-<pre><code>&quot;extends&quot;:[
-    &quot;eslint:recommend&quot;,
-    &quot;prettier&quot;
-]
-</code></pre>
-<h3 id="eslint-plugin-prettier"><a href="#eslint-plugin-prettier" class="headerlink" title="eslint-plugin-prettier"></a><code>eslint-plugin-prettier</code></h3><p>将 prettier 的能力集成到 eslint 中。以 ESlint 规则的方式运行 Prettier 检查代码规范性，并进行修复</p>
-<pre><code>&#123;
-    &quot;rules&quot;:&#123;
-        &quot;prettier/prettier&quot;: &quot;error&quot;
-    &#125;,
-    &quot;plugins&quot;:[&quot;prettier&quot;]
-&#125;
-</code></pre>
-<h3 id="Prettier和ESLint"><a href="#Prettier和ESLint" class="headerlink" title="Prettier和ESLint"></a><code>Prettier</code>和<code>ESLint</code></h3><p>npm 安装这两个，要它们生效都需要使用命令行，例如<code>prettier --write</code>和<code>eslint --fix</code><br>如果需要 vscode 保存就生效，vscode 需要安装对应插件</p>
-<p><code>Prettier</code>对应的<code>settins.json</code>配置</p>
-<pre><code>&#123;
-    ...
-    // 新增如下配置
-    &quot;editor.formatOnType&quot;: true,
-    &quot;editor.formatOnSave&quot;: true,
-    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,
-    &quot;[javascript]&quot;: &#123;
-        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
-      &#125;,
-      &quot;[typescript]&quot;: &#123;
-        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
-      &#125;,
-      &quot;[typescriptreact]&quot;: &#123;
-        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
-      &#125;,
-      &quot;[html]&quot;: &#123;
-        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
-      &#125;,
-      &quot;[json]&quot;: &#123;
-        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
-      &#125;,
-      &quot;[scss]&quot;: &#123;
-        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
-      &#125;,
-      &quot;[jsonc]&quot;: &#123;
-        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
-      &#125;,
-&#125;
-</code></pre>
-<p><code>ESLint</code>对应<code>setting.json</code>配置</p>
-<pre><code> &quot;editor.codeActionsOnSave&quot;: &#123;
-        &quot;source.fixAll.eslint&quot;: true
-    &#125;,
-</code></pre>
-<h2 id="VSCode-安装的-eslint-和-prettier-插件和-npm-安装的有什么区别"><a href="#VSCode-安装的-eslint-和-prettier-插件和-npm-安装的有什么区别" class="headerlink" title="VSCode 安装的 eslint 和 prettier 插件和 npm 安装的有什么区别"></a>VSCode 安装的 eslint 和 prettier 插件和 npm 安装的有什么区别</h2><p>VSCode 中安装的是在编辑器里面用的，如果项目根目录下有 eslintrc 和 prettierrc 配置文件，VSCode 插件会自动读取配置文件中的配置检查你的代码和格式化文件，npm 安装的是在命令行中运行的。如果你只安装 npm 包，VSCode 是不会有 lint 提示的，只能通过命令行，在小黑窗查看不符合 lint 规则的检测信息。安装 npm 包最主要的原因是可以通过 git hook 强制提交代码前 lint 和格式化代码保证代码仓库的代码风格统一。</p>
-<p><a href="https://blog.theodo.com/2019/08/empower-your-dev-environment-with-eslint-prettier-and-editorconfig-with-no-conflicts/">参考链接</a></p>
-<p><a href="https://juejin.cn/post/6924568874700505102">参考链接</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/07/29/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/29/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">linux常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="linux-常用命令"><a href="#linux-常用命令" class="headerlink" title="linux 常用命令"></a>linux 常用命令</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Linux 絮絮念</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 一、图形终端操作 -&gt; 字符终端操作</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 1.1、帮助命令</span></span><br><span class="line"></span><br><span class="line"><span class="code">```bash</span></span><br><span class="line"><span class="code">man ls</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code"># 对于内部命令，使用 help 命令查看其帮助</span></span><br><span class="line"><span class="code">help cd</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code"># 对于外部命令，使用 --help 选项查看其帮助</span></span><br><span class="line"><span class="code">ls --help</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">info ls</span></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2、可以使用-type-来区分内、外部命令"><a href="#1-2、可以使用-type-来区分内、外部命令" class="headerlink" title="1.2、可以使用 type 来区分内、外部命令"></a>1.2、可以使用 type 来区分内、外部命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 终端打印：cd is a shell builtin</span></span><br><span class="line"><span class="built_in">type</span> <span class="built_in">cd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端打印：ls is aliased to `ls --color=auto&#x27;</span></span><br><span class="line"><span class="built_in">type</span> <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3、显示当前目录"><a href="#1-3、显示当前目录" class="headerlink" title="1.3、显示当前目录"></a>1.3、显示当前目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 终端打印当前目录，如：/root</span></span><br><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4、改变当前目录"><a href="#1-4、改变当前目录" class="headerlink" title="1.4、改变当前目录"></a>1.4、改变当前目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回到上个目录</span></span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回到上一级目录</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-5、创建、删除目录"><a href="#1-5、创建、删除目录" class="headerlink" title="1.5、创建、删除目录"></a>1.5、创建、删除目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建目录 a、a/b、a/b/c</span></span><br><span class="line"><span class="built_in">mkdir</span> -p a/b/c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除空目录</span></span><br><span class="line"><span class="built_in">rmdir</span> a/b/c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除非空目录</span></span><br><span class="line"><span class="built_in">rm</span> -r a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除非空目录，不进行提示</span></span><br><span class="line"><span class="built_in">rm</span> -rf a</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-6、列出目录内容"><a href="#1-6、列出目录内容" class="headerlink" title="1.6、列出目录内容"></a>1.6、列出目录内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示每个文件详细信息</span></span><br><span class="line"><span class="built_in">ls</span> -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端打印：ll is aliased to `ls -l --color=auto&#x27;</span></span><br><span class="line"><span class="built_in">type</span> ll</span><br><span class="line"></span><br><span class="line"><span class="comment"># 递归显示目录的内容</span></span><br><span class="line"><span class="built_in">ls</span> -R a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示隐藏文件</span></span><br><span class="line"><span class="built_in">ls</span> -a a/b/c</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-7、复制、剪切、重命名"><a href="#1-7、复制、剪切、重命名" class="headerlink" title="1.7、复制、剪切、重命名"></a>1.7、复制、剪切、重命名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 复制文件</span></span><br><span class="line"><span class="built_in">cp</span> afile bfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制目录</span></span><br><span class="line"><span class="built_in">cp</span> -r test-cp test-cp1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示复制的过程</span></span><br><span class="line"><span class="built_in">cp</span> -rv test-cp test-cp1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 剪切</span></span><br><span class="line"><span class="built_in">mv</span> test-cp/afile afile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名</span></span><br><span class="line"><span class="built_in">mv</span> afile cfile</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-8、通配符"><a href="#1-8、通配符" class="headerlink" title="1.8、通配符"></a>1.8、通配符</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> file afile aafile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 afile</span></span><br><span class="line"><span class="built_in">ls</span> ?file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 file afile aafile</span></span><br><span class="line"><span class="built_in">ls</span> *file</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-9、文本查看"><a href="#1-9、文本查看" class="headerlink" title="1.9、文本查看"></a>1.9、文本查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看文件</span></span><br><span class="line"><span class="built_in">cat</span> afile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件前 10 行</span></span><br><span class="line"><span class="built_in">head</span> -10 afile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 跟踪文件结尾变化</span></span><br><span class="line"><span class="built_in">tail</span> -f afile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计文件行数</span></span><br><span class="line"><span class="built_in">wc</span> -l afile</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-0、压缩和解压缩"><a href="#2-0、压缩和解压缩" class="headerlink" title="2.0、压缩和解压缩"></a>2.0、压缩和解压缩</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 /etc 打包成 etc.tar 文件</span></span><br><span class="line">tar cf etc.tar /etc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 /etc 打包压缩成 etc.tar.gz 文件，通过 gzip 压缩</span></span><br><span class="line">tar cfz etc.tar.gz /etc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 /etc 打包压缩成 etc.tar.bz2 文件，通过 bzip2 压缩</span></span><br><span class="line">tar cfj etc.tar.bz2 /etc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 etc.tar.gz 文件解包解压缩到当前目录</span></span><br><span class="line">tar xfz etc.tar.gz -C ./</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-1、Vim"><a href="#2-1、Vim" class="headerlink" title="2.1、Vim"></a>2.1、Vim</h3><h4 id="2-1-1、正常模式"><a href="#2-1-1、正常模式" class="headerlink" title="2.1.1、正常模式"></a>2.1.1、正常模式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">h 左，j 下，k 上，l 右</span><br><span class="line"></span><br><span class="line">yy + p 复制整行</span><br><span class="line"></span><br><span class="line">3 + yy + p 复制 3 行</span><br><span class="line"></span><br><span class="line">y$ + p 从当前光标位置复制整行</span><br><span class="line"></span><br><span class="line">dd + p 剪切整行</span><br><span class="line"></span><br><span class="line">d$ + p 从当前光标位置剪切整行</span><br><span class="line"></span><br><span class="line">u 撤销</span><br><span class="line"></span><br><span class="line">ctrl + r 重做</span><br><span class="line"></span><br><span class="line">x 单个字符删除</span><br><span class="line"></span><br><span class="line">r 替换单个字符</span><br><span class="line"></span><br><span class="line">10 + G 移动到第 10 行</span><br><span class="line"></span><br><span class="line">G 移动到最后一行</span><br><span class="line"></span><br><span class="line">g 移动到第一行</span><br><span class="line"></span><br><span class="line">^ 移动到行首</span><br><span class="line"></span><br><span class="line">$ 移动到行尾</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-1-2、命令模式"><a href="#2-1-2、命令模式" class="headerlink" title="2.1.2、命令模式"></a>2.1.2、命令模式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">:w 保存</span><br><span class="line"></span><br><span class="line">:q 退出</span><br><span class="line"></span><br><span class="line">:q! 不保存退出</span><br><span class="line"></span><br><span class="line">:! + 命令 执行命令</span><br><span class="line"></span><br><span class="line">/ + 当前 查找当前，n 查找下一个，shift + n 查找上一个</span><br><span class="line"></span><br><span class="line">:s/帮助/help 将当前行的帮助替换成 help</span><br><span class="line"></span><br><span class="line">:%s/目录/dir 将所有目录替换成 dir</span><br><span class="line"></span><br><span class="line">:%s/目录/dir/g 将所有目录替换成 dir</span><br><span class="line"></span><br><span class="line">:3,5s/目录/dir 将 3 到 5 行的目录替换成 dir</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-1-3、可视模式"><a href="#2-1-3、可视模式" class="headerlink" title="2.1.3、可视模式"></a>2.1.3、可视模式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">三种进入可视模式的方式</span><br><span class="line"></span><br><span class="line">v 字符可视模式</span><br><span class="line"></span><br><span class="line">V 行可视模式</span><br><span class="line"></span><br><span class="line">ctrl + v 块可视模式</span><br><span class="line"></span><br><span class="line">块可视模式，配合 d 和 I 命令可以进行块的便利操作</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-1-4、插入模式"><a href="#2-1-4、插入模式" class="headerlink" title="2.1.4、插入模式"></a>2.1.4、插入模式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">正常模式进入插入模式</span><br><span class="line"></span><br><span class="line">i 定位到光标当前位置</span><br><span class="line"></span><br><span class="line">I 定位到行首</span><br><span class="line"></span><br><span class="line">a 定位到当前光标位置的下一位</span><br><span class="line"></span><br><span class="line">A 定位到行尾</span><br><span class="line"></span><br><span class="line">o 往下新增空行，定位到这个空行</span><br><span class="line"></span><br><span class="line">O 往上新增空行，定位到这个空行</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2、用户与权限管理"><a href="#2-2、用户与权限管理" class="headerlink" title="2.2、用户与权限管理"></a>2.2、用户与权限管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增 lcf 用户</span></span><br><span class="line">useradd lcf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 lcf 用户相关信息</span></span><br><span class="line"><span class="built_in">id</span> lcf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 lcf 用户的密码</span></span><br><span class="line">passwd lcf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 lcf 用户，并通过 -r 删除其家目录</span></span><br><span class="line">userdel -r lcf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 lcf 用户的家目录为 /home/lcf1</span></span><br><span class="line">usermod -d /home/lcf1 lcf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 lcf 用户，新增 lcf-group 组，将 lcf 用户添加到 lcf-group 组</span></span><br><span class="line">useradd lcf; groupadd lcf-group; usermod -g lcf-group lcf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 lcf-group 组</span></span><br><span class="line">groupdel lcf-group</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3、su、sudo"><a href="#2-3、su、sudo" class="headerlink" title="2.3、su、sudo"></a>2.3、su、sudo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 lcf 用户，通过 - 切换到 lcf 的家目录</span></span><br><span class="line">su - lcf</span><br><span class="line"></span><br><span class="line"><span class="comment"># lcf 用户免密切换到 root 用户，通过 visudo 修改 /etc/sudoers，加上一条配置 lcf ALL=/bin/su 即可</span></span><br><span class="line">sudo su</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-4、用户和用户组的配置文件介绍"><a href="#2-4、用户和用户组的配置文件介绍" class="headerlink" title="2.4、用户和用户组的配置文件介绍"></a>2.4、用户和用户组的配置文件介绍</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用户配置文件</span></span><br><span class="line"><span class="comment"># lcf:x:1000:1001::/home/lcf:/bin/bash</span></span><br><span class="line"><span class="comment"># lcf 用户名，x 登录是否需要密码，1000 用户 id，1001 用户所在组 id，注释，/home/lcf 家目录，/bin/bash 用户登录后使用的命令解释器</span></span><br><span class="line"><span class="built_in">cat</span> /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户密码配置文件</span></span><br><span class="line"><span class="comment"># lcf:$1$9Ohvr8/m$1fPtW1axmrMGXgKzdiyK30</span></span><br><span class="line"><span class="comment"># lcf 用户名，$1$9Ohvr8/m$1fPtW1axmrMGXgKzdiyK30 用户密码</span></span><br><span class="line"><span class="built_in">cat</span> /etc/shadow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户组配置文件</span></span><br><span class="line"><span class="comment"># lcf-group:x:1001:lcf2</span></span><br><span class="line"><span class="comment"># lcf-group 组名，x 是否需要密码验证；1001 gid，lcf2 lcf2 用户也属于这个组</span></span><br><span class="line"><span class="built_in">cat</span> /etc/group</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-5、文件与目录权限的表示方法"><a href="#2-5、文件与目录权限的表示方法" class="headerlink" title="2.5、文件与目录权限的表示方法"></a>2.5、文件与目录权限的表示方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -rw-r--r-- 1 root root 0 Jul 31 14:22 test/afile</span></span><br><span class="line"><span class="comment"># - 普通文件，rw- root 用户可读可写，r-- root 组用户可读，r-- 非 root 用户、非 root 用户组用户可读</span></span><br><span class="line"><span class="comment"># - 普通文件，d 目录文件，b 块特殊文件，c 字符特殊文件，l 符号链接，f 命名管道，s 套接字文件</span></span><br><span class="line">ll <span class="built_in">test</span>/afile</span><br><span class="line"></span><br><span class="line"><span class="comment"># drwxr-xr-x 2 root root 4096 Jul 31 14:37 test</span></span><br><span class="line"><span class="comment"># d 目录文件，rwx root 用户可进入目录，可看到目录中的文件名，可修改目录中的文件名，r-x root 组用户用户可进入目录，可看到目录中的文件名，r-x 非 root 用户、非 root 用户组可进入目录，可看到目录中的文件名</span></span><br><span class="line">ll <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 给其他用户增加 w 权限</span></span><br><span class="line"><span class="comment"># 也可以使用数字法设置权限 chmod 755 test</span></span><br><span class="line"><span class="built_in">chmod</span> o+w <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 test 目录的数组设置为 lcf-group</span></span><br><span class="line"><span class="built_in">chown</span> :lcf-group <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-6、文件的特殊权限"><a href="#2-6、文件的特殊权限" class="headerlink" title="2.6、文件的特殊权限"></a>2.6、文件的特殊权限</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SUID 用于二进制可执行文件，执行命令时取得文件属主权限，如：/usr/bin/passwd</span><br><span class="line"></span><br><span class="line">SGID 用于目录，在该目录下创建新的文件和目录，权限自动更改为该目录的属组</span><br><span class="line"></span><br><span class="line">SBIT 用于目录，该目录下新建的文件和目录，仅 root 和自己可以删除，如：/tmp</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、系统管理"><a href="#二、系统管理" class="headerlink" title="二、系统管理"></a>二、系统管理</h2><h3 id="2-1、查看网络配置"><a href="#2-1、查看网络配置" class="headerlink" title="2.1、查看网络配置"></a>2.1、查看网络配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有网卡信息</span></span><br><span class="line">ifconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 eth1 网卡信息</span></span><br><span class="line">ifconfig eth1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将网卡名称变成 eth1</span></span><br><span class="line"><span class="comment"># 编辑 /etc/default/grub，增加 net.ifnames=0 biosdevname=0</span></span><br><span class="line"><span class="comment"># 生成启动时执行的文件</span></span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">vim vim /etc/default/grub</span><br><span class="line">grub2-mkconfig -o /boot/grub2/grub.cfg</span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 eth1 网线连接情况</span></span><br><span class="line">mii-tool eth1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看路由（网关）情况</span></span><br><span class="line"><span class="comment"># -n 不将 ip 解析为域名</span></span><br><span class="line">route -n</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2、修改网络配置"><a href="#2-2、修改网络配置" class="headerlink" title="2.2、修改网络配置"></a>2.2、修改网络配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 eth1 的 ip 地址设置为 9.134.54.27，子网掩码设置为 255.255.252.0</span></span><br><span class="line">ifconfig eth1 9.134.54.27 netmask 255.255.252.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 eth1 网卡</span></span><br><span class="line">ifup eth1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭 eth1 网卡</span></span><br><span class="line">ifdown eth1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除默认网关</span></span><br><span class="line">route del default gw 9.134.52.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加默认网关</span></span><br><span class="line">route add default gw 9.134.52.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问 9.134.54.27 走 9.134.52.1 网关</span></span><br><span class="line">route add -host 9.134.54.27 gw 9.134.52.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问 192.168.0 网段，走 9.134.52.1 网关</span></span><br><span class="line">route add -net 192.168.0.0 netmask 255.255.255.0 gw 9.134.52.1</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3、网络故障排除命令"><a href="#2-3、网络故障排除命令" class="headerlink" title="2.3、网络故障排除命令"></a>2.3、网络故障排除命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 到 baidu 的网络层是否畅通</span></span><br><span class="line">ping www.baidu.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 到 baidu 的每一跳的情况，-w 1 每一跳最多等待 1 s</span></span><br><span class="line">traceroute -w 1 www.baidu.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示到各 host 的网络情况</span></span><br><span class="line">mtr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 www.baidu.com 对应的 ip</span></span><br><span class="line">nslookup www.baidu.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接 www.baidu.com 的 80 端口</span></span><br><span class="line">telnet www.baidu.com 80</span><br><span class="line"></span><br><span class="line"><span class="comment"># 捕获 ip 为 14.215.177.39，端口为 80 的 tcp 包，并将记录保存在 /tmp/afile 文件</span></span><br><span class="line">tcpdump -i any -n host 14.215.177.39 and port 80 -w /tmp/afile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看自身开启的服务</span></span><br><span class="line">netstat -ntpl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看自身开启的服务</span></span><br><span class="line">ss -ntpl</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-4、网络管理和配置文件"><a href="#2-4、网络管理和配置文件" class="headerlink" title="2.4、网络管理和配置文件"></a>2.4、网络管理和配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 网络服务管理程序分为 2 种，分别为 Sysv 和 systemd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Sysv</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看网络状态</span></span><br><span class="line">service network status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启 network 服务</span></span><br><span class="line">service network restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 禁用 network</span></span><br><span class="line">chkconfig --list network</span><br><span class="line">chkconfig --level 2345 network off</span><br><span class="line"></span><br><span class="line"><span class="comment"># systemd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 NetworkManager 服务</span></span><br><span class="line">systemctl list-unit-files NetworkManager.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 禁用 NetworkManager</span></span><br><span class="line">systemctl <span class="built_in">disable</span> NetworkManager</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用 NetworkManager</span></span><br><span class="line">systemctl <span class="built_in">enable</span> NetworkManager</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启 network 服务</span></span><br><span class="line">systemctl restart NetworkManager.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 eth1 的配置文件</span></span><br><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 DNS 地址</span></span><br><span class="line"><span class="comment"># nslookup 后，输入 server，退出 exit</span></span><br><span class="line">nslookup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看主机名</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改主机名</span></span><br><span class="line">hostname c7.test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 固化主机名</span></span><br><span class="line">hostnamectl set-hostname c7.test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 固化主机名后，需要在 /etc/hosts 配置 127.0.0.1 c7.test</span></span><br><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-5、使用-rpm-命令安装软件包"><a href="#2-5、使用-rpm-命令安装软件包" class="headerlink" title="2.5、使用 rpm 命令安装软件包"></a>2.5、使用 rpm 命令安装软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm 包格式</span></span><br><span class="line"><span class="comment"># vim-common-7.4.10-5.el7.x86_64.rpm</span></span><br><span class="line"><span class="comment"># vim-common 软件名称，7.4.10-5 软件版本，el7 系统版本，x86_64 平台</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有安装的软件包</span></span><br><span class="line">rpm -qa</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 vim-common</span></span><br><span class="line">rpm -q vim-common</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 vim-enhanced</span></span><br><span class="line">rpm -i vim-enhanced-7.4.160-5.el7.x86_64.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载 vim-enhanced</span></span><br><span class="line">rpm -e vim-enhanced</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-6、使用-yum-包管理器安装软件包"><a href="#2-6、使用-yum-包管理器安装软件包" class="headerlink" title="2.6、使用 yum 包管理器安装软件包"></a>2.6、使用 yum 包管理器安装软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可通过修改 yum 配置文件，指向国内镜像，提高下载速度</span></span><br><span class="line"><span class="comment"># /etc/yum.repos.d/CentOS-Base.repo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 vim-enhanced</span></span><br><span class="line">yum install vim-enhanced</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 vim</span></span><br><span class="line">yum remove vim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列举已安装的软件包</span></span><br><span class="line">yum list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级所有软件包</span></span><br><span class="line">yum update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级 vim-enhanced</span></span><br><span class="line">yum update vim-enhanced</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-7、通过源代码编译安装软件包"><a href="#2-7、通过源代码编译安装软件包" class="headerlink" title="2.7、通过源代码编译安装软件包"></a>2.7、通过源代码编译安装软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 openresty</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 openresty</span></span><br><span class="line">wget https://openresty.org/download/openresty-1.15.8.1.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">tar zxf</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> openresty-1.15.8.1</span><br><span class="line"></span><br><span class="line">./configure --prefix=/usr/local/openresty</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">gmake -j2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">gmake install</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-8、如何进行内核升级"><a href="#2-8、如何进行内核升级" class="headerlink" title="2.8、如何进行内核升级"></a>2.8、如何进行内核升级</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 升级内核可通过 yum 升级，也可通过源代码编译安装升级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过 yum 升级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看内核版本</span></span><br><span class="line"><span class="built_in">uname</span> -r</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩展 centos 仓库</span></span><br><span class="line">yum install epel-release -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将内核升级到库里有的最新版本</span></span><br><span class="line">yum install kernel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本内核</span></span><br><span class="line">yum install kernel-3.10.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过源代码编译安装升级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载内核压缩包</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装相关依赖</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将内核压缩包解压缩</span></span><br><span class="line">tar xvf linux-5.1.14.tar.xz -C /usr/src/kernels/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置内核</span></span><br><span class="line">make menuconfig</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除了通过 make menuconfig 配置内核，还可复用当前内核配置</span></span><br><span class="line"><span class="built_in">cd</span> /boot</span><br><span class="line"><span class="built_in">cp</span> config-3.10.0-957.21.2.el7.x86_64 /usr/src/kernels/linux-5.1.14/.config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 cpu 能力</span></span><br><span class="line">lscpu</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">make -j2 all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">make modules_install</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-9、grub-配置文件介绍"><a href="#2-9、grub-配置文件介绍" class="headerlink" title="2.9、grub 配置文件介绍"></a>2.9、grub 配置文件介绍</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># grub 启动的引导软件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本 grub 配置</span></span><br><span class="line">vim /etc/default/grub</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更详细的 grub 配置</span></span><br><span class="line"><span class="built_in">ls</span> /etc/grub.d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动时用到的 grub 文件</span></span><br><span class="line">vim /boot/grub2/grub.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将修改的 grub 配置转变成启动时执行的 grub 文件</span></span><br><span class="line">grub2-mkconfig -o /boot/grub2/grub.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置启动时，引导的内核</span></span><br><span class="line"><span class="comment"># 查看当前引导的内核</span></span><br><span class="line">grub2-editenv  list</span><br><span class="line">grep ^menu /boot/grub2/grub.cfg</span><br><span class="line">grub2-set-default 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用单用户进入系统（忘记 root 密码）</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-10、使用-ps-和-top-命令查看进程"><a href="#2-10、使用-ps-和-top-命令查看进程" class="headerlink" title="2.10、使用 ps 和 top 命令查看进程"></a>2.10、使用 ps 和 top 命令查看进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前终端进程</span></span><br><span class="line">ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有进程</span></span><br><span class="line">ps -e</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示更详细的进程信息</span></span><br><span class="line">ps -ef</span><br><span class="line">ps -eLf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看进程数</span></span><br><span class="line">pstree</span><br><span class="line"></span><br><span class="line"><span class="comment"># 动态查看进程信息</span></span><br><span class="line">top</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-11、进程的控制与进程之间的关系"><a href="#2-11、进程的控制与进程之间的关系" class="headerlink" title="2.11、进程的控制与进程之间的关系"></a>2.11、进程的控制与进程之间的关系</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单独查看某一进程情况</span></span><br><span class="line">top -p 22548</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置进程执行的优先级</span></span><br><span class="line"><span class="comment"># nice 范围从 -20 到 19，值越小优先级越高，抢占资源就越多</span></span><br><span class="line"><span class="built_in">nice</span> -n 10 ./a.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对运行的进程调整其优先级</span></span><br><span class="line">renice -n 15 23633</span><br><span class="line"></span><br><span class="line"><span class="comment"># 让进程在后台运行</span></span><br><span class="line">./a.sh &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将后台执行的进程调回前台</span></span><br><span class="line"><span class="built_in">jobs</span></span><br><span class="line"><span class="built_in">fg</span> 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将前台执行的程序调回后台，并停止</span></span><br><span class="line"><span class="comment"># ctrl + z</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将后台暂停的进程，继续运行</span></span><br><span class="line"><span class="built_in">bg</span> 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-12、进程的通信方式与信号：kill-命令"><a href="#2-12、进程的通信方式与信号：kill-命令" class="headerlink" title="2.12、进程的通信方式与信号：kill 命令"></a>2.12、进程的通信方式与信号：kill 命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有信号</span></span><br><span class="line"><span class="built_in">kill</span> -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># kill -2 30291 等同于 ctrl + c</span></span><br><span class="line"><span class="built_in">kill</span> -2 30291</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不可中断地杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 30044</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-13、守护进程"><a href="#2-13、守护进程" class="headerlink" title="2.13、守护进程"></a>2.13、守护进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 nohup 与 &amp; 符号配合运行一个命令</span></span><br><span class="line"><span class="comment"># nohup 命令使进程忽略 hangup（挂起）信号</span></span><br><span class="line"><span class="built_in">nohup</span> <span class="built_in">tail</span> -f /var/log/messages &amp;</span><br><span class="line"><span class="comment"># 当关掉终端时，此进程不会被杀死，其父进程变为 1 号进程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># /proc 中的信息都在内存，里面有跟进程号同名的目录，这些目录保存着进程信息</span></span><br><span class="line"><span class="built_in">cd</span> /proc/28407</span><br><span class="line">ll cwd</span><br><span class="line">ll fd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 了解守护进程（daemon）</span></span><br><span class="line">ps -ef | grep sshd</span><br><span class="line">ll cwd</span><br><span class="line">ll fd</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-14、screen-命令和系统日志"><a href="#2-14、screen-命令和系统日志" class="headerlink" title="2.14、screen 命令和系统日志"></a>2.14、screen 命令和系统日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 screen 命令</span></span><br><span class="line"><span class="comment"># screen 进入 screen 环境</span></span><br><span class="line"><span class="comment"># ctrl + a d 退出（detached）screen 环境</span></span><br><span class="line"><span class="comment"># screen -ls 查看 screen 的会话</span></span><br><span class="line"><span class="comment"># screen -r sessionid 恢复会话</span></span><br><span class="line"><span class="comment"># exit 删除这个会话</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统日志</span></span><br><span class="line"><span class="built_in">cd</span> /var/log</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line"><span class="comment"># 系统常规日志</span></span><br><span class="line"><span class="built_in">tail</span> -f messages</span><br><span class="line"><span class="comment"># 内核运行的相关信息</span></span><br><span class="line"><span class="built_in">tail</span> -f dmesg</span><br><span class="line"><span class="comment"># 系统的安全日志</span></span><br><span class="line"><span class="built_in">tail</span> -f secure</span><br><span class="line"><span class="comment"># 计划任务的日志信息</span></span><br><span class="line"><span class="built_in">tail</span> -f cron</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-15、服务管理工具-systemctl"><a href="#2-15、服务管理工具-systemctl" class="headerlink" title="2.15、服务管理工具 systemctl"></a>2.15、服务管理工具 systemctl</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 服务（提供常见功能的守护进程）集中管理工具：service、systemctl</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># service 的启动脚本</span></span><br><span class="line"><span class="built_in">cd</span> /etc/init.d/</span><br><span class="line"></span><br><span class="line"><span class="comment"># systemctl 的启动脚本</span></span><br><span class="line"><span class="built_in">cd</span> /usr/lib/systemd/system/</span><br><span class="line"></span><br><span class="line"><span class="comment"># service 服务启动级别</span></span><br><span class="line"><span class="comment"># service 启动级别由 init 控制</span></span><br><span class="line"><span class="comment"># 0 关机，6 重启，1 单用户，2 不带网络的多用户，3 字符模式，5 图形模式</span></span><br><span class="line">chkconfig --list</span><br><span class="line"></span><br><span class="line"><span class="comment"># systemctl 服务启动级别</span></span><br><span class="line"><span class="built_in">cd</span> /lib/systemd/system</span><br><span class="line"><span class="built_in">ls</span> runlevel*.target</span><br><span class="line"><span class="comment"># 查看当前级别</span></span><br><span class="line">systemctl get-default</span><br><span class="line"><span class="comment"># 设置默认启动级别</span></span><br><span class="line">systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># systemctl 服务启动顺序问题</span></span><br><span class="line"><span class="comment"># 由 Unit 选项决定</span></span><br><span class="line"><span class="built_in">cd</span> /usr/lib/systemd/system/</span><br><span class="line">vim sshd.service</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-16、SELinux-简介"><a href="#2-16、SELinux-简介" class="headerlink" title="2.16、SELinux 简介"></a>2.16、SELinux 简介</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 SELinux 状态</span></span><br><span class="line">getenforce</span><br><span class="line"></span><br><span class="line"><span class="comment"># SELinux 配置文件</span></span><br><span class="line"><span class="comment"># 修改配置文件后，需要重启才能生效</span></span><br><span class="line">vim /etc/selinux/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时从 enforcing 变为 permissive</span></span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 具体标签查看</span></span><br><span class="line">ps -Z</span><br><span class="line"><span class="built_in">id</span> -Z</span><br><span class="line"><span class="built_in">ls</span> -Z</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1217,14 +1143,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1251,7 +1177,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="user"></i>
   </span>
