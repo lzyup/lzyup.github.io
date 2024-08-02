@@ -150,6 +150,76 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/20/vuerouter%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/20/vuerouter%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">VueRouter的两种模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/Vue-Router/" itemprop="url" rel="index"><span itemprop="name">Vue Router</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="单页面路由原理"><a href="#单页面路由原理" class="headerlink" title="单页面路由原理"></a>单页面路由原理</h2><h3 id="hash模式"><a href="#hash模式" class="headerlink" title="hash模式"></a>hash模式</h3><p>例如<code>www.baidu.com/#help</code>，当##后面的哈希值发生变化时，<strong>不会向服务器请求数据</strong>，可以通过<code>hashchange</code>事件来监听到URL的变化，从而进行跳转页面<br><img src="http://api.fly63.com/vue_blog/public/Uploads/20190220/5c6d5d956b4e4.jpg" alt="image"></p>
+<h3 id="history模式"><a href="#history模式" class="headerlink" title="history模式"></a>history模式</h3><ul>
+<li>HTML5中的两个API:pushState和replaceState,改变url之后页面不会重新刷新，也不会带#号，页面地址美观，url的改变会触发popState事件，监听该事件也可以实现根据不同的url渲染对应的页面内容</li>
+<li>但是因为没有#会导致用户刷新页面的时候，还会发送请求到服务器，为避免这种情况，需要每次url改变的时候，都将所有的路由重新定位到根路由下。</li>
+</ul>
+<p>history模式相比hash模式更美观，需要用到Html5新增的几个api实现</p>
+<p><img src="http://api.fly63.com/vue_blog/public/Uploads/20190220/5c6d5d9b70ec2.jpg" alt="image"></p>
+<p><a href="https://juejin.im/post/5b5697675188251b11097464">参考链接</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/20/history/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -594,14 +664,14 @@ git fetch 通常用来查看他人的进程，因为它取回的代码对你本�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>

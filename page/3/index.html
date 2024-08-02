@@ -150,6 +150,350 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/http%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/27/http%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">http协议</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>URL是Uniform Resource Locator的简写，统一资源定位符</p>
+<h4 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h4><p><code>scheme://host:port/path?query-string=xxx#achor</code></p>
+<ul>
+<li>scheme</br><br>代表的是访问的协议，一般情况下是http或者https以及ftp等。</li>
+<li>host</br><br>主机名，域名，比如<code>www.baidu.com</code></li>
+<li>path</br><br>查找路径。比如：<code>www.jianshu.com/trending/now</code>,后面的<code>trending/now</code>就是path</li>
+<li>query-string</br><br>查询字符串，比如:<code>www.baidu.com/s?wd=python</code>,后面的<code>wd=python</code>就是查询字符串。</li>
+<li>anchor</br><br>锚点，后台一般不用管，前端用来做页面定位的</li>
+</ul>
+<h3 id="网址（url）和域名的关系"><a href="#网址（url）和域名的关系" class="headerlink" title="网址（url）和域名的关系"></a>网址（url）和域名的关系</h3><p>网址是打开网站的地址；<br>比如：<a href="http://zhidao.baidu.com/question/263101382.html?push=core&group=1">http://zhidao.baidu.com/question/263101382.html?push=core&amp;group=1</a></p>
+<p>这个是网址；</p>
+<p><strong>域名是zhidao.baidu.com，<br>指http:&#x2F;&#x2F;前面到第一个&#x2F;中间的一段。</strong></p>
+<h3 id="1、Http方法"><a href="#1、Http方法" class="headerlink" title="1、Http方法"></a>1、Http方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>获取资源</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>向服务器端发送数据，传输实体主体</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>传输文件</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>获取报文首部</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除文件</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>询问支持的方法</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>追踪路径</td>
+</tr>
+</tbody></table>
+<h3 id="2、HTTP状态码"><a href="#2、HTTP状态码" class="headerlink" title="2、HTTP状态码"></a>2、HTTP状态码</h3><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1XX</td>
+<td>Informational(信息性状态码)</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>Success(成功状态码)</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>Redirection(重定向)</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>Client Error(客户端错误状态码)</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>Server Error(服务器错误状态码)</td>
+</tr>
+</tbody></table>
+<h4 id="2XX成功"><a href="#2XX成功" class="headerlink" title="2XX成功"></a>2XX成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">200(OK 客户端发过来的数据被正常处理)</span><br><span class="line">204(Not Content 正常响应，没有实体)</span><br><span class="line">206(Partial Content 范围请求，返回部分数据，响应报文中由Content-Range指定实体内容)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3XXX重定向"><a href="#3XXX重定向" class="headerlink" title="3XXX重定向"></a>3XXX重定向</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">301(Moved Permanently) 永久重定向</span><br><span class="line">302(Found) 临时重定向，规范要求，方法名不变，但是都会改变</span><br><span class="line">303(See Other)和302类似，但必须用GET方法</span><br><span class="line">304(Not Modified)状态未改变，配合(If-Modified-Since、If-None-Match)</span><br><span class="line">307(Temporay Redirect)临时重定向，不改变请求方法</span><br></pre></td></tr></table></figure>
+<h3 id="4XXX客户端错误"><a href="#4XXX客户端错误" class="headerlink" title="4XXX客户端错误"></a>4XXX客户端错误</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">400(Bad Request)请求报文语法错误</span><br><span class="line">401(unauthorized)需要认证</span><br><span class="line">403(Forbidden)服务器拒绝访问对应的资源</span><br><span class="line">404(Not Found)服务器上无法找到资源</span><br></pre></td></tr></table></figure>
+<h4 id="5XXX服务器端错误"><a href="#5XXX服务器端错误" class="headerlink" title="5XXX服务器端错误"></a>5XXX服务器端错误</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">500(Internal Server Error)服务器故障</span><br><span class="line">503(Service Unavailable)服务器处于负载或正在停机维护</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTP之请求头部结构"><a href="#HTTP之请求头部结构" class="headerlink" title="HTTP之请求头部结构"></a>HTTP之请求头部结构</h3><h4 id="1、请求行"><a href="#1、请求行" class="headerlink" title="1、请求行"></a>1、请求行</h4><p>请求行分为三个部分：请求方法、请求地址和协议版本</p>
+<h4 id="2、请求头部"><a href="#2、请求头部" class="headerlink" title="2、请求头部"></a>2、请求头部</h4><p>从第二行起为请求头部，HOST将指出请求的目的地。User-Agent，服务器端和客户端脚本都能访问它，它是浏览器类型检测逻辑的重要基础。该信息由你的浏览器来定义，并且在每个请求中自动发送等等。</p>
+<h4 id="3、空行"><a href="#3、空行" class="headerlink" title="3、空行"></a>3、空行</h4><p>请求头部后面的空行是必须的，即使第四部分的请求数据为空，也必须空行</p>
+<h4 id="4、请求体"><a href="#4、请求体" class="headerlink" title="4、请求体"></a>4、请求体</h4><p>请求体是post请求方式中的请求参数，以key &#x3D; value形式进行存储，多个请求参数之间用&amp;连接，如果请求当中请求体，那么在请求头当中的<code>Content-Length</code>属性记录的就是该请求体的长度</p>
+<p>eg:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP1.1</span><br><span class="line">Host:www.wrox.com</span><br><span class="line">User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)</span><br><span class="line">Content-Type:application/x-www-form-urlencoded</span><br><span class="line">Content-Length:40</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"></span><br><span class="line">name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /books/?sex=man&amp;name=Professional HTTP/1.1</span><br><span class="line">Host: www.example.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko/20050225 Firefox/1.0.1</span><br><span class="line">Connection: Keep-Alive</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="HTTP的Head头"><a href="#HTTP的Head头" class="headerlink" title="HTTP的Head头"></a>HTTP的Head头</h4><table>
+<thead>
+<tr>
+<th>Header</th>
+<th>解释</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept</td>
+<td>指定客户端能够接收的内容类型</td>
+<td>Accept:text&#x2F;plain,text&#x2F;html</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>浏览器可以接受的字符串编码集</td>
+<td>Accept-Charset:iso-8859-5</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>指定浏览器可以支持的web服务器返回内容压缩编码类型</td>
+<td>Accept-Encoding:compress,gzip</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>浏览器可接受的语言</td>
+<td>Accept-Language:en,zh</td>
+</tr>
+<tr>
+<td>Accept-Ranges</td>
+<td>可以请求网页实体的一个或者多个子范围字段</td>
+<td>Accept-Range:bytes</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Http授权的授权证书</td>
+<td>Authorization:BasicQWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>指定请求和响应遵循的缓存机制</td>
+<td>Cache-Control:no-cache</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>表示是否需要持久连接。（HTTP1.1默认进行持久连接）</td>
+<td>Connection:close</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>Http请求发送时，会把保存在该请求域名下的所有cookie值一起发送给Web服务器</td>
+<td>Cookie:$Version&#x3D;1:Skin&#x3D;new;</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>请求的内容长度</td>
+<td>Content-Length:348</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>请求的实体对应的MIME信息</td>
+<td>Content-Type:application&#x2F;x-www-form-urlencode</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>请求发送的日期和时间</td>
+<td>Date:Tue,15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td>Expect</td>
+<td>请求的特定的服务器行为</td>
+<td>Expect:100-continue</td>
+</tr>
+<tr>
+<td>From</td>
+<td>发出请求的用户的Email</td>
+<td>From:<a href="mailto:&#x75;&#x73;&#101;&#114;&#64;&#101;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#x75;&#x73;&#101;&#114;&#64;&#101;&#x6d;&#97;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a></td>
+</tr>
+<tr>
+<td>Host</td>
+<td><strong>指定请求的服务器的域名和端口号</strong></td>
+<td>Host:<a href="http://www.zcmhi.com/">www.zcmhi.com</a></td>
+</tr>
+<tr>
+<td>If-Match</td>
+<td>只有请求内容与实体相匹配才有效</td>
+<td>If-Match:“737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304</td>
+<td>If-Modified-Since:Sat,29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td>If-Range</td>
+<td>如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag</td>
+<td>If-Range:“737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>If-Unmodified-Since</td>
+<td>只在实体在指定时间之后未被修改才请求成功</td>
+<td>If-Unmodified-Since:Sat,29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td>Max-Forwards</td>
+<td>限制信息通过代理和网关传送的时间</td>
+<td>Max-Forwards:10</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>用来包含实现特定的指令</td>
+<td>Pragma:no-cache</td>
+</tr>
+<tr>
+<td>Proxy-Authorization</td>
+<td>连接到代理的授权证书</td>
+<td>Proxy-Authorization:Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>只请求实体的一部分，指定范围</td>
+<td>Range:bytes&#x3D;500-999</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>先前网页的地址，当前请求网页紧随其后,即来路</td>
+<td>Referer:http:</td>
+</tr>
+<tr>
+<td>TE</td>
+<td>客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息</td>
+<td>TE:trailers,deflate;q&#x3D;0.5</td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>向服务器指定某种传输协议以便服务器进行转换（如果支持）</td>
+<td>Upgrade:HTTP&#x2F;2.0,SHTTP&#x2F;1.3,IRC&#x2F;6.9,RTA&#x2F;x11</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>User-Agent的内容包含发出请求的用户信息</td>
+<td>User-Agent:Mozilla&#x2F;5.0(Linux;X11)</td>
+</tr>
+<tr>
+<td>Via</td>
+<td>通知中间网关或代理服务器地址，通信协议</td>
+<td>Via:1.0 fred,1.1 nowhere.com (Apache&#x2F;1.1)</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>关于消息实体的警告信息</td>
+<td>Warn:199 Miscellaneous warning</td>
+</tr>
+</tbody></table>
+<h3 id="HTTP之响应头部结构"><a href="#HTTP之响应头部结构" class="headerlink" title="HTTP之响应头部结构"></a>HTTP之响应头部结构</h3><h4 id="1、状态行"><a href="#1、状态行" class="headerlink" title="1、状态行"></a>1、状态行</h4><p>由HTTP协议版本号，状态码，状态消息三部分组成</p>
+<h4 id="2、消息报头"><a href="#2、消息报头" class="headerlink" title="2、消息报头"></a>2、消息报头</h4><p>用来说明客户端要使用的一些附加信息</p>
+<h4 id="3、空行-1"><a href="#3、空行-1" class="headerlink" title="3、空行"></a>3、空行</h4><p>消息报头后面的空行是必须的</p>
+<h4 id="4、响应正文"><a href="#4、响应正文" class="headerlink" title="4、响应正文"></a>4、响应正文</h4><p>服务器返回给客户端的文本信息</p>
+<p>eg:输入<code>curl -I www.baidu.com</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Length: 277</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Date: Thu, 19 Dec 2019 10:48:12 GMT</span><br><span class="line">Etag: &quot;575e1f72-115&quot;</span><br><span class="line">Last-Modified: Mon, 13 Jun 2016 02:50:26 GMT</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Server: bfe/1.0.8.18</span><br></pre></td></tr></table></figure>
+
+<p>eg:输入<code>curl -I geekbang.org</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line">Date: Thu, 19 Dec 2019 09:40:46 GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 178</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Location: https://www.geekbang.org/</span><br><span class="line">Strict-Transport-Security: max-age=15768000</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见响应头"><a href="#常见响应头" class="headerlink" title="常见响应头"></a>常见响应头</h4><table>
+<thead>
+<tr>
+<th>Header</th>
+<th>解释</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date</td>
+<td>原始服务器消息发出的时间</td>
+<td>Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td>Last-Modified</td>
+<td>请求资源的最后修改时间</td>
+<td>Last-Modified: Tue, 15 Nov 2010 12:45:26 GMT</td>
+</tr>
+<tr>
+<td>ETag</td>
+<td>请求变量的实体标签的当前值</td>
+<td>ETag: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>重定向到另一个 URL，如输入浏览器就输入 baidu.com 回车，会自动跳转到<a href="http://www.baidu.com/">www.baidu.com</a> 就是通过这个响应头控制的</td>
+<td>Location:<a href="http://www.zcmhi.com/archives/94.html">http://www.zcmhi.com/archives/94.html</a></td>
+</tr>
+</tbody></table>
+<p><a href="https://note.youdao.com/">参考链接1</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/thunk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,116 +1335,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/mvvm%E6%8E%A2%E7%A9%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Luzy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Luzy's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/01/mvvm%E6%8E%A2%E7%A9%B6/" class="post-title-link" itemprop="url">mvvm探究</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">响应式原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
-<li>实现一个数据监听器<code>Observer</code>,能够对数据对象的所有的属性进行监听，如有变动可拿到最新值并通知订阅者。</li>
-<li>实现一个指令解析器<code>Compile</code>，对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。</li>
-<li>实现一个Watcher，作为连接<code>Observer</code>和<code>Compile</code>的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。</li>
-</ul>
-<h3 id="实现Observer"><a href="#实现Observer" class="headerlink" title="实现Observer"></a>实现Observer</h3><ul>
-<li>作用：给对象的属性添加getter和setter,用于依赖收集和派发更新</li>
-</ul>
-<p>利用<code>Object.defineProperty()</code>来监听属性变动那么将需要observer的数据对象进行递归遍历，包括子属性对象的属性，都加上<code>setter</code>和<code>getter</code>这样的话，给这个对象的某个赋值，就会触发<code>setter</code>，那么就能监听到了数据变化。代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;name:&#x27;kindeng&#x27;&#125;;</span><br><span class="line">observer(data);</span><br><span class="line">data.name = &#x27;dmp&#x27;;//监听到值变化了 kindeng ---&gt; dmq</span><br><span class="line"></span><br><span class="line">function observer(data)&#123;</span><br><span class="line">    if(!data || typeof data !== &#x27;object&#x27;)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    Object.keys(data).forEach(functioin(key)&#123;</span><br><span class="line">        defineReactive(data,key,data[key]);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function defineReactive(data,key,val)&#123;</span><br><span class="line">    observe(val); //监听子属性</span><br><span class="line">    Object.defineProperty(data,key,&#123;</span><br><span class="line">        enumerable:true,//可枚举</span><br><span class="line">        configurable:false,//不能再define</span><br><span class="line">        get:function()&#123;</span><br><span class="line">            return val;</span><br><span class="line">        &#125;,</span><br><span class="line">        set:function(newVal)&#123;</span><br><span class="line">            console.log(&#x27;监听到值变化了&#x27;,val,&#x27;----&gt;&#x27;,newValue);</span><br><span class="line">            val = newVal;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样我们已经可以监听每个数据的变化了，那么监听到变化之后就是怎么通知订阅者了，所以接下来需要实现一个消息订阅器，很简单，维护一个数组，用来收集订阅者，数据变动触发notify,再调用订阅者的update方法，代码改善之后如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//...省略</span><br><span class="line">function defineReactive(data,key,val)&#123;</span><br><span class="line">    var dep = new Dep();</span><br><span class="line">    observal(val);//监听子属性</span><br><span class="line">    </span><br><span class="line">    Object.defineProperty(data,key,&#123;</span><br><span class="line">        // ...省略</span><br><span class="line">        set:function(newVal)&#123;</span><br><span class="line">            if(val === newVal) return;</span><br><span class="line">            console.log(&#x27;监听到值变化了&#x27;,val,&#x27;----&gt;&#x27;,newVal);</span><br><span class="line">            val = newVal;</span><br><span class="line">            dep.notify();//通知所有订阅者</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Dep()&#123;</span><br><span class="line">    this.subs = [];</span><br><span class="line">&#125;</span><br><span class="line">Dep.prototype = &#123;</span><br><span class="line">    addSub:function(sub)&#123;</span><br><span class="line">        this.subs.push(sub);</span><br><span class="line">    &#125;,</span><br><span class="line">    notify:function()&#123;</span><br><span class="line">        this.subs.forEach(function(dub)&#123;</span><br><span class="line">            sub.update();</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>之前我们已经明确了<code>Watcher</code>是订阅者，而且<code>var dep = new Dep()</code>;是在<code>defineReactive</code>方法内部定义的，所以想通过<code>dep</code>添加订阅者，就必须要在闭包内操作，所以我们可以在<code>getter</code>里面动手脚：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//Observer.js</span><br><span class="line">//...省略</span><br><span class="line">Object.defineProperty(data,key,&#123;</span><br><span class="line">    get:function()&#123;</span><br><span class="line">        //由于需要在闭包内添加Watcher，所以通过Dep定义一个全局target属性，暂存watcher,添加完移除</span><br><span class="line">        Dep.target &amp;&amp; dep.addDep(Dep.target);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">    // ...省略</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// Watcher.js</span><br><span class="line">Watcher.prototype = &#123;</span><br><span class="line">    get:function(key)&#123;</span><br><span class="line">        Dep.target = this;</span><br><span class="line">        this.value = data[key];//这里会触发属性的getter,从而添加订阅者</span><br><span class="line">        Dep.target = null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Dep"><a href="#Dep" class="headerlink" title="Dep"></a>Dep</h3><p><code>Dep</code>是一个Class,它定义了一些属性和方法，这里需要特别注意的是它有一个静态属性<code>target</code>,这是一个全局唯一<code>Watcher</code>,这是一个非常巧妙的设计，<strong>因为在同一时间只能有一个全局的Watcher</strong></p>
-<p><code>Dep</code>实际上就是对<code>Watcher</code>的一种管理</p>
-<h3 id="实现Compile"><a href="#实现Compile" class="headerlink" title="实现Compile"></a>实现Compile</h3><p>compile主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图。</p>
-<p>因为遍历解析的过程有多次操作dom节点，为提高性能和效率，会先将vue实例根节点的<code>el</code>转换成文档碎片<code>fragment</code>进行解析编译操作，解析完成，再将<code>fragment</code>添加回原来的真实dom节点中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function Compile(el)&#123;</span><br><span class="line">    this.$el = this.isElementNode(el)?el:documennt.querySelector(el);</span><br><span class="line">    if(this.$el)&#123;</span><br><span class="line">        this.$fragment = this.node2Fragment(this.$el);</span><br><span class="line">        this.init();</span><br><span class="line">        this.$el.appendChild(this.$fragment);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Compile.prototype = &#123;</span><br><span class="line">    init:function()&#123;this.compileElement(this.$fragment);&#125;,</span><br><span class="line">    node2Fragment:function(el)&#123;</span><br><span class="line">        var fragment = document.createDocumentFragment(),child;</span><br><span class="line">        //将原生节点拷贝到fragment</span><br><span class="line">        while(child = el.firstChild)&#123;</span><br><span class="line">            fragment.appendChild(child)</span><br><span class="line">        &#125;</span><br><span class="line">        return fragment</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>compileElement方法将遍历所有节点及其子节点，进行扫描解析编译，调用对应的指令渲染函数进行数据渲染，并调用对应的指令更新函数进行绑定</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">Compile.prototype = &#123;</span><br><span class="line">    //...省略</span><br><span class="line">    compileElement:function(el)&#123;</span><br><span class="line">        var childNodes = el.childNodes, me = this;</span><br><span class="line">        [].slice.call(childNodes).forEach(function(node)&#123;</span><br><span class="line">            var text = node.textContent;</span><br><span class="line">            var reg = /\&#123;\&#123;(.*)\&#125;\&#125;/;//表达式文本</span><br><span class="line">            // 按元素节点方式编译</span><br><span class="line">            if(me.isElementNode(node))&#123;</span><br><span class="line">                me.compile(node);</span><br><span class="line">            &#125;else if(me.isTextNode(node) &amp;&amp; reg.test(text))&#123;</span><br><span class="line">                me.compileText(node,RegExp.$1);</span><br><span class="line">            &#125;</span><br><span class="line">            //遍历编译子节点</span><br><span class="line">            if(node.childNodes &amp;&amp; node.childNodes.length)&#123;</span><br><span class="line">                me.compileElement(node);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    compile:function(node)&#123;</span><br><span class="line">        var nodeAttrs = node.attributes, me = this;</span><br><span class="line">        [].slice.call(nodeAttrs).forEach(function(attr)&#123;</span><br><span class="line">            //规定：指令以 v-xxx 命令</span><br><span class="line">            // 如&lt;span v-text=&quot;content&quot;&gt;&lt;/span&gt;中指令为v-text</span><br><span class="line">            var attrName = attr.name; //v-text</span><br><span class="line">        if(me.isDirective(attrName))&#123;</span><br><span class="line">            var exp = attr.value;//content</span><br><span class="line">            var dir = attrName.substring(2);//text</span><br><span class="line">            if(me.isEventDirective(dir))&#123;</span><br><span class="line">                //事件指令，如 v-on:click</span><br><span class="line">                compileUtil.eventHandler(node,me.$vm,exp,dir);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                // 普通指令</span><br><span class="line">                compileUtil[dir] &amp;&amp; compileUtil[dir](node,me.$vm,exp);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//指令处理集合</span><br><span class="line">var compileUtil = &#123;</span><br><span class="line">    text:function(node,vm,exp)&#123;</span><br><span class="line">        this.bind(node,vm,exp,&#x27;text&#x27;);</span><br><span class="line">    &#125;,</span><br><span class="line">    //...省略</span><br><span class="line">    bind:function(node,vm,exp,dir)&#123;</span><br><span class="line">        var updateFn = update[dir + &#x27;Updater&#x27;];</span><br><span class="line">        //第一次初始化视图</span><br><span class="line">        updateFn &amp;&amp; updateFn(node,vm[exp]);</span><br><span class="line">        // 实例化订阅者，此操作会在对应的属性消息订阅器中添加了该订阅者Watcher</span><br><span class="line">        new Watcher(vm,exp,function(value,oldValue)&#123;</span><br><span class="line">            //一旦属性值有变化，会收到通知执行此更新函数，更新视图</span><br><span class="line">            updaterFn &amp;&amp; updateFn(node,value,oldValue);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//更新函数</span><br><span class="line">var updater = &#123;</span><br><span class="line">    textUpdater: function(node,value)&#123;</span><br><span class="line">        node.textConntent = typeof value === &#x27;undefined&#x27;?&#x27;&#x27;:value;</span><br><span class="line">    &#125;</span><br><span class="line">    //...省略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里通过递归遍历保证了每个节点及子节点都会解析编译到，包括了{{ }}表达式声明的文本节点。监听数据、绑定更新函数的处理是在<code>compileUtil.bind()</code>这个方法中，通过<code>new Watcher()</code>添加回调来接收数据变化的通知。</p>
-<h3 id="实现Watcher"><a href="#实现Watcher" class="headerlink" title="实现Watcher"></a>实现Watcher</h3><p>Watcher订阅者作为Observer和Compile之间通信的桥梁，主要做的事情是</p>
-<ul>
-<li>在自身实例化时往属性订阅器(dep)里面添加自己</li>
-<li>自身必须有一个update()方法</li>
-<li>待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中绑定的回调</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">function Watcher(vm,exp,cb)&#123;</span><br><span class="line">    this.cb = cb;</span><br><span class="line">    this.vm = vm;</span><br><span class="line">    this.exp = exp;</span><br><span class="line">    //此处为了触发属性的getter,从而在dep添加自己，结合Observer更容易理解</span><br><span class="line">    this.value = this.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Watcher.prototype = &#123;</span><br><span class="line">    update:function()&#123;</span><br><span class="line">        this.run(); //属性值变化收到通知</span><br><span class="line">    &#125;,</span><br><span class="line">    run:function()&#123;</span><br><span class="line">        var value = this.get();//取到最新值</span><br><span class="line">        var oldValue = this.value;</span><br><span class="line">        if(value !== oldValue)&#123;</span><br><span class="line">            this.value = value;</span><br><span class="line">            this.cb.call(this.vm,value,oldVal);//执行Compile中绑定的回调，更新视图</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    get:function()&#123;</span><br><span class="line">        Dep.target = this;//将当前订阅者指向自己</span><br><span class="line">        var value = this.vm[exp]; //触发getter,添加自己到属性订阅器中</span><br><span class="line">        Dep.target = null;//添加完毕，重置</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">//这里再次列出Observer和Dep,方便理解</span><br><span class="line">Object.defineProperty(data,key,&#123;</span><br><span class="line">    get:function()&#123;</span><br><span class="line">        //由于需要在闭包内添加watcher,所以可以在Dep定义一个全局的target属性，暂存watcher,添加完移除</span><br><span class="line">        Dep.target &amp;&amp; dep.addDep(Dep.target);</span><br><span class="line">        return val;</span><br><span class="line">    &#125;</span><br><span class="line">    // ...省略</span><br><span class="line">&#125;);</span><br><span class="line">Dep.prototype = &#123;</span><br><span class="line">    notify:function()&#123;</span><br><span class="line">        this.subs.forEach(function(sub)&#123;</span><br><span class="line">            sub.update();//调用订阅者的update方法，通知变化</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实例化<code>Watcher</code>的时候，调用<code>get()</code>方法，通过<code>Dep.target = watcherInstance</code>标记订阅者是当前Watche实例，强行触发属性定义的<code>getter</code>方法，<code>getter</code>方法执行的时候，就会在属性的订阅器<code>dep</code>添加当前watcher实例，从而属性值有变化的时候，watcherinstance就能收到更新通知。</p>
-<h4 id="补充实例化Watcher的场景"><a href="#补充实例化Watcher的场景" class="headerlink" title="补充实例化Watcher的场景"></a>补充实例化Watcher的场景</h4><ul>
-<li>Vue实例化过程中的Watch选项</li>
-<li>Vue实例化过程中的Computed计算属性选项</li>
-<li>Vue原型上有挂载$watch方法：Vue.prototype.$watch,可以直接通过实例调用this.$watch方法</li>
-<li>Vue生成了render函数，更新视图时</li>
-</ul>
-<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h3><p>主线程的执行过程就是一个<code>tick</code></p>
-<h3 id="实现MVVM"><a href="#实现MVVM" class="headerlink" title="实现MVVM"></a>实现MVVM</h3><p>MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者,通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的沟通桥梁。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function MVVM(options) &#123;</span><br><span class="line">    this.$options = options || &#123;&#125;;</span><br><span class="line">    var data = this._data = this.$options.data;</span><br><span class="line">    var me = this;</span><br><span class="line"></span><br><span class="line">    // 数据代理</span><br><span class="line">    // 实现 vm.xxx -&gt; vm._data.xxx</span><br><span class="line">    Object.keys(data).forEach(function(key) &#123;</span><br><span class="line">        me._proxyData(key);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    this._initComputed();</span><br><span class="line"></span><br><span class="line">    observe(data, this);</span><br><span class="line"></span><br><span class="line">    this.$compile = new Compile(options.el || document.body, this)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>1、实例化MVVM的时候，会先调用observe就是Observer类的方法，从而对数据劫持。<br><strong>每个对象值的getter都持有一个<code>dep</code>,这里的dep是观察者管理器Dep类中有一个subs数组是用来收集watcher</strong></p>
-<p>2、实例化Compile,传入模板,可以认为在模板上用到data选项（也就是被observe劫持的数据）里面的标签就是一个watcher实例</p>
-<p>3、实例化watcher的同时，会触发劫持属性的get方法从而添加自己到订阅中去。<strong>即触发了<code>dep.depend()方法</code></strong></p>
-<p>4、然后改变劫持属性的时候，会发送通知给watcher触发update方法更新</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1170,14 +1404,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
