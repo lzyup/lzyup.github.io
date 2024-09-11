@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="问题1Unable to preventDefault inside passive event listener due to target being treated as passive  场景当我们给document添加了touch事件的监听器的时候，如果同时在handle内部调用了event.preventDefault()就会报这个警告，提示我们，不能给passive（被动的） 事件监">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事件监听">
+<meta property="og:url" content="http://yoursite.com/2020/01/20/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="问题1Unable to preventDefault inside passive event listener due to target being treated as passive  场景当我们给document添加了touch事件的监听器的时候，如果同时在handle内部调用了event.preventDefault()就会报这个警告，提示我们，不能给passive（被动的） 事件监">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-20T02:49:09.000Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.288Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2020/01/20/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2020/01/20/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/","path":"2020/01/20/事件监听/","title":"事件监听"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>事件监听 | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#addEventListener"><span class="nav-number">3.</span> <span class="nav-text">addEventListener</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#target-addEventListener-type-listener-useCapture"><span class="nav-number">3.1.</span> <span class="nav-text">target.addEventListener(type,listener, useCapture)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#target-addEventListener-type-listener-options"><span class="nav-number">3.2.</span> <span class="nav-text">target.addEventListener(type,listener, options)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#passive-event-listener"><span class="nav-number">4.</span> <span class="nav-text">passive event listener</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/20/%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="事件监听 | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          事件监听
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-20 10:49:09" itemprop="dateCreated datePublished" datetime="2020-01-20T10:49:09+08:00">2020-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-09-03 10:41:52" itemprop="dateModified" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/API/" itemprop="url" rel="index"><span itemprop="name">API</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unable to preventDefault inside passive event listener due to target being treated as passive</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>当我们给<code>document</code>添加了<code>touch</code>事件的监听器的时候，如果同时在handle内部调用了<code>event.preventDefault()</code>就会报这个警告，提示我们，不能给passive（被动的） 事件监听器<code>preventDefault</code>,因为它被认为是passive</p>
+<h3 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h3><h4 id="target-addEventListener-type-listener-useCapture"><a href="#target-addEventListener-type-listener-useCapture" class="headerlink" title="target.addEventListener(type,listener, useCapture)"></a>target.addEventListener(type,listener, useCapture)</br></h4><p>useCature默认为false,表示在冒泡阶段出发listener</p>
+<h4 id="target-addEventListener-type-listener-options"><a href="#target-addEventListener-type-listener-options" class="headerlink" title="target.addEventListener(type,listener, options)"></a>target.addEventListener(type,listener, options)</h4><ul>
+<li><code>options</code><ul>
+<li><code>capture</code> (默认false)</li>
+<li><code>once</code></br><br>  表示listener在添加之后最多只调用一次，如果是true，listener会在其被调用后自动移除</li>
+<li><code>pasive</code></br><br>  设置为true时，表示<code>listener</code>永远不会调用<code>preventDefault()</code> (默认为true)</li>
+</ul>
+</li>
+</ul>
+<h3 id="passive-event-listener"><a href="#passive-event-listener" class="headerlink" title="passive event listener"></a><code>passive event listener</code></h3><p>当我们滚动页面的时候（通常是我们监听touch事件的时候），页面其实会有一个短暂的停顿，浏览器不知道我们是否需要<code>preventDefault</code>,所以它需要一个延迟来检测，导致我们滑动显得比较卡顿。</p>
+<p>我们可以对<code>addEventListener</code>设置<code>&#123;passive: true&#125;</code>来避免浏览器检测这个我们是否有在touch事件的handler里调用<code>preventDefault</code>。此时的事件监听器就被称为<strong>passive event listener</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/19/new%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E5%AE%9E%E7%8E%B0/" rel="prev" title="new的理解和实现">
+                  <i class="fa fa-angle-left"></i> new的理解和实现
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/20/history/" rel="next" title="history">
+                  history <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

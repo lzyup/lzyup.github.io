@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="eslint+prettier+editorconfig+lint-stagedESlint开发过程中，如果写出不合符规范的代码，能够及时提醒开发者，及时修复 通常，需要较大变动才能修复的规范问题，eslint 无法自动修复。如：单行不超过 80 个字符 针对代码质量问题，例如：未使用变量、三等号、全局变量生命问题 Prettier保存代码，使用格式化快捷键，能够自动按照我们制定的规范、格式化代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESLint 与 Prettie">
+<meta property="og:url" content="http://yoursite.com/2024/09/03/ESLint-%E4%B8%8E-Prettie/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="eslint+prettier+editorconfig+lint-stagedESlint开发过程中，如果写出不合符规范的代码，能够及时提醒开发者，及时修复 通常，需要较大变动才能修复的规范问题，eslint 无法自动修复。如：单行不超过 80 个字符 针对代码质量问题，例如：未使用变量、三等号、全局变量生命问题 Prettier保存代码，使用格式化快捷键，能够自动按照我们制定的规范、格式化代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-03T02:41:52.284Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.284Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2024/09/03/ESLint-%E4%B8%8E-Prettie/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/09/03/ESLint-%E4%B8%8E-Prettie/","path":"2024/09/03/ESLint-与-Prettie/","title":"ESLint 与 Prettie"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ESLint 与 Prettie | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#eslint-prettier-editorconfig-lint-staged"><span class="nav-number">1.</span> <span class="nav-text">eslint+prettier+editorconfig+lint-staged</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESlint"><span class="nav-number">2.</span> <span class="nav-text">ESlint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prettier"><span class="nav-number">3.</span> <span class="nav-text">Prettier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#editorconfig"><span class="nav-number">4.</span> <span class="nav-text">editorconfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B8%A4%E8%80%85%E7%BB%93%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">为什么要两者结合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ESLint%E4%B8%AD%E7%9A%84-extends"><span class="nav-number">5.1.</span> <span class="nav-text">ESLint中的 extends</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">5.2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eslint-config-prettier"><span class="nav-number">5.3.</span> <span class="nav-text">eslint-config-prettier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eslint-plugin-prettier"><span class="nav-number">5.4.</span> <span class="nav-text">eslint-plugin-prettier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prettier%E5%92%8CESLint"><span class="nav-number">5.5.</span> <span class="nav-text">Prettier和ESLint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VSCode-%E5%AE%89%E8%A3%85%E7%9A%84-eslint-%E5%92%8C-prettier-%E6%8F%92%E4%BB%B6%E5%92%8C-npm-%E5%AE%89%E8%A3%85%E7%9A%84%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">6.</span> <span class="nav-text">VSCode 安装的 eslint 和 prettier 插件和 npm 安装的有什么区别</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/09/03/ESLint-%E4%B8%8E-Prettie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ESLint 与 Prettie | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ESLint 与 Prettie
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-03 10:41:52" itemprop="dateCreated datePublished" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/ESlint/" itemprop="url" rel="index"><span itemprop="name">ESlint</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="eslint-prettier-editorconfig-lint-staged"><a href="#eslint-prettier-editorconfig-lint-staged" class="headerlink" title="eslint+prettier+editorconfig+lint-staged"></a><code>eslint</code>+<code>prettier</code>+<code>editorconfig</code>+<code>lint-staged</code></h2><h2 id="ESlint"><a href="#ESlint" class="headerlink" title="ESlint"></a><code>ESlint</code></h2><p>开发过程中，如果写出不合符规范的代码，能够及时提醒开发者，及时修复</p>
+<p>通常，需要较大变动才能修复的规范问题，eslint 无法自动修复。如：单行不超过 80 个字符</p>
+<p>针对代码质量问题，例如：未使用变量、三等号、全局变量生命问题</p>
+<h2 id="Prettier"><a href="#Prettier" class="headerlink" title="Prettier"></a><code>Prettier</code></h2><p>保存代码，使用格式化快捷键，能够自动按照我们制定的规范、格式化代码</p>
+<p>针对代码格式问题，例如：单行代码长度、tab 长度、空格、逗号表达式</p>
+<h2 id="editorconfig"><a href="#editorconfig" class="headerlink" title="editorconfig"></a><code>editorconfig</code></h2><p>用于覆盖编辑器（针对不同编辑器，vscode,webstorm）默认的配置</p>
+<h2 id="为什么要两者结合"><a href="#为什么要两者结合" class="headerlink" title="为什么要两者结合"></a>为什么要两者结合</h2><p><code>ESLint</code>擅长校验，<code>prettier</code>擅长格式；但是两者有些规则是冲突的</p>
+<h3 id="ESLint中的-extends"><a href="#ESLint中的-extends" class="headerlink" title="ESLint中的 extends"></a><code>ESLint</code>中的 extends</h3><p>用别人定义好的规则集，直接拿过来用</p>
+<ul>
+<li>eslint 开头的，就是 eslint 官方的扩展，如<code>eslint:recommend</code>(推荐规范)和<code>eslint:all</code>(所有规范)</li>
+<li>eslint-config 开头的，比如第三方发布到 npm 上的，如<code>eslint-config-airbnb</code>(airbnb 的规范)，<code>eslint-config-alloy</code>（Alloy team 的规范）等</li>
+<li>plugin 开头的，就是通过插件共享的规则，如<code>eslint-plugin-vue</code>,通常一个插件会提供多套规则</li>
+</ul>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>禁掉 ESLint 中与 Prettier 冲突的规则，然后使用 Prettier 做格式化， ESLint 做代码校验</p>
+<ul>
+<li><p>首先禁掉 ESLint&#x2F;插件中与 Prettier 冲突的规则，创建一个包<code>eslint-confit-prettier</code>,里面定义了被禁掉的 ESLint&#x2F;插件规则</p>
+</li>
+<li><p>创建一个插件<code>eslint-plugin-prettier</code>,定义一条规则 prettier&#x2F;prettier，调用 Prettier,配合 ESLint 实现运行<code>eslint --fix</code>按 Prettier 规则自动化格式代码</p>
+</li>
+<li><p>在.eslintrc.js 中如下配置</p>
+<p>{<br>extends: [<br>…, &#x2F;&#x2F; 其他<br>“prettier”, &#x2F;&#x2F; eslint-config-prettier<br>]<br>plugins: [“prettier”], &#x2F;&#x2F; eslint-plugin-prettier<br>rules: {<br>“prettier&#x2F;prettier”: “error” &#x2F;&#x2F; 开启规则<br>}<br>}</p>
+</li>
+</ul>
+<h3 id="eslint-config-prettier"><a href="#eslint-config-prettier" class="headerlink" title="eslint-config-prettier"></a><code>eslint-config-prettier</code></h3><p>让所有可能会与 prettier 规则存在冲突的 eslint rule 失效即关闭 ESLint 与 Prettier 冲突的规则。</p>
+<pre><code>&quot;extends&quot;:[
+    &quot;eslint:recommend&quot;,
+    &quot;prettier&quot;
+]
+</code></pre>
+<h3 id="eslint-plugin-prettier"><a href="#eslint-plugin-prettier" class="headerlink" title="eslint-plugin-prettier"></a><code>eslint-plugin-prettier</code></h3><p>将 prettier 的能力集成到 eslint 中。以 ESlint 规则的方式运行 Prettier 检查代码规范性，并进行修复</p>
+<pre><code>&#123;
+    &quot;rules&quot;:&#123;
+        &quot;prettier/prettier&quot;: &quot;error&quot;
+    &#125;,
+    &quot;plugins&quot;:[&quot;prettier&quot;]
+&#125;
+</code></pre>
+<h3 id="Prettier和ESLint"><a href="#Prettier和ESLint" class="headerlink" title="Prettier和ESLint"></a><code>Prettier</code>和<code>ESLint</code></h3><p>npm 安装这两个，要它们生效都需要使用命令行，例如<code>prettier --write</code>和<code>eslint --fix</code><br>如果需要 vscode 保存就生效，vscode 需要安装对应插件</p>
+<p><code>Prettier</code>对应的<code>settins.json</code>配置</p>
+<pre><code>&#123;
+    ...
+    // 新增如下配置
+    &quot;editor.formatOnType&quot;: true,
+    &quot;editor.formatOnSave&quot;: true,
+    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,
+    &quot;[javascript]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[typescript]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[typescriptreact]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[html]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[json]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[scss]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+      &quot;[jsonc]&quot;: &#123;
+        &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;
+      &#125;,
+&#125;
+</code></pre>
+<p><code>ESLint</code>对应<code>setting.json</code>配置</p>
+<pre><code> &quot;editor.codeActionsOnSave&quot;: &#123;
+        &quot;source.fixAll.eslint&quot;: true
+    &#125;,
+</code></pre>
+<h2 id="VSCode-安装的-eslint-和-prettier-插件和-npm-安装的有什么区别"><a href="#VSCode-安装的-eslint-和-prettier-插件和-npm-安装的有什么区别" class="headerlink" title="VSCode 安装的 eslint 和 prettier 插件和 npm 安装的有什么区别"></a>VSCode 安装的 eslint 和 prettier 插件和 npm 安装的有什么区别</h2><p>VSCode 中安装的是在编辑器里面用的，如果项目根目录下有 eslintrc 和 prettierrc 配置文件，VSCode 插件会自动读取配置文件中的配置检查你的代码和格式化文件，npm 安装的是在命令行中运行的。如果你只安装 npm 包，VSCode 是不会有 lint 提示的，只能通过命令行，在小黑窗查看不符合 lint 规则的检测信息。安装 npm 包最主要的原因是可以通过 git hook 强制提交代码前 lint 和格式化代码保证代码仓库的代码风格统一。</p>
+<p><a href="https://blog.theodo.com/2019/08/empower-your-dev-environment-with-eslint-prettier-and-editorconfig-with-no-conflicts/">参考链接</a></p>
+<p><a href="https://juejin.cn/post/6924568874700505102">参考链接</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/03/Flex%E5%B8%83%E5%B1%80/" rel="prev" title="Flex布局理解">
+                  <i class="fa fa-angle-left"></i> Flex布局理解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/03/Context/" rel="next" title="Context">
+                  Context <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

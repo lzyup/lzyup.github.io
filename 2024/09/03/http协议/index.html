@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="URLURL是Uniform Resource Locator的简写，统一资源定位符 组成部分scheme:&#x2F;&#x2F;host:port&#x2F;path?query-string&#x3D;xxx#achor  scheme代表的是访问的协议，一般情况下是http或者https以及ftp等。 host主机名，域名，比如www.baidu.com path查找路径。比如：www.jianshu.com&#x2F;trending&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http协议">
+<meta property="og:url" content="http://yoursite.com/2024/09/03/http%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="URLURL是Uniform Resource Locator的简写，统一资源定位符 组成部分scheme:&#x2F;&#x2F;host:port&#x2F;path?query-string&#x3D;xxx#achor  scheme代表的是访问的协议，一般情况下是http或者https以及ftp等。 host主机名，域名，比如www.baidu.com path查找路径。比如：www.jianshu.com&#x2F;trending&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-03T02:41:52.286Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.286Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2024/09/03/http%E5%8D%8F%E8%AE%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/09/03/http%E5%8D%8F%E8%AE%AE/","path":"2024/09/03/http协议/","title":"http协议"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>http协议 | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL"><span class="nav-number">1.</span> <span class="nav-text">URL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">1.1.</span> <span class="nav-text">组成部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%9D%80%EF%BC%88url%EF%BC%89%E5%92%8C%E5%9F%9F%E5%90%8D%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">网址（url）和域名的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81Http%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">1、Http方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">2、HTTP状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2XX%E6%88%90%E5%8A%9F"><span class="nav-number">4.1.</span> <span class="nav-text">2XX成功</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3XXX%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">4.2.</span> <span class="nav-text">3XXX重定向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4XXX%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF"><span class="nav-number">5.</span> <span class="nav-text">4XXX客户端错误</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5XXX%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%94%99%E8%AF%AF"><span class="nav-number">5.1.</span> <span class="nav-text">5XXX服务器端错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E4%B9%8B%E8%AF%B7%E6%B1%82%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">6.</span> <span class="nav-text">HTTP之请求头部结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%AF%B7%E6%B1%82%E8%A1%8C"><span class="nav-number">6.1.</span> <span class="nav-text">1、请求行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E8%AF%B7%E6%B1%82%E5%A4%B4%E9%83%A8"><span class="nav-number">6.2.</span> <span class="nav-text">2、请求头部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E7%A9%BA%E8%A1%8C"><span class="nav-number">6.3.</span> <span class="nav-text">3、空行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E8%AF%B7%E6%B1%82%E4%BD%93"><span class="nav-number">6.4.</span> <span class="nav-text">4、请求体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP%E7%9A%84Head%E5%A4%B4"><span class="nav-number">6.5.</span> <span class="nav-text">HTTP的Head头</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP%E4%B9%8B%E5%93%8D%E5%BA%94%E5%A4%B4%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">7.</span> <span class="nav-text">HTTP之响应头部结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E7%8A%B6%E6%80%81%E8%A1%8C"><span class="nav-number">7.1.</span> <span class="nav-text">1、状态行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E6%B6%88%E6%81%AF%E6%8A%A5%E5%A4%B4"><span class="nav-number">7.2.</span> <span class="nav-text">2、消息报头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E7%A9%BA%E8%A1%8C-1"><span class="nav-number">7.3.</span> <span class="nav-text">3、空行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E5%93%8D%E5%BA%94%E6%AD%A3%E6%96%87"><span class="nav-number">7.4.</span> <span class="nav-text">4、响应正文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%93%8D%E5%BA%94%E5%A4%B4"><span class="nav-number">7.5.</span> <span class="nav-text">常见响应头</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/09/03/http%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="http协议 | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          http协议
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-03 10:41:52" itemprop="dateCreated datePublished" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>URL是Uniform Resource Locator的简写，统一资源定位符</p>
+<h4 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h4><p><code>scheme://host:port/path?query-string=xxx#achor</code></p>
+<ul>
+<li>scheme</br><br>代表的是访问的协议，一般情况下是http或者https以及ftp等。</li>
+<li>host</br><br>主机名，域名，比如<code>www.baidu.com</code></li>
+<li>path</br><br>查找路径。比如：<code>www.jianshu.com/trending/now</code>,后面的<code>trending/now</code>就是path</li>
+<li>query-string</br><br>查询字符串，比如:<code>www.baidu.com/s?wd=python</code>,后面的<code>wd=python</code>就是查询字符串。</li>
+<li>anchor</br><br>锚点，后台一般不用管，前端用来做页面定位的</li>
+</ul>
+<h3 id="网址（url）和域名的关系"><a href="#网址（url）和域名的关系" class="headerlink" title="网址（url）和域名的关系"></a>网址（url）和域名的关系</h3><p>网址是打开网站的地址；<br>比如：<a href="http://zhidao.baidu.com/question/263101382.html?push=core&group=1">http://zhidao.baidu.com/question/263101382.html?push=core&amp;group=1</a></p>
+<p>这个是网址；</p>
+<p><strong>域名是zhidao.baidu.com，<br>指http:&#x2F;&#x2F;前面到第一个&#x2F;中间的一段。</strong></p>
+<h3 id="1、Http方法"><a href="#1、Http方法" class="headerlink" title="1、Http方法"></a>1、Http方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>获取资源</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>向服务器端发送数据，传输实体主体</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>传输文件</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>获取报文首部</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除文件</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>询问支持的方法</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>追踪路径</td>
+</tr>
+</tbody></table>
+<h3 id="2、HTTP状态码"><a href="#2、HTTP状态码" class="headerlink" title="2、HTTP状态码"></a>2、HTTP状态码</h3><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1XX</td>
+<td>Informational(信息性状态码)</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>Success(成功状态码)</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>Redirection(重定向)</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>Client Error(客户端错误状态码)</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>Server Error(服务器错误状态码)</td>
+</tr>
+</tbody></table>
+<h4 id="2XX成功"><a href="#2XX成功" class="headerlink" title="2XX成功"></a>2XX成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">200(OK 客户端发过来的数据被正常处理)</span><br><span class="line">204(Not Content 正常响应，没有实体)</span><br><span class="line">206(Partial Content 范围请求，返回部分数据，响应报文中由Content-Range指定实体内容)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3XXX重定向"><a href="#3XXX重定向" class="headerlink" title="3XXX重定向"></a>3XXX重定向</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">301(Moved Permanently) 永久重定向</span><br><span class="line">302(Found) 临时重定向，规范要求，方法名不变，但是都会改变</span><br><span class="line">303(See Other)和302类似，但必须用GET方法</span><br><span class="line">304(Not Modified)状态未改变，配合(If-Modified-Since、If-None-Match)</span><br><span class="line">307(Temporay Redirect)临时重定向，不改变请求方法</span><br></pre></td></tr></table></figure>
+<h3 id="4XXX客户端错误"><a href="#4XXX客户端错误" class="headerlink" title="4XXX客户端错误"></a>4XXX客户端错误</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">400(Bad Request)请求报文语法错误</span><br><span class="line">401(unauthorized)需要认证</span><br><span class="line">403(Forbidden)服务器拒绝访问对应的资源</span><br><span class="line">404(Not Found)服务器上无法找到资源</span><br></pre></td></tr></table></figure>
+<h4 id="5XXX服务器端错误"><a href="#5XXX服务器端错误" class="headerlink" title="5XXX服务器端错误"></a>5XXX服务器端错误</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">500(Internal Server Error)服务器故障</span><br><span class="line">503(Service Unavailable)服务器处于负载或正在停机维护</span><br></pre></td></tr></table></figure>
+
+<h3 id="HTTP之请求头部结构"><a href="#HTTP之请求头部结构" class="headerlink" title="HTTP之请求头部结构"></a>HTTP之请求头部结构</h3><h4 id="1、请求行"><a href="#1、请求行" class="headerlink" title="1、请求行"></a>1、请求行</h4><p>请求行分为三个部分：请求方法、请求地址和协议版本</p>
+<h4 id="2、请求头部"><a href="#2、请求头部" class="headerlink" title="2、请求头部"></a>2、请求头部</h4><p>从第二行起为请求头部，HOST将指出请求的目的地。User-Agent，服务器端和客户端脚本都能访问它，它是浏览器类型检测逻辑的重要基础。该信息由你的浏览器来定义，并且在每个请求中自动发送等等。</p>
+<h4 id="3、空行"><a href="#3、空行" class="headerlink" title="3、空行"></a>3、空行</h4><p>请求头部后面的空行是必须的，即使第四部分的请求数据为空，也必须空行</p>
+<h4 id="4、请求体"><a href="#4、请求体" class="headerlink" title="4、请求体"></a>4、请求体</h4><p>请求体是post请求方式中的请求参数，以key &#x3D; value形式进行存储，多个请求参数之间用&amp;连接，如果请求当中请求体，那么在请求头当中的<code>Content-Length</code>属性记录的就是该请求体的长度</p>
+<p>eg:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP1.1</span><br><span class="line">Host:www.wrox.com</span><br><span class="line">User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)</span><br><span class="line">Content-Type:application/x-www-form-urlencoded</span><br><span class="line">Content-Length:40</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"></span><br><span class="line">name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /books/?sex=man&amp;name=Professional HTTP/1.1</span><br><span class="line">Host: www.example.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko/20050225 Firefox/1.0.1</span><br><span class="line">Connection: Keep-Alive</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="HTTP的Head头"><a href="#HTTP的Head头" class="headerlink" title="HTTP的Head头"></a>HTTP的Head头</h4><table>
+<thead>
+<tr>
+<th>Header</th>
+<th>解释</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept</td>
+<td>指定客户端能够接收的内容类型</td>
+<td>Accept:text&#x2F;plain,text&#x2F;html</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>浏览器可以接受的字符串编码集</td>
+<td>Accept-Charset:iso-8859-5</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>指定浏览器可以支持的web服务器返回内容压缩编码类型</td>
+<td>Accept-Encoding:compress,gzip</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>浏览器可接受的语言</td>
+<td>Accept-Language:en,zh</td>
+</tr>
+<tr>
+<td>Accept-Ranges</td>
+<td>可以请求网页实体的一个或者多个子范围字段</td>
+<td>Accept-Range:bytes</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Http授权的授权证书</td>
+<td>Authorization:BasicQWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>指定请求和响应遵循的缓存机制</td>
+<td>Cache-Control:no-cache</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>表示是否需要持久连接。（HTTP1.1默认进行持久连接）</td>
+<td>Connection:close</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>Http请求发送时，会把保存在该请求域名下的所有cookie值一起发送给Web服务器</td>
+<td>Cookie:$Version&#x3D;1:Skin&#x3D;new;</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>请求的内容长度</td>
+<td>Content-Length:348</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>请求的实体对应的MIME信息</td>
+<td>Content-Type:application&#x2F;x-www-form-urlencode</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>请求发送的日期和时间</td>
+<td>Date:Tue,15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td>Expect</td>
+<td>请求的特定的服务器行为</td>
+<td>Expect:100-continue</td>
+</tr>
+<tr>
+<td>From</td>
+<td>发出请求的用户的Email</td>
+<td>From:<a href="mailto:&#x75;&#115;&#x65;&#x72;&#x40;&#x65;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">&#x75;&#115;&#x65;&#x72;&#x40;&#x65;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a></td>
+</tr>
+<tr>
+<td>Host</td>
+<td><strong>指定请求的服务器的域名和端口号</strong></td>
+<td>Host:<a href="http://www.zcmhi.com/">www.zcmhi.com</a></td>
+</tr>
+<tr>
+<td>If-Match</td>
+<td>只有请求内容与实体相匹配才有效</td>
+<td>If-Match:“737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304</td>
+<td>If-Modified-Since:Sat,29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td>If-Range</td>
+<td>如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag</td>
+<td>If-Range:“737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>If-Unmodified-Since</td>
+<td>只在实体在指定时间之后未被修改才请求成功</td>
+<td>If-Unmodified-Since:Sat,29 Oct 2010 19:43:31 GMT</td>
+</tr>
+<tr>
+<td>Max-Forwards</td>
+<td>限制信息通过代理和网关传送的时间</td>
+<td>Max-Forwards:10</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>用来包含实现特定的指令</td>
+<td>Pragma:no-cache</td>
+</tr>
+<tr>
+<td>Proxy-Authorization</td>
+<td>连接到代理的授权证书</td>
+<td>Proxy-Authorization:Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ&#x3D;&#x3D;</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>只请求实体的一部分，指定范围</td>
+<td>Range:bytes&#x3D;500-999</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>先前网页的地址，当前请求网页紧随其后,即来路</td>
+<td>Referer:http:</td>
+</tr>
+<tr>
+<td>TE</td>
+<td>客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息</td>
+<td>TE:trailers,deflate;q&#x3D;0.5</td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>向服务器指定某种传输协议以便服务器进行转换（如果支持）</td>
+<td>Upgrade:HTTP&#x2F;2.0,SHTTP&#x2F;1.3,IRC&#x2F;6.9,RTA&#x2F;x11</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>User-Agent的内容包含发出请求的用户信息</td>
+<td>User-Agent:Mozilla&#x2F;5.0(Linux;X11)</td>
+</tr>
+<tr>
+<td>Via</td>
+<td>通知中间网关或代理服务器地址，通信协议</td>
+<td>Via:1.0 fred,1.1 nowhere.com (Apache&#x2F;1.1)</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>关于消息实体的警告信息</td>
+<td>Warn:199 Miscellaneous warning</td>
+</tr>
+</tbody></table>
+<h3 id="HTTP之响应头部结构"><a href="#HTTP之响应头部结构" class="headerlink" title="HTTP之响应头部结构"></a>HTTP之响应头部结构</h3><h4 id="1、状态行"><a href="#1、状态行" class="headerlink" title="1、状态行"></a>1、状态行</h4><p>由HTTP协议版本号，状态码，状态消息三部分组成</p>
+<h4 id="2、消息报头"><a href="#2、消息报头" class="headerlink" title="2、消息报头"></a>2、消息报头</h4><p>用来说明客户端要使用的一些附加信息</p>
+<h4 id="3、空行-1"><a href="#3、空行-1" class="headerlink" title="3、空行"></a>3、空行</h4><p>消息报头后面的空行是必须的</p>
+<h4 id="4、响应正文"><a href="#4、响应正文" class="headerlink" title="4、响应正文"></a>4、响应正文</h4><p>服务器返回给客户端的文本信息</p>
+<p>eg:输入<code>curl -I www.baidu.com</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Length: 277</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Date: Thu, 19 Dec 2019 10:48:12 GMT</span><br><span class="line">Etag: &quot;575e1f72-115&quot;</span><br><span class="line">Last-Modified: Mon, 13 Jun 2016 02:50:26 GMT</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Server: bfe/1.0.8.18</span><br></pre></td></tr></table></figure>
+
+<p>eg:输入<code>curl -I geekbang.org</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line">Date: Thu, 19 Dec 2019 09:40:46 GMT</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Length: 178</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Location: https://www.geekbang.org/</span><br><span class="line">Strict-Transport-Security: max-age=15768000</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见响应头"><a href="#常见响应头" class="headerlink" title="常见响应头"></a>常见响应头</h4><table>
+<thead>
+<tr>
+<th>Header</th>
+<th>解释</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date</td>
+<td>原始服务器消息发出的时间</td>
+<td>Date: Tue, 15 Nov 2010 08:12:31 GMT</td>
+</tr>
+<tr>
+<td>Last-Modified</td>
+<td>请求资源的最后修改时间</td>
+<td>Last-Modified: Tue, 15 Nov 2010 12:45:26 GMT</td>
+</tr>
+<tr>
+<td>ETag</td>
+<td>请求变量的实体标签的当前值</td>
+<td>ETag: “737060cd8c284d8af7ad3082f209582d”</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>重定向到另一个 URL，如输入浏览器就输入 baidu.com 回车，会自动跳转到<a href="http://www.baidu.com/">www.baidu.com</a> 就是通过这个响应头控制的</td>
+<td>Location:<a href="http://www.zcmhi.com/archives/94.html">http://www.zcmhi.com/archives/94.html</a></td>
+</tr>
+</tbody></table>
+<p><a href="https://note.youdao.com/">参考链接1</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/03/http%E7%89%88%E6%9C%AC%E5%B7%AE%E5%BC%82/" rel="prev" title="http版本差异">
+                  <i class="fa fa-angle-left"></i> http版本差异
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/03/https/" rel="next" title="https">
+                  https <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

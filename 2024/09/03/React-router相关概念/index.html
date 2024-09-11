@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="场景1234567&#x2F;&#x2F;写法一import &amp;#123;Switch,Route,Router,HashHistory,Link&amp;#125; from &amp;#x27;react-router-dom&amp;#x27;&#x2F;&#x2F;写法二import &amp;#123;Switch,Route,Router&amp;#125; from &amp;#x27;react-router&amp;#x27;import &amp;#123;HashHistory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Router相关概念">
+<meta property="og:url" content="http://yoursite.com/2024/09/03/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="场景1234567&#x2F;&#x2F;写法一import &amp;#123;Switch,Route,Router,HashHistory,Link&amp;#125; from &amp;#x27;react-router-dom&amp;#x27;&#x2F;&#x2F;写法二import &amp;#123;Switch,Route,Router&amp;#125; from &amp;#x27;react-router&amp;#x27;import &amp;#123;HashHistory">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-03T02:41:52.285Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.285Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2024/09/03/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/09/03/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/","path":"2024/09/03/React-router相关概念/","title":"React Router相关概念"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>React Router相关概念 | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-router-react-router-dom%E5%92%8Creact-router-native"><span class="nav-number">2.</span> <span class="nav-text">react-router,react-router-dom和react-router-native</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-router"><span class="nav-number">2.1.</span> <span class="nav-text">react-router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-router-dom"><span class="nav-number">2.2.</span> <span class="nav-text">react-router-dom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-router-native"><span class="nav-number">2.3.</span> <span class="nav-text">react-router-native</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">2.4.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V4%E4%B8%8E%E4%B9%8B%E5%89%8D%E7%89%88%E6%9C%AC%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">V4与之前版本路由跳转的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-router-v4%E4%BD%BF%E7%94%A8history%E6%8E%A7%E5%88%B6%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC"><span class="nav-number">3.1.</span> <span class="nav-text">react-router v4使用history控制路由跳转</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8withRouter"><span class="nav-number">3.1.1.</span> <span class="nav-text">推荐使用withRouter</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E7%89%88%E5%90%8E%E7%9A%84react-router-dom%E8%B7%AF%E7%94%B1%EF%BC%8C%E9%9C%80%E8%A6%81%E7%90%86%E8%A7%A3%E4%B8%89%E4%B8%AA%E6%A6%82%E5%BF%B5Router%E3%80%81Route%E5%92%8CLink%E3%80%82"><span class="nav-number">4.</span> <span class="nav-text">改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">&lt;Router&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-number">4.2.</span> <span class="nav-text">&lt;Link&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-2"><span class="nav-number">4.3.</span> <span class="nav-text">&lt;Route&gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E4%BC%9A%E6%B8%B2%E6%9F%93%E4%BB%80%E4%B9%88"><span class="nav-number">4.3.1.</span> <span class="nav-text">&lt;Route&gt;将会渲染什么</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E4%BC%A0%E5%8F%82"><span class="nav-number">4.4.</span> <span class="nav-text">路由传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Router-V4%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="nav-number">4.5.</span> <span class="nav-text">React Router V4设计思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-3"><span class="nav-number">4.6.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/09/03/React-router%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="React Router相关概念 | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React Router相关概念
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-03 10:41:52" itemprop="dateCreated datePublished" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/React/Router/" itemprop="url" rel="index"><span itemprop="name">Router</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//写法一</span><br><span class="line">import &#123;Switch,Route,Router,HashHistory,Link&#125; from &#x27;react-router-dom&#x27;</span><br><span class="line"></span><br><span class="line">//写法二</span><br><span class="line">import &#123;Switch,Route,Router&#125; from &#x27;react-router&#x27;</span><br><span class="line">import &#123;HashHistory,Link&#125; from &#x27;react-router-dom&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="react-router-react-router-dom和react-router-native"><a href="#react-router-react-router-dom和react-router-native" class="headerlink" title="react-router,react-router-dom和react-router-native"></a><code>react-router</code>,<code>react-router-dom</code>和<code>react-router-native</code></h2><h3 id="react-router"><a href="#react-router" class="headerlink" title="react-router"></a><code>react-router</code></h3><p>提供了一些router的核心api,包括<code>Router</code>,<code>Route</code>,<code>Switch</code>等，但是它没有提供dom操作进行跳转的api,<strong>服务器端渲染</strong>正好可以。</p>
+<h3 id="react-router-dom"><a href="#react-router-dom" class="headerlink" title="react-router-dom"></a><code>react-router-dom</code></h3><p>基于<code>react-router</code>，加入了在浏览器运行环境下的一些功能，我们可以通过dom的事件控制路由。例如<code>Link</code>组件，会渲染一个<code>a</code>标签；<code>BrowserRouter</code>和<code>HahsRouter</code>组件，前者使用<code>pushState</code>和<code>popState</code>事件构建路由，后者使用<code>window.location.hash</code>和<code>hashchange</code>事件构建路由。</p>
+<h3 id="react-router-native"><a href="#react-router-native" class="headerlink" title="react-router-native"></a><code>react-router-native</code></h3><p>基于<code>react-router</code>,类似<code>react-router-dom</code>,加入了<code>react-native</code>运行环境下的一些功能。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><code>react-router-dom</code>依赖<code>react-router</code>，所以我们使用npm安装以来的时候，只需要安装相应环境下的库即可，不用再显式安装<code>react-router</code>。基于浏览器环境下的开发，只需要安装<code>raect-router-dom</code>;基于<code>react-native</code>环境的开发，只需要安装<code>react-router-native</code>。<code>npm</code>会自动解析<code>react-router-dom</code>包中<code>package.json</code>的依赖并安装。</p>
+<h2 id="V4与之前版本路由跳转的区别"><a href="#V4与之前版本路由跳转的区别" class="headerlink" title="V4与之前版本路由跳转的区别"></a>V4与之前版本路由跳转的区别</h2><h3 id="react-router-v4使用history控制路由跳转"><a href="#react-router-v4使用history控制路由跳转" class="headerlink" title="react-router v4使用history控制路由跳转"></a><code>react-router v4使用history控制路由跳转</code></h3><p>在使用<code>react-router v3</code>时候，跳转路由如下：</p>
+<ul>
+<li>从<code>react-router</code>导出<code>browserHistory</code>。</li>
+<li>使用<code>browserHistory.push()</code>等操作路由跳转</li>
+</ul>
+<p>但是在<code>react-router v4</code>中，不提供<code>browserHistory</code>等导出</p>
+<h4 id="推荐使用withRouter"><a href="#推荐使用withRouter" class="headerlink" title="推荐使用withRouter"></a>推荐使用<code>withRouter</code></h4><p><code>withRouter</code>高阶组件，提供了<code>history</code>使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &quot;react&quot;;</span><br><span class="line">import &#123;withRouter&#125; from &quot;react-router-dom&quot;;</span><br><span class="line"></span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    ...</span><br><span class="line">    myFunction()&#123;</span><br><span class="line">        this.props.history.push(&quot;/some/path&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">export default withRouter(MyComponent)</span><br></pre></td></tr></table></figure>
+
+<h2 id="改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。"><a href="#改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。" class="headerlink" title="改版后的react-router-dom路由，需要理解三个概念Router、Route和Link。"></a>改版后的<code>react-router-dom</code>路由，需要理解三个概念<code>Router</code>、<code>Route</code>和<code>Link</code>。</h2><h3 id=""><a href="#" class="headerlink" title="&lt;Router&gt;"></a><code>&lt;Router&gt;</code></h3><p><code>&lt;Router&gt;</code>是所有路由组件共用的底层接口，一般我们的应用不会使用这个接口，而是使用高级的路由：</p>
+<ul>
+<li><code>&lt;BrowserRouter&gt;</code>:使用HTML5提供的historyAPI来保持UI和URL的同步；</li>
+<li><code>&lt;HashRouter&gt;</code>:使用URL的hash(例如：<code>window.location.hash</code>)来保持UI和URL同步</li>
+<li><code>&lt;MemoryRouter&gt;</code>：能在内存保存你“URL”的历史记录（并没有对地址栏读写）;</li>
+<li><code>&lt;NativeRouter&gt;</code>：为使用<code>React Native</code>提供路由支持</li>
+<li><code>&lt;StaticRouter&gt;</code>: 从不会改变地址</li>
+</ul>
+<h3 id="-1"><a href="#-1" class="headerlink" title="&lt;Link&gt;"></a><code>&lt;Link&gt;</code></h3><p>Link是react路由中的点击切换到哪一个组件的链接，（这里只素衣不说是页面，而是说组件，因为切换到另一个界面只是展示效果，react的本质还是一个单页面应用-single page application）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">e.g.:</span><br><span class="line">import &#123; BrowserRouter as Router, Link&#125; from &quot;react-router-dom&quot;;</span><br><span class="line">class Main extends Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return(</span><br><span class="line">        &lt;Router&gt;</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &lt;li&gt;&lt;link to=&#x27;/&#x27;&gt;首页&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;&lt;link to=&#x27;/other&#x27;&gt;其他页&lt;/Link&gt;&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/Router&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要说明的是：</br><br><code>&lt;Router&gt;</code>下面只能包含一个盒子标签，类似这里的div</br><br><code>&lt;Link&gt;</code>代表一个链接，在html界面中会解析成a标签。作为一个链接，必须有一个to属性，代表链接地址。这个链接地址是一个相对路径。</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title="&lt;Route&gt;"></a><code>&lt;Route&gt;</code></h3><ul>
+<li><code>Route</code>代表你的路由界面，<code>path</code>代表路径，<code>component</code>代表路径对应的界面。</li>
+<li>在其<code>path</code>属性与某个<code>location</code>匹配时呈现一些UI</li>
+<li>e.g.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&#x27;/roster&#x27;&gt;</span><br><span class="line">//when the pathname is &#x27;/&#x27;,the path dose not match</span><br><span class="line">//when the pathname is &#x27;/roster&#x27; or &#x27;/roster/2&#x27;,the path matches</span><br><span class="line">//If you only want to match &#x27;/roster&#x27;,then you need to use</span><br><span class="line">//the &quot;exact&quot; prop.The following will match &#x27;/roster&#x27;,but not</span><br><span class="line">//&#x27;/roster/2&#x27;</span><br><span class="line"></span><br><span class="line">&lt;Route exact path=&quot;/roster&quot;&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="将会渲染什么"><a href="#将会渲染什么" class="headerlink" title="&lt;Route&gt;将会渲染什么"></a><code>&lt;Route&gt;</code>将会渲染什么</h4><p><a href="https://juejin.im/post/5a7e9ee7f265da4e7832949c#heading-12">链接</a></br><br>Routes可以接受三种props来决定路径匹配时渲染的元素，只能给<code>&lt;Route&gt;</code>元素提供一种来定义要渲染的内容。</p>
+<ul>
+<li><code>&lt;component&gt;</code></br><br>一个React组件，当一个带有<code>component</code>prop的路由匹配的时候，路由将会返回prop提供的component类型的组件</li>
+<li><code>render</code></br><br>一个返回React元素的方法，与<code>Component</code>类似，也是当路径匹配的时候会被调用。写成内联形式渲染和传递参数的时候非常方便。</li>
+<li><code>children</code></br><br>一个返回React元素的方法。与前两种不同的是，这种方法总是会被渲染，无论路由与当前的路径是否匹配。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=&quot;/page&quot; component=&#123;Page&#125;/&gt;</span><br><span class="line"></span><br><span class="line">const extraProps = &#123;color:&#x27;red&#x27;&#125;</span><br><span class="line">&lt;Route path=&quot;/page&quot; render=&#123;(props)=&gt;&#123;</span><br><span class="line">    &lt;Page &#123;...props&#125; data=&#123;extraProps&#125;/&gt;</span><br><span class="line">&#125;&#125;</span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line">&lt;Route path=&quot;/page&quot; children=&#123;(props)=&gt;&#123;</span><br><span class="line">    props.match</span><br><span class="line">    ?&lt;Page &#123;...props&#125;/&gt;</span><br><span class="line">    :&lt;EmptyPage &#123;...props&#125;/&gt;</span><br><span class="line">&#125;&#125;/&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/a/1 ---this.props.match.params.id</span><br><span class="line">/a?id=1---this.props.location.query.id`</span><br></pre></td></tr></table></figure>
+
+<h3 id="React-Router-V4设计思路"><a href="#React-Router-V4设计思路" class="headerlink" title="React Router V4设计思路"></a>React Router V4设计思路</h3><p><a href="https://juejin.im/post/5986d1456fb9a03c3f405bd2">链接</a></br><br>在V4中，路由是动态，需要忘记之前使用静态路由的思维方式，把路由当做普通组件，动态路由的优点，可以任意时间、任意地点自由添加新的Route。</p>
+<p>e.g.</br></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;BrowserRoute&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;Route path=&#x27;/&#x27; component=&#123;App&#125;/&gt;</span><br><span class="line">        &lt;Route path=&#123;&#x27;/about&#x27;&#125; component=&#123;About&#125;/&gt;</span><br><span class="line">        &lt;Route path=&#123;&#x27;/contact&#x27;&#125; component=&#123;Contact&#125;/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/BrowserRoute&gt;</span><br><span class="line"></span><br><span class="line">const About = (props) =&gt;&#123;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;Route path=&#123;`$&#123;props.match.url/a&#125;` component=&#123;AboutA&#125;&#125;/&gt;</span><br><span class="line">        &lt;Route </span><br><span class="line">            path=&#123;`$&#123;props.match.url&#125;/b` component=&#123;AboutB&#125;&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&#125;</span><br><span class="line">//动态在About组件内定义两个新的路由</span><br><span class="line">//当访问/about/a时，组件AboutA会被作为About的子组件渲染，</span><br><span class="line">//当访问/about/b时，组件AboutB会作为About的子组件渲染。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="-3"><a href="#-3" class="headerlink" title=""></a></h3><p><a href="https://github.com/mrdulin/blog/issues/42">参考链接（1）</a></br><br><a href="https://www.kancloud.cn/chandler/react_handbook/1271261">参考链接（2）</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/03/React%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/" rel="prev" title="React事件系统">
+                  <i class="fa fa-angle-left"></i> React事件系统
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/03/Immutable/" rel="next" title="Immutable">
+                  Immutable <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="什么是前端沙盒前端沙盒是一种技术手段，用于在浏览器环境中创建一个隔离的、受限制的代码执行环境。在这个环境中，我们可以执行一些不受信任的代码，而不用担心它会对我们的应用程序或用户数据造成伤害 为什么需要沙盒通过使用沙盒技术，我们可以防止恶意代码的执行，保护用户数据和隐私。此外，沙盒还可以帮助我们限制代码的功能和访问权限，以防止其执行不安全的操作。 使用场景 第三方代码集成在 Web 应用中，我们经常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端沙盒">
+<meta property="og:url" content="http://yoursite.com/2024/09/03/sandbox/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="什么是前端沙盒前端沙盒是一种技术手段，用于在浏览器环境中创建一个隔离的、受限制的代码执行环境。在这个环境中，我们可以执行一些不受信任的代码，而不用担心它会对我们的应用程序或用户数据造成伤害 为什么需要沙盒通过使用沙盒技术，我们可以防止恶意代码的执行，保护用户数据和隐私。此外，沙盒还可以帮助我们限制代码的功能和访问权限，以防止其执行不安全的操作。 使用场景 第三方代码集成在 Web 应用中，我们经常">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-03T02:41:52.287Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.288Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2024/09/03/sandbox/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/09/03/sandbox/","path":"2024/09/03/sandbox/","title":"前端沙盒"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>前端沙盒 | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%89%8D%E7%AB%AF%E6%B2%99%E7%9B%92"><span class="nav-number">1.</span> <span class="nav-text">什么是前端沙盒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B2%99%E7%9B%92"><span class="nav-number">2.</span> <span class="nav-text">为什么需要沙盒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-iframe"><span class="nav-number">4.1.</span> <span class="nav-text">使用 iframe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Web-Workers"><span class="nav-number">4.2.</span> <span class="nav-text">使用 Web Workers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="nav-number">5.</span> <span class="nav-text">方案对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/09/03/sandbox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="前端沙盒 | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端沙盒
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-03 10:41:52" itemprop="dateCreated datePublished" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/sandbox/" itemprop="url" rel="index"><span itemprop="name">sandbox</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="什么是前端沙盒"><a href="#什么是前端沙盒" class="headerlink" title="什么是前端沙盒"></a>什么是前端沙盒</h2><p>前端沙盒是一种技术手段，用于在浏览器环境中创建一个隔离的、受限制的代码执行环境。在这个环境中，我们可以执行一些不受信任的代码，而不用担心它会对我们的应用程序或用户数据造成伤害</p>
+<h2 id="为什么需要沙盒"><a href="#为什么需要沙盒" class="headerlink" title="为什么需要沙盒"></a>为什么需要沙盒</h2><p>通过使用沙盒技术，我们可以防止恶意代码的执行，保护用户数据和隐私。此外，沙盒还可以帮助我们限制代码的功能和访问权限，以防止其执行不安全的操作。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li><p>第三方代码集成<br>在 Web 应用中，我们经常需要集成第三方库、插件或者广告代码。这些代码可能存在安全隐患，如恶意代码、XSS 攻击等。使用前端沙盒技术，我们可以在隔离的环境中执行这些不受信任的代码，降低安全风险。</p>
+</li>
+<li><p>用户自定义代码执行<br>在一些在线编程平台、教育工具或者可视化编辑器中，用户可能需要编写并执行自定义的 JavaScript 代码。前端沙盒可以为用户提供一个安全的代码执行环境，防止恶意代码对应用程序或其他用户数据造成破坏。</p>
+</li>
+<li><p>多租户应用<br>在多租户应用中，不同租户的代码可能需要在同一个浏览器环境中运行，但又需要相互隔离以保护数据安全。前端沙盒技术可以为每个租户创建独立的执行环境，确保数据和资源的隔离。</p>
+</li>
+<li><p>性能隔离<br>在复杂的 Web 应用中，某些耗时的任务可能会影响到页面的性能和响应速度。使用前端沙盒技术，如 Web Workers，可以将这些任务放在后台线程中执行，避免阻塞主线程，提高页面性能。</p>
+</li>
+<li><p>代码审计和测试<br>在代码审计和测试过程中，我们可能需要执行一些不确定的代码片段。使用前端沙盒技术可以确保这些代码在一个受限制的环境中运行，防止对应用程序或系统造成意外损害。</p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h3 id="使用-iframe"><a href="#使用-iframe" class="headerlink" title="使用 iframe"></a>使用 iframe</h3><p>iframe 是一种内嵌 HTML 文档的方式，可以用于创建于一个独立的、隔离的浏览器上下文。我们可以利用 iframe 实现前端沙盒。<br>1、创建和配置 iframe<br>使用<code>document.createElemet</code>创建 iframe 元素，并设置其属性和样式，以便将其嵌入到我们的应用程序中。</p>
+<p>2、限制 iframe 的权限<br>使用<code>sandbox</code>属性限制 iframe 的权限选项</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>allow-form</td>
+<td>允许表单提交</td>
+</tr>
+<tr>
+<td>allow-modals</td>
+<td>允许弹出窗口，如<code>alert</code>、<code>confirm</code>、<code>prompt</code></td>
+</tr>
+<tr>
+<td>allow-oriential-lock</td>
+<td>允许锁定屏幕方向</td>
+</tr>
+<tr>
+<td>all-pointer-lock</td>
+<td>允许指针锁定</td>
+</tr>
+<tr>
+<td>allow-popups</td>
+<td>允许弹出窗口。</td>
+</tr>
+<tr>
+<td>allow-popups-to-escape-sandbox</td>
+<td>允许沙盒外的弹出窗口。</td>
+</tr>
+<tr>
+<td>allow-presentation</td>
+<td>允许演示请求。</td>
+</tr>
+<tr>
+<td>allow-same-origin</td>
+<td>允许同源策略，使 iframe 可以访问父页面的 DOM。</td>
+</tr>
+<tr>
+<td>allow-scripts</td>
+<td>允许执行脚本。</td>
+</tr>
+<tr>
+<td>allow-top-navigation</td>
+<td>允许 iframe 导航到其父页面。</td>
+</tr>
+<tr>
+<td>allow-top-navigation-by-user-activation</td>
+<td>允许用户激活的 iframe 导航到其父页面。</td>
+</tr>
+</tbody></table>
+<p>3、加载网络请求返回代码</p>
+<p>使用 iframe 的<code>srcdoc</code>属性或<code>src</code>属性加载网络请求返回的代码，并对其进行验证和过滤，以防止恶意代码的执行</p>
+<p>4、与 iframe 进行通信</p>
+<p>使用<code>postMessage</code>方法进行消息传递，以便在主页面和 iframe 之间建立通信通道</p>
+<p>示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">class IframeSandbox &#123;</span><br><span class="line">  constructor(options) &#123;</span><br><span class="line">    this.options = options || &#123;&#125;;</span><br><span class="line">    this.iframe = document.createElement(&#x27;iframe&#x27;);</span><br><span class="line">    this.init();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  init() &#123;</span><br><span class="line">    this.setupIframe();</span><br><span class="line">    this.setupMessageListener();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  setupIframe() &#123;</span><br><span class="line">    const &#123; width, height, sandboxAttributes &#125; = this.options;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    this.iframe.width = width || &#x27;100%&#x27;;</span><br><span class="line">    this.iframe.height = height || &#x27;100%&#x27;;</span><br><span class="line">    this.iframe.sandbox = sandboxAttributes || &#x27;allow-scripts&#x27;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    document.body.appendChild(this.iframe);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  setupMessageListener() &#123;</span><br><span class="line">    window.addEventListener(&#x27;message&#x27;, (event) =&gt; &#123;</span><br><span class="line">      if (event.source === this.iframe.contentWindow) &#123;</span><br><span class="line">        console.log(&#x27;Message from iframe:&#x27;, event.data);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  executeCode(code) &#123;</span><br><span class="line">   const disableFetchAndXHR = `</span><br><span class="line">      &lt;script&gt;</span><br><span class="line">        window.fetch = function() &#123;</span><br><span class="line">          throw new Error(&#x27;Fetch is not allowed in this sandbox.&#x27;);</span><br><span class="line">        &#125;;</span><br><span class="line">        window.XMLHttpRequest = function() &#123;</span><br><span class="line">          throw new Error(&#x27;XMLHttpRequest is not allowed in this sandbox.&#x27;);</span><br><span class="line">        &#125;;</span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">    `;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    const html = `</span><br><span class="line">      &lt;!DOCTYPE html&gt;</span><br><span class="line">      &lt;html&gt;</span><br><span class="line">      &lt;head&gt;</span><br><span class="line">        $&#123;disableFetchAndXHR&#125;</span><br><span class="line">      &lt;/head&gt;</span><br><span class="line">      &lt;body&gt;</span><br><span class="line">        $&#123;code&#125;</span><br><span class="line">      &lt;/body&gt;</span><br><span class="line">      &lt;/html&gt;</span><br><span class="line">    `;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    const codeBlob = new Blob([html], &#123; type: &#x27;text/html&#x27; &#125;);</span><br><span class="line">    const codeUrl = URL.createObjectURL(codeBlob);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    this.iframe.src = codeUrl;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  postMessage(message) &#123;</span><br><span class="line">    this.iframe.contentWindow.postMessage(message, &#x27;*&#x27;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 使用示例</span><br><span class="line">const iframeSandbox = new IframeSandbox(&#123;</span><br><span class="line">  width: &#x27;500px&#x27;,</span><br><span class="line">  height: &#x27;300px&#x27;,</span><br><span class="line">  sandboxAttributes: &#x27;allow-scripts&#x27;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const code = `</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    window.addEventListener(&#x27;message&#x27;, (event) =&gt; &#123;</span><br><span class="line">      console.log(&#x27;Message from parent:&#x27;, event.data);</span><br><span class="line">      event.source.postMessage(&#x27;Hello from iframe!&#x27;, &#x27;*&#x27;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">`;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iframeSandbox.executeCode(code);</span><br><span class="line">iframeSandbox.postMessage(&#x27;Hello from parent!&#x27;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里定义了一个名为 IframeSandbox 的类，它可以用于创建基于 iframe 的沙盒环境。在类的构造函数中，我们创建一个 iframe 元素，并进行一些初始化操作，如设置 iframe 的尺寸、权限等。我们还为主页面添加了一个消息监听器，用于接收来自 iframe 的消息。</p>
+<p>此外，我们定义了两个方法：executeCode 和 postMessage。executeCode 方法用于在 iframe 中执行给定的代码，我们在 executeCode 方法中添加了一个名为 disableFetchAndXHR 的变量，其中包含用于禁用 fetch 和 XMLHttpRequest API 的脚本。然后，我们将这段脚本插入到要加载到 iframe 中的 HTML 字符串中。这样，在 iframe 中执行的任何代码都无法使用 fetch 和 XMLHttpRequest API。而 postMessage 方法用于向 iframe 发送消息。在使用示例中，我们创建了一个 IframeSandbox 实例，并执行了一段简单的代码，该代码在 iframe 中监听来自主页面的消息，并回复一条消息。</p>
+<p>需要注意的是，这种方法仅适用于你对 iframe 中的内容有完全控制的情况。如果你需要加载外部 URL，并且无法修改其内容，这种方法可能无法实现。在这种情况下，你可以考虑使用其他沙盒技术，如 Web Workers，或者在服务端对网络请求进行控制和过滤。</p>
+<h3 id="使用-Web-Workers"><a href="#使用-Web-Workers" class="headerlink" title="使用 Web Workers"></a>使用 Web Workers</h3><p>Web Workers 是一种在后台线程中运行 JavaScript 代码的技术，可以用于实现前端沙盒</p>
+<ul>
+<li><p>创建 Web Workers<br>使用<code>new Worker()</code>构造函数创建 Web Worker 实例，并将<br>网络请求返回的代码作为参数传递给构造函数。</p>
+</li>
+<li><p>限制 Web Workers 的权限<br>Web Workers 默认在沙盒环境中运行，无法访问 DOM</p>
+</li>
+<li><p>与 Web Worker 进行通信<br>使用<code>postMessage</code>方法进行消息传递，以便在主页面和 Web Worker 之间建立通信通道。</p>
+</li>
+</ul>
+<p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">class WebWorkerSandbox &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    this.worker = null;</span><br><span class="line">    this.init();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  init() &#123;</span><br><span class="line">    this.setupMessageListener();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  setupMessageListener() &#123;</span><br><span class="line">    this.messageHandler = (event) =&gt; &#123;</span><br><span class="line">      console.log(&#x27;Message from Web Worker:&#x27;, event.data);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  executeCode(code) &#123;</span><br><span class="line">    const codeBlob = new Blob([code], &#123; type: &#x27;text/javascript&#x27; &#125;);</span><br><span class="line">    const codeUrl = URL.createObjectURL(codeBlob);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    if (this.worker) &#123;</span><br><span class="line">      this.worker.terminate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    this.worker = new Worker(codeUrl);</span><br><span class="line">    this.worker.addEventListener(&#x27;message&#x27;, this.messageHandler);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  postMessage(message) &#123;</span><br><span class="line">    if (this.worker) &#123;</span><br><span class="line">      this.worker.postMessage(message);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      console.error(&#x27;Web Worker is not initialized.&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  terminate() &#123;</span><br><span class="line">    if (this.worker) &#123;</span><br><span class="line">      this.worker.terminate();</span><br><span class="line">      this.worker = null;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 使用示例</span><br><span class="line">const webWorkerSandbox = new WebWorkerSandbox();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const code = `</span><br><span class="line">  self.addEventListener(&#x27;message&#x27;, (event) =&gt; &#123;</span><br><span class="line">    console.log(&#x27;Message from parent:&#x27;, event.data);</span><br><span class="line">    self.postMessage(&#x27;Hello from Web Worker!&#x27;);</span><br><span class="line">  &#125;);</span><br><span class="line">`;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">webWorkerSandbox.executeCode(code);</span><br><span class="line">webWorkerSandbox.postMessage(&#x27;Hello from parent!&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 释放资源</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">  webWorkerSandbox.terminate();</span><br><span class="line">&#125;, 5000);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里 定义了一个名为 WebWorkerSandbox 的类，用于创建基于 Web Workers 的沙盒环境。在类的构造函数中，我们进行一些初始化操作，如设置消息监听器。</p>
+<p>我们定义了四个方法：executeCode、postMessage、terminate 和 setupMessageListener。executeCode 方法用于在 Web Worker 中执行给定的代码，postMessage 方法用于向 Web Worker 发送消息，terminate 方法用于终止 Web Worker，setupMessageListener 方法用于设置消息监听器。</p>
+<p>在使用示例中，我们创建了一个 WebWorkerSandbox 实例，并执行了一段简单的代码，该代码在 Web Worker 中监听来自主页面的消息，并回复一条消息。我们还演示了如何终止 Web Worker 以释放资源。</p>
+<h2 id="方案对比"><a href="#方案对比" class="headerlink" title="方案对比"></a>方案对比</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>iframe</th>
+<th>Web Worker</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>环境</td>
+<td>完整的浏览器环境（包括 DOM、CSS 和 JavaScript）</td>
+<td>独立的 JavaScript 执行环境（无 DOM 和 CSS）</td>
+</tr>
+<tr>
+<td>访问权限</td>
+<td>可访问 DOM 和浏览器相关 API</td>
+<td>无法访问 DOM 和浏览器相关 API</td>
+</tr>
+<tr>
+<td>隔离性</td>
+<td>有限的隔离性，可以通过设置 <code>allow-same-origin</code> 访问主页面 DOM</td>
+<td>高度隔离，无法访问主页面 DOM 和数据</td>
+</tr>
+<tr>
+<td>通信</td>
+<td>使用<code>postMessage</code>方法进行跨域消息传递</td>
+<td>使用<code>postMessage</code>方法进行跨域消息传递</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>可能影响性能，尤其是在存在多个 iframe 时</td>
+<td>运行在后台线程中，不会阻塞主线程，性能更优</td>
+</tr>
+</tbody></table>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>如果你需要一个完整的浏览器环境来渲染和执行 HTML、CSS 和 JavaScript 代码，那么 iframe 更适合你。</li>
+<li>如果你只需要一个独立的 JavaScript 执行环境，而不需要访问 DOM 和浏览器相关 API，那么 Web Worker 更适合你。</li>
+<li>在性能方面，Web Worker 通常比 iframe 更优越，因为它运行在后台线程中，不会阻塞主线程。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/03/git%E4%BD%BF%E7%94%A8ssh%E8%BF%9E%E6%8E%A5/" rel="prev" title="Git使用ssh连接">
+                  <i class="fa fa-angle-left"></i> Git使用ssh连接
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/03/promiseMiiddleware/" rel="next" title="promiseMiddleware">
+                  promiseMiddleware <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

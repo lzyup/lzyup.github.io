@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="SSR的作用 seo问题，有利于搜索引擎蜘蛛抓取网站内容，利于网站的收录和排名 首屏加载过慢的问题，例如现在成熟的SPA项目中，打开首页需要加载很多资源，通过服务端渲染可以加速首屏渲染。  首屏的渲染是node发送过来的html字符串，并不依赖于js文件了，这就会使用户更快的看到页面的内容。 实战demo源码地址 一、 简单的前端渲染demo(纯展示)这个比较简单就直接上效果图了  二、后端渲染（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSR指南">
+<meta property="og:url" content="http://yoursite.com/2024/09/03/SSR%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="SSR的作用 seo问题，有利于搜索引擎蜘蛛抓取网站内容，利于网站的收录和排名 首屏加载过慢的问题，例如现在成熟的SPA项目中，打开首页需要加载很多资源，通过服务端渲染可以加速首屏渲染。  首屏的渲染是node发送过来的html字符串，并不依赖于js文件了，这就会使用户更快的看到页面的内容。 实战demo源码地址 一、 简单的前端渲染demo(纯展示)这个比较简单就直接上效果图了  二、后端渲染（">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/lzyup/vue-ssr/master/demo1/images/demo1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/lzyup/vue-ssr/master/demo2/images/demo2.jpg">
+<meta property="article:published_time" content="2024-09-03T02:41:52.285Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.285Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/lzyup/vue-ssr/master/demo1/images/demo1.jpg">
+
+
+<link rel="canonical" href="http://yoursite.com/2024/09/03/SSR%E6%8C%87%E5%8D%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/09/03/SSR%E6%8C%87%E5%8D%97/","path":"2024/09/03/SSR指南/","title":"SSR指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SSR指南 | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSR%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">SSR的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%88%98demo"><span class="nav-number">2.</span> <span class="nav-text">实战demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E7%AE%80%E5%8D%95%E7%9A%84%E5%89%8D%E7%AB%AF%E6%B8%B2%E6%9F%93demo-%E7%BA%AF%E5%B1%95%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">一、 简单的前端渲染demo(纯展示)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%90%8E%E7%AB%AF%E6%B8%B2%E6%9F%93%EF%BC%88%E7%BA%AF%E5%B1%95%E7%A4%BA%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">二、后端渲染（纯展示）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%8C%BA%E5%88%86%E5%85%A5%E5%8F%A3entry-js"><span class="nav-number">4.1.</span> <span class="nav-text">1、区分入口entry.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#main-js"><span class="nav-number">4.2.</span> <span class="nav-text">main.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#entry-client-js"><span class="nav-number">4.3.</span> <span class="nav-text">entry-client.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#entry-server-js"><span class="nav-number">4.4.</span> <span class="nav-text">entry-server.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%8C%BA%E5%88%86webpack%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE"><span class="nav-number">4.5.</span> <span class="nav-text">2、区分webpack打包配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-Server-Config"><span class="nav-number">4.6.</span> <span class="nav-text">服务器配置(Server Config)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B8%B2%E6%9F%93%E9%80%BB%E8%BE%91"><span class="nav-number">4.7.</span> <span class="nav-text">3、服务端渲染逻辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%90%8E%E7%AB%AF%E6%B8%B2%E6%9F%93%EF%BC%88%E5%8C%85%E5%90%AB%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">三、后端渲染（包含网络请求数据）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%B8%A6%E9%80%BB%E8%BE%91%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">配置带逻辑的组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E6%B8%B2%E6%9F%93%E5%89%8D%E9%A2%84%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE"><span class="nav-number">5.3.</span> <span class="nav-text">如何在渲染前预获取所有网络数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BD%95%E8%BF%98%E9%9C%80%E8%A6%81%E5%B0%86%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E5%BE%97%E5%88%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E9%80%9A%E8%BF%87window-INITIAL-STATE%E4%BC%A0%E9%80%92%E5%88%B0%E5%89%8D%E7%AB%AF%EF%BC%9F"><span class="nav-number">5.4.</span> <span class="nav-text">为何还需要将网络请求得到的数据通过window.INITIAL_STATE传递到前端？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">5.5.</span> <span class="nav-text">参考链接</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/09/03/SSR%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SSR指南 | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSR指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-03 10:41:52" itemprop="dateCreated datePublished" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue/SSR%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">SSR指南</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="SSR的作用"><a href="#SSR的作用" class="headerlink" title="SSR的作用"></a>SSR的作用</h3><ul>
+<li>seo问题，有利于搜索引擎蜘蛛抓取网站内容，利于网站的收录和排名</li>
+<li>首屏加载过慢的问题，例如现在成熟的SPA项目中，打开首页需要加载很多资源，通过服务端渲染可以加速首屏渲染。</li>
+</ul>
+<p>首屏的渲染是node发送过来的html字符串，并不依赖于js文件了，这就会使用户更快的看到页面的内容。</p>
+<h3 id="实战demo"><a href="#实战demo" class="headerlink" title="实战demo"></a>实战demo</h3><p><a href="https://github.com/lzyup/vue-ssr">源码地址</a></p>
+<h3 id="一、-简单的前端渲染demo-纯展示"><a href="#一、-简单的前端渲染demo-纯展示" class="headerlink" title="一、 简单的前端渲染demo(纯展示)"></a>一、 简单的前端渲染demo(纯展示)</h3><p>这个比较简单就直接上效果图了</p>
+<p><img src="https://raw.githubusercontent.com/lzyup/vue-ssr/master/demo1/images/demo1.jpg" alt="效果图"></p>
+<h3 id="二、后端渲染（纯展示）"><a href="#二、后端渲染（纯展示）" class="headerlink" title="二、后端渲染（纯展示）"></a>二、后端渲染（纯展示）</h3><h4 id="1、区分入口entry-js"><a href="#1、区分入口entry-js" class="headerlink" title="1、区分入口entry.js"></a>1、区分入口entry.js</h4><h4 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a><code>main.js</code></br></h4><p>这是应用的通用<code>entry</code>。作用是使用<code>export</code>导出一个<code>createApp</code>函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const Vue = require(&#x27;vue&#x27;);</span><br><span class="line">const App = require(&#x27;./App.vue&#x27;).default;</span><br><span class="line"></span><br><span class="line">//导出一个工厂函数，用于创建新的</span><br><span class="line">//应用程序、router和store实例</span><br><span class="line">function createApp()&#123;</span><br><span class="line">    const app = new Vue(&#123;</span><br><span class="line">        render: h =&gt; h(App)</span><br><span class="line">    &#125;)</span><br><span class="line">    return app;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = createApp;</span><br></pre></td></tr></table></figure>
+
+<h4 id="entry-client-js"><a href="#entry-client-js" class="headerlink" title="entry-client.js"></a><code>entry-client.js</code></br></h4><p>客户端创建应用并挂载到DOM上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const createApp = require(&#x27;./main&#x27;)</span><br><span class="line">const app = createApp();</span><br><span class="line">app.$mount(&#x27;#app&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="entry-server-js"><a href="#entry-server-js" class="headerlink" title="entry-server.js"></a><code>entry-server.js</code></br></h4><p>服务器entry使用工厂函数创建的实例，在每次渲染中重复调用此函数。此时，除了创建和返回应用程序实例之外，它不会做太多的事情。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const createApp = require(&#x27;./main.js&#x27;);</span><br><span class="line">module.exports = createApp;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、区分webpack打包配置"><a href="#2、区分webpack打包配置" class="headerlink" title="2、区分webpack打包配置"></a>2、区分<code>webpack</code>打包配置</h4><p>分为三个配置文件：base,client和server。基本配置(base config)包含两个环境共享的配置，例如：输出路径(output path),别名(alias)和loader。服务器配置(server config)和客户端配置(client config)，可以通过使用<code>webpack-merge</code>来简单地扩展基本配置。</p>
+<p>这里只贴出服务端配置</p>
+<h4 id="服务器配置-Server-Config"><a href="#服务器配置-Server-Config" class="headerlink" title="服务器配置(Server Config)"></a>服务器配置(Server Config)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const merge = require(&#x27;webpack-merge&#x27;);</span><br><span class="line">const base = require(&#x27;./webpack.base.conf&#x27;);</span><br><span class="line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);</span><br><span class="line"></span><br><span class="line">module.exports = merge(base,&#123;</span><br><span class="line">    //指定Node环境，避免非Node环境API报错</span><br><span class="line">    target:&#x27;node&#x27;,</span><br><span class="line">    entry:&#123;</span><br><span class="line">        server:&#x27;./entry-server.js&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    output:&#123;</span><br><span class="line">        filename:&#x27;[name].js&#x27;,</span><br><span class="line">        //此处告知 server bundel使用Node风格导出模块</span><br><span class="line">        libraryTarget:&#x27;commonjs2&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins:[</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template:&#x27;./index.ssr.html&#x27;,</span><br><span class="line">            filename:&#x27;index.ssr.html&#x27;,</span><br><span class="line">            files:&#123;</span><br><span class="line">                js:&#x27;client.js&#x27;</span><br><span class="line">            &#125;,</span><br><span class="line">            excludeChunks:[&#x27;server&#x27;]</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/lzyup/vue-ssr/master/demo2/images/demo2.jpg" alt="效果图"></p>
+<h4 id="3、服务端渲染逻辑"><a href="#3、服务端渲染逻辑" class="headerlink" title="3、服务端渲染逻辑"></a>3、服务端渲染逻辑</h4><p><code>vue-server-render</code>提供一个<code>createBundleRenderer</code>的API，支持热重载（支持更新后的server的bundle文件，然后重新创建renderer实例）</br><br>相关逻辑代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const bundle = fs.readFileSync(path.resolve(__dirname,&#x27;dist/server.js&#x27;),&#x27;utf-8&#x27;);</span><br><span class="line">const renderer = require(&#x27;vue-server-renderer&#x27;).createBundleRenderer(bundle,&#123;</span><br><span class="line">    template:fs.readFileSync(path.resolve(__dirname,&#x27;dist/index.ssr.html&#x27;),&#x27;utf-8&#x27;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server.get(&#x27;/index&#x27;,(req,res)=&gt;&#123;</span><br><span class="line">    // const app = createApp();</span><br><span class="line">    const context = &#123;url:req.url&#125;</span><br><span class="line">    //这里无需传入一个应用程序，因为在执行bundle时已经自动创建过了</span><br><span class="line">    renderer.renderToString(context,(err,html)=&gt;&#123;</span><br><span class="line">        if(err)&#123;</span><br><span class="line">            console.error(err);</span><br><span class="line">            res.status(500).end(&#x27;服务器内部错误&#x27;)</span><br><span class="line">            return;</span><br><span class="line">        &#125; </span><br><span class="line">        res.end(html)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>bundleRender在调用<code>renderToString</code>时，会自动执行「由bundle创建的应用程序实例」所导出的函数（传入上下文作为参数），然后渲染它。</p>
+<h3 id="三、后端渲染（包含网络请求数据）"><a href="#三、后端渲染（包含网络请求数据）" class="headerlink" title="三、后端渲染（包含网络请求数据）"></a>三、后端渲染（包含网络请求数据）</h3><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ul>
+<li>在渲染之前，预先获取所有的网络数据，然后存储到Vuex的Store中</li>
+<li>后端渲染的时候，通过Vuex将获取到的网络数据分别注入到各个组件中</li>
+<li>将全部网络数据埋在<code>window.INITIAL_STATE</code>中，通过HTML传递到浏览器端</li>
+<li>浏览器端通过Vuex将<code>window.INITIAL_STATE</code>里面的网络数据分别注入到各个组件</li>
+</ul>
+<h4 id="配置带逻辑的组件"><a href="#配置带逻辑的组件" class="headerlink" title="配置带逻辑的组件"></a>配置带逻辑的组件</h4><p>在组件上暴露一个自定义静态函数<code>asyncData</code>。需要注意的是，此函数会在组件实例化之前调用，所以它无法访问<code>this</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">// store.js</span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import Vuex from &#x27;vuex&#x27;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">function fetchBar()&#123;</span><br><span class="line">    return new Promise(function (resolve,reject) &#123;</span><br><span class="line">        resolve(&#x27;bar ajax 返回数据&#x27;)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function fetchFoo() &#123;</span><br><span class="line">    return new Promise(function (resolve, reject) &#123;</span><br><span class="line">        resolve(&#x27;foo ajax 返回数据&#x27;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default function createStore()&#123;</span><br><span class="line">    return new Vuex.Store(&#123;</span><br><span class="line">        state:&#123;</span><br><span class="line">            bar:&#x27;&#x27;,</span><br><span class="line">            foo:&#x27;&#x27;</span><br><span class="line">        &#125;,</span><br><span class="line">        actions:&#123;</span><br><span class="line">            fetchBar(&#123;commit&#125;)&#123;</span><br><span class="line">                return fetchBar().then(msg=&gt;&#123;</span><br><span class="line">                    commit(&#x27;setBar&#x27;,&#123;msg&#125;);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            fetchFoo(&#123; commit &#125;) &#123;</span><br><span class="line">                return fetchFoo().then(msg =&gt; &#123;</span><br><span class="line">                    commit(&#x27;setFoo&#x27;, &#123; msg &#125;)</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        mutations:&#123;</span><br><span class="line">            setBar(state,&#123;msg&#125;)&#123;</span><br><span class="line">                Vue.set(state,&#x27;bar&#x27;,msg);</span><br><span class="line">            &#125;,</span><br><span class="line">            setFoo(state,&#123;msg&#125;)&#123;</span><br><span class="line">                Vue.set(state,&#x27;foo&#x27;,msg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Bar.vue</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;bar&quot;&gt;</span><br><span class="line">        &lt;h1&gt;Bar&lt;/h1&gt;</span><br><span class="line">        &lt;p&gt;ajax数据：&#123;&#123;bar&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    asyncData(&#123;store&#125;)&#123;</span><br><span class="line">        return store.dispatch(&#x27;fetchBar&#x27;)</span><br><span class="line">    &#125;,</span><br><span class="line">    computed:&#123;</span><br><span class="line">        bar()&#123;</span><br><span class="line">            return this.$store.state.bar</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    created()&#123;</span><br><span class="line">        console.log(&#x27;bar created&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">    .bar&#123;</span><br><span class="line">        background:#9e9ecd</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="如何在渲染前预获取所有网络数据"><a href="#如何在渲染前预获取所有网络数据" class="headerlink" title="如何在渲染前预获取所有网络数据"></a>如何在渲染前预获取所有网络数据</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//entry-server.js</span><br><span class="line"></span><br><span class="line">import Vue from &#x27;vue&#x27;;</span><br><span class="line">import App from &#x27;./App.vue&#x27;;</span><br><span class="line">import createStore from &#x27;./store&#x27;;</span><br><span class="line"></span><br><span class="line">export default function(context)&#123;</span><br><span class="line">    //context 是 vue-server-render注入参数</span><br><span class="line">    const store = createStore();</span><br><span class="line">    let app = new Vue(&#123;</span><br><span class="line">        store,</span><br><span class="line">        render:h=&gt;h(App)</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    //找到所有prefetchData方法</span><br><span class="line">    let components = App.components;</span><br><span class="line">    let prefetchFns = [];</span><br><span class="line">    for(let key in components)&#123;</span><br><span class="line">        if(!components.hasOwnProperty(key)) continue;</span><br><span class="line">        let component = components[key];</span><br><span class="line">        if(component.asyncData)&#123;</span><br><span class="line">            prefetchFns.push(component.asyncData(&#123;</span><br><span class="line">                store</span><br><span class="line">            &#125;))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Promise.all(prefetchFns).then((res)=&gt;&#123;</span><br><span class="line">        //在所有组件的Ajax都返回之后，才最终返回app进行渲染</span><br><span class="line">        context.state = store.state;</span><br><span class="line">        //context.state 赋值成什么，windwo.__INITIAL_STATE__就是什么</span><br><span class="line">        return app;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="为何还需要将网络请求得到的数据通过window-INITIAL-STATE传递到前端？"><a href="#为何还需要将网络请求得到的数据通过window-INITIAL-STATE传递到前端？" class="headerlink" title="为何还需要将网络请求得到的数据通过window.INITIAL_STATE传递到前端？"></a>为何还需要将网络请求得到的数据通过<code>window.INITIAL_STATE</code>传递到前端？</h4><p>可以看到我们打包出来的<code>dist</code>目录下的<code>index.ssr.html</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;!--vue-ssr-outlet--&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;client.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>注意到引入的<code>script</code>是<code>client.js</code>接管浏览器端的后续操作；而且客户端和浏览器也是通过工厂函数分别创建的<code>vue实例</code>和<code>store实例</code>，数据也是互不干扰的。浏览器中后续的操作是<code>client.js</code>来接管的，因此需要把网络数据写入<code>window.INITIAL_STATE</code>中，使<code>client.js</code>保持同样一份数据。</p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a href="https://github.com/youngwind/blog/issues/112">link1</a></br><br><a href="https://segmentfault.com/a/1190000016637877#item-2-1">link2</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/03/Web%E5%AE%89%E5%85%A8/" rel="prev" title="Web安全">
+                  <i class="fa fa-angle-left"></i> Web安全
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/03/Redux/" rel="next" title="Redux">
+                  Redux <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1、this是什么 this是JavaScript的一个关键字 this不是function本身。 this也不是function的scope this和function在哪里声明没有关系，而是取决于function被调用的方式（即谁调用它，this就指向谁）  2、影响this的因素2.1、环境因素浏览器环境：无论是否在严格模式下，在全局执行环境下（在任何函数体外部）this都指向全局对象win">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this理解">
+<meta property="og:url" content="http://yoursite.com/2024/09/03/this%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="1、this是什么 this是JavaScript的一个关键字 this不是function本身。 this也不是function的scope this和function在哪里声明没有关系，而是取决于function被调用的方式（即谁调用它，this就指向谁）  2、影响this的因素2.1、环境因素浏览器环境：无论是否在严格模式下，在全局执行环境下（在任何函数体外部）this都指向全局对象win">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-03T02:41:52.288Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.288Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2024/09/03/this%E7%90%86%E8%A7%A3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/09/03/this%E7%90%86%E8%A7%A3/","path":"2024/09/03/this理解/","title":"this理解"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>this理解 | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81this%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">1、this是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%BD%B1%E5%93%8Dthis%E7%9A%84%E5%9B%A0%E7%B4%A0"><span class="nav-number">2.</span> <span class="nav-text">2、影响this的因素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E3%80%81%E7%8E%AF%E5%A2%83%E5%9B%A0%E7%B4%A0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、环境因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%98%BE%E7%A4%BA%E8%B0%83%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 显示调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-new%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 new操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-call%E3%80%81apply%E3%80%81bind%E8%B0%83%E7%94%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 call、apply、bind调用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%9A%90%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 隐式调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8%E6%98%AF%E5%9C%A8%E6%9F%90%E4%B8%AA%E5%AF%B9%E8%B1%A1%E4%B8%8A%E8%A7%A6%E5%8F%91%E7%9A%84%E3%80%82xxx-fn"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 函数的调用是在某个对象上触发的。xxx.fn()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2 箭头函数</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/09/03/this%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="this理解 | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          this理解
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-03 10:41:52" itemprop="dateCreated datePublished" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JS%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">JS相关</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JS%E7%9B%B8%E5%85%B3/new-this/" itemprop="url" rel="index"><span itemprop="name">new&this</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="1、this是什么"><a href="#1、this是什么" class="headerlink" title="1、this是什么"></a>1、<code>this</code>是什么</h2><ul>
+<li>this是JavaScript的一个关键字</li>
+<li>this不是function本身。</li>
+<li>this也不是function的scope</li>
+<li>this和function在哪里声明没有关系，而是取决于function被调用的方式（<strong>即谁调用它，this就指向谁</strong>）</li>
+</ul>
+<h2 id="2、影响this的因素"><a href="#2、影响this的因素" class="headerlink" title="2、影响this的因素"></a>2、影响<code>this</code>的因素</h2><h3 id="2-1、环境因素"><a href="#2-1、环境因素" class="headerlink" title="2.1、环境因素"></a>2.1、环境因素</h3><p>浏览器环境：无论是否在严格模式下，在<strong>全局执行环境下</strong>（在任何函数体外部）this都指向全局对象<code>window</code></br><br>node环境：无论是否在严格模式下，在全局执行环境下（在任何函数体外部），this都是空对象<code>&#123;&#125;</code></br><br>非严格模式：node环境，指向全局对象global,浏览器环境，指向全局对象window</br><br>非严格模式：执行undefined</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function hello(thing)&#123;</span><br><span class="line">    console.log(&quot;Hello&quot; + thing);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hello(&quot;world&quot;)</span><br><span class="line"></span><br><span class="line">//等同于</span><br><span class="line">hello.call(window,&quot;world&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-显示调用"><a href="#2-2-显示调用" class="headerlink" title="2.2 显示调用"></a>2.2 显示调用</h3><h4 id="2-2-1-new操作符"><a href="#2-2-1-new操作符" class="headerlink" title="2.2.1 new操作符"></a>2.2.1 <code>new</code>操作符</h4><p>如果是<code>new</code>绑定，并且构造函数中没有返回function或者是object,那么this指向这个新对象。</p>
+<h4 id="2-2-2-call、apply、bind调用"><a href="#2-2-2-call、apply、bind调用" class="headerlink" title="2.2.2 call、apply、bind调用"></a>2.2.2 <code>call</code>、<code>apply</code>、<code>bind</code>调用</h4><p>通过这三个方法调用，则<code>this</code><br>绑定的就是指定的对象</p>
+<ul>
+<li><code>apply</code>使用参数数组（或类数组）</li>
+<li><code>call</code>使用参数列表</li>
+</ul>
+<h3 id="2-3-隐式调用"><a href="#2-3-隐式调用" class="headerlink" title="2.3 隐式调用"></a>2.3 隐式调用</h3><h4 id="2-3-1-函数的调用是在某个对象上触发的。xxx-fn"><a href="#2-3-1-函数的调用是在某个对象上触发的。xxx-fn" class="headerlink" title="2.3.1 函数的调用是在某个对象上触发的。xxx.fn()"></a>2.3.1 函数的调用是在某个对象上触发的。<code>xxx.fn()</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var person = &#123;</span><br><span class="line">            name:&#x27;Luzy&#x27;,</span><br><span class="line">            hello:function(thing)&#123;</span><br><span class="line">                console.log(this.name + &quot; says hello &quot; + thing);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        person.hello(&quot;world&quot;);</span><br><span class="line">        //等同于</span><br><span class="line">        person.hello.call(person,&quot;world&quot;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-2-箭头函数"><a href="#2-3-2-箭头函数" class="headerlink" title="2.3.2 箭头函数"></a>2.3.2 箭头函数</h4><p>箭头函数没有自己的this,继承外层上下文绑定的this</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var age = 26;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    age:20,</span><br><span class="line">    info:() =&gt;&#123;</span><br><span class="line">        console.log(this,this.age);</span><br><span class="line">    &#125;,</span><br><span class="line">    info1: function () &#123;</span><br><span class="line">        console.log(this,this.age)</span><br><span class="line">    &#125;,</span><br><span class="line">    info2:function()&#123;</span><br><span class="line">        console.log(age);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line">obj.info();//window 26</span><br><span class="line">obj.info1();//obj 20</span><br><span class="line">obj.info2();//26</span><br></pre></td></tr></table></figure>
+<p>解释一下，<code>obj.info2()</code>这里<code>obj</code>不是一个函数，因此<code>obj.info2()</code>其实是一个全局声明的函数，根据<strong>词法作用域规则</strong>输出26。</p>
+<p><strong>this系统和作用域链是两套不一样的系统</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/03/thunk/" rel="prev" title="thunk">
+                  <i class="fa fa-angle-left"></i> thunk
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/03/%E8%A3%85%E9%A5%B0%E5%99%A8/" rel="next" title="装饰器">
+                  装饰器 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

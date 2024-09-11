@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yoursite.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="字符集（Character Set）字符的集合，定义系统能处理哪些字符； 编码方式（Encoding）规定这些字符在计算机内部的表示（存储形式） 码点（Code Point）每一个字符的编码就是一个码点（字符在字符集中的表示） 列几种常见的字符集和编码方式字符集 ASCII(American Standard Code for Information Interchange，美国信息交换标准代码)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符集和编码">
+<meta property="og:url" content="http://yoursite.com/2024/09/03/%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81/index.html">
+<meta property="og:site_name" content="Luzy&#39;s Blog">
+<meta property="og:description" content="字符集（Character Set）字符的集合，定义系统能处理哪些字符； 编码方式（Encoding）规定这些字符在计算机内部的表示（存储形式） 码点（Code Point）每一个字符的编码就是一个码点（字符在字符集中的表示） 列几种常见的字符集和编码方式字符集 ASCII(American Standard Code for Information Interchange，美国信息交换标准代码)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-03T02:41:52.289Z">
+<meta property="article:modified_time" content="2024-09-03T02:41:52.289Z">
+<meta property="article:author" content="Luzy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2024/09/03/%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yoursite.com/2024/09/03/%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81/","path":"2024/09/03/字符集和编码/","title":"字符集和编码"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>字符集和编码 | Luzy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Luzy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%EF%BC%88Character-Set%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">字符集（Character Set）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F%EF%BC%88Encoding%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">编码方式（Encoding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%81%E7%82%B9%EF%BC%88Code-Point%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">码点（Code Point）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="nav-number"></span> <span class="nav-text">列几种常见的字符集和编码方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">编码方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">理解字符集和编码方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URI-%E7%BC%96%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">URI 编码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Luzy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2024/09/03/%E5%AD%97%E7%AC%A6%E9%9B%86%E5%92%8C%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Luzy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="字符集和编码 | Luzy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字符集和编码
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-03 10:41:52" itemprop="dateCreated datePublished" datetime="2024-09-03T10:41:52+08:00">2024-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">编码</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="字符集（Character-Set）"><a href="#字符集（Character-Set）" class="headerlink" title="字符集（Character Set）"></a>字符集（Character Set）</h3><p>字符的集合，定义系统能处理哪些字符；</p>
+<h3 id="编码方式（Encoding）"><a href="#编码方式（Encoding）" class="headerlink" title="编码方式（Encoding）"></a>编码方式（Encoding）</h3><p>规定这些字符在计算机内部的表示（存储形式）</p>
+<h3 id="码点（Code-Point）"><a href="#码点（Code-Point）" class="headerlink" title="码点（Code Point）"></a>码点（Code Point）</h3><p>每一个字符的编码就是一个码点（字符在字符集中的表示）</p>
+<h2 id="列几种常见的字符集和编码方式"><a href="#列几种常见的字符集和编码方式" class="headerlink" title="列几种常见的字符集和编码方式"></a>列几种常见的字符集和编码方式</h2><h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><ul>
+<li>ASCII(American Standard Code for Information Interchange，美国信息交换标准代码)</li>
+</ul>
+<p>是比较早的一种编码字符集，里面包含了 128 种字符，囊括了英文中常用的字母、数字、标点符号。另外还考虑了一些计算机的特定行为，比如响铃等等。</p>
+<ul>
+<li>GBK</li>
+</ul>
+<p>GBK 是对 GB2312 的一个扩展，兼容 GB2312，因此也兼容 ASCII，也是一个变长编码方案。下面是一个简介：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GBK 总体编码范围为 8140-FEFE，首字节在 81-FE 之间，尾字节在 40-FE 之间，总计 23940 个码位，共收入 21886 个汉字和图形符号，其中汉字（包括部首和构件）21003 个，图形符号 883 个。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Unicode</li>
+</ul>
+<p>Unicode 字符集的容量其实是在不断扩充中的。它规定，一个 16 位即 2Byte 的空间为一个平面（plane），一个平面的容量就是 2^16 &#x3D; 65536。目前 Unicode 已经定义了 17 个平面，即 17 * 65536 大约 100 万这么多容量。如果不够还可以继续扩充至 18 平面、19 平面 ……</p>
+<p>Unicode 的编码一般使用十六进制表示，前面加一个 U+，比如「汉」的 Unicode 编码是 U+6C49, a 的 Unicode 编码是 U+0061. 补充前面两个 0 是一种通常的记法。</p>
+<h4 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h4><ul>
+<li><p>ASCII</p>
+</li>
+<li><p>GBK</p>
+</li>
+<li><p>utf-16、utf-8</p>
+</li>
+<li><p>emoji</p>
+</li>
+<li><p>base64</p>
+<p>base64 编码是用来解决把不可打印的内容塞进可打印内容的需求的。比如把图片存到数据库，图片数据归根到底还是一堆二进制串，用 base64 编码后的显示成的字符串就大大缩小的长度，可以存到数据库。</p>
+<p>所谓 Base64，就是:小写字母 a-z、大写字母 A-Z、数字 0-9、符号”+”、”&#x2F;“（再加上作为垫字的”&#x3D;”，实际上是 65 个字符）—-作为一个基本字符集。然后，其他所有符号都转换成这个字符集中的字符。</p>
+</li>
+</ul>
+<h3 id="理解字符集和编码方式"><a href="#理解字符集和编码方式" class="headerlink" title="理解字符集和编码方式"></a>理解字符集和编码方式</h3><p>ASCII、GBK 等类编码模式的字符集和编码方式都是一一对应的，Unicode 是字符集，UTF-32&#x2F; UTF-16&#x2F; UTF-8 是三种字符编码方案。</p>
+<p>在早期的编码字符集中，如 ASCII，都是存储器里面直接放入编码字符集的对应编码，字符的编号是什么，就直接用这个编号作为存储中的编码。这在 ASCII 这样字符集中是没问题的。</p>
+<p>但是 Unicode 就会有上面的问题。因为 Unicode 有 17 个编码空间，17 超过了 2^4 &#x3D; 16，实际上用到了 2^5 的容量，再加上每个平面都是 2^16，其实一共是 5 + 16 &#x3D; 21 位。在 1Byte &#x3D; 8 bit 的硬件设备中，要使用定长的方式表示 Unicode，就会用到 3Byte。这样英文字符所占的空间就会 ASCII 情况下多三倍。而 Unicode 作为一种现代字符编码规则，用了一种截然的不同的策略。 那就是把每一个字符的编码，用一种特殊的规则映射到编码之上。这样的策略过程就是「编码方式」（charset encoding），Unicode 有很多编码方式，我们常见的有<code>utf-8</code>、<code>utf-16</code></p>
+<h3 id="URI-编码"><a href="#URI-编码" class="headerlink" title="URI 编码"></a>URI 编码</h3><p>考虑到 URI 在各种平台间传输时的兼容性，<code>URI 规范中规定只有 US-ASCII 字符集中的字符</code>可以直接出现在 URI 中。事实上，甚至 ASCII 本身的许多字符也不允许直接出现在 URI 中，有的也要转义。URL 路径中的中文需要转义，具体编码用的是 utf-8。</p>
+<p><strong>encodeURI:</strong> 会将需要编码的字符转换为 UTF-8 的格式。对于非转义字符以及保留字符（;,&#x2F;?:@&amp;&#x3D;+$#）不会进行转义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL中包含中文</span></span><br><span class="line"><span class="built_in">encodeURI</span>(<span class="string">&#x27;http://www.帅.com&#x27;</span>); <span class="comment">// http://www.%E5%B8%85.com</span></span><br><span class="line">​</span><br><span class="line"><span class="comment">// 值的内容为特殊符号。值为?&amp;</span></span><br><span class="line"><span class="built_in">encodeURI</span>(<span class="string">&#x27;http://a.com?key=?&amp;&#x27;</span>); <span class="comment">// &quot;http://a.com?key=?&amp;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>encodeURIComponent:</strong> 会编码所有的 URL 保留字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">encodeURIComponent</span>(<span class="string">&#x27;https://aotu.io/&#x27;</span>)</span><br><span class="line"><span class="comment">// &quot;https%3A%2F%2Faotu.io%2F&quot;</span></span><br><span class="line">​</span><br><span class="line"><span class="built_in">encodeURI</span>(<span class="string">&#x27;https://aotu.io/&#x27;</span>)</span><br><span class="line"><span class="comment">// &quot;https://aotu.io/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在处理页面跳转、跟服务器端进行交互时, 凡涉及到对 URI 进行解析的、最好用<strong>encodeURIComponent</strong>进行编码避免部分数据的丢失</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/03/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" rel="prev" title="拓扑排序">
+                  <i class="fa fa-angle-left"></i> 拓扑排序
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/03/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/" rel="next" title="发布订阅模式">
+                  发布订阅模式 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Luzy</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
